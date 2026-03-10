@@ -179,7 +179,66 @@
     background: rgba(196,154,10,0.04);
     color: var(--accent);
   }
-  .slot-empty-plus { font-size: 1.5rem; line-height: 1; }
+  .badge-hired { background: rgba(26,170,106,0.15); border: 1px solid rgba(26,170,106,0.4); color: var(--accent3); }
+
+  /* HIRED THIS WEEK REPORT */
+  .hired-report {
+    max-width: 1200px; margin: 0 auto 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .hired-report-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; background: linear-gradient(135deg, #0f2e1a, #1a4a2a);
+    cursor: pointer;
+  }
+  .hired-report-header-left { display: flex; align-items: center; gap: 10px; }
+  .hired-report-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
+  .hired-count-badge {
+    background: var(--accent3); color: #fff;
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: 0.8rem; padding: 3px 10px; border-radius: 20px;
+  }
+  .hired-week-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+  .hired-toggle { color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: transform 0.2s; }
+  .hired-toggle.open { transform: rotate(180deg); }
+  .hired-report-body { padding: 16px 20px; }
+  .hired-empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 0; }
+  .hired-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .hired-card {
+    background: linear-gradient(135deg, #f0fdf6, #e8faf1);
+    border: 1px solid rgba(26,170,106,0.25);
+    border-radius: 10px; padding: 12px 14px;
+    position: relative; animation: slotIn 0.25s ease;
+  }
+  .hired-card-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+  .hired-card-division { font-size: 0.72rem; font-weight: 700; color: var(--accent3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+  .hired-card-meta { font-size: 0.74rem; color: var(--muted); margin-top: 2px; }
+  .hired-card-date { font-size: 0.7rem; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .hired-card-delete {
+    position: absolute; top: 5px; right: 5px;
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 0.72rem; padding: 2px 5px;
+    border-radius: 4px; opacity: 0; transition: opacity 0.2s, color 0.2s;
+  }
+  .hired-card:hover .hired-card-delete { opacity: 1; }
+  .hired-card-delete:hover { color: var(--accent-red); }
+  .hired-report-footer {
+    padding: 10px 20px 14px;
+    display: flex; justify-content: flex-end;
+  }
+  .clear-hired-btn {
+    font-size: 0.74rem; color: var(--muted); cursor: pointer;
+    background: none; border: 1px dashed var(--border); padding: 3px 10px;
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .clear-hired-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
 
   [contenteditable="true"] {
     outline: none; border-radius: 3px; cursor: text;
@@ -243,6 +302,26 @@
   <div class="live-clock" id="liveClock">--:-- --<span>CDT</span></div>
 </header>
 
+<div class="hired-report" id="hiredReport">
+  <div class="hired-report-header" onclick="toggleHiredReport()">
+    <div class="hired-report-header-left">
+      <span style="font-size:1.3rem">🏆</span>
+      <span class="hired-report-title">Hired This Week</span>
+      <span class="hired-count-badge" id="hiredCount">0</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="hired-week-label" id="hiredWeekLabel"></span>
+      <span class="hired-toggle" id="hiredToggle">▼</span>
+    </div>
+  </div>
+  <div id="hiredReportBody" style="display:none;">
+    <div class="hired-report-body" id="hiredGrid"></div>
+    <div class="hired-report-footer">
+      <button class="clear-hired-btn" onclick="clearHired()">🗑 Clear this week</button>
+    </div>
+  </div>
+</div>
+
 <div class="grid" id="dash"></div>
 
 <!-- Add Driver Modal -->
@@ -286,6 +365,7 @@ setInterval(updateClock, 1000);
 const STORAGE_KEY = 'driverDash_v4';
 
 const defaultData = {
+  hiredLog: [],
   sections: [
     {
       id:"reefer", icon:"❄️", title:"Reefer", divStatus:"hiring", totalSlots:10,
@@ -328,6 +408,7 @@ let data;
 try {
   const saved = localStorage.getItem(STORAGE_KEY);
   data = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultData));
+  if(!data.hiredLog) data.hiredLog = [];
   data.sections.forEach((s,i) => {
     if(!s.totalSlots) s.totalSlots = defaultData.sections[i]?.totalSlots || 10;
     if(!s.divStatus) s.divStatus = 'hiring';
@@ -344,9 +425,9 @@ function save(){
   setTimeout(()=>ind.classList.remove('show'), 1500);
 }
 
-function badgeClass(s){ return s==='ready'?'badge-ready':s==='preapproval'?'badge-preapproval':'badge-pending'; }
-function badgeLabel(s){ return s==='ready'?'✅ Ready':s==='preapproval'?'🔵 Pre-Approval':'⏳ Pending'; }
-function nextStatus(s){ return s==='preapproval'?'pending':s==='pending'?'ready':'preapproval'; }
+function badgeClass(s){ return s==='ready'?'badge-ready':s==='preapproval'?'badge-preapproval':s==='hired'?'badge-hired':'badge-pending'; }
+function badgeLabel(s){ return s==='ready'?'✅ Ready':s==='preapproval'?'🔵 Pre-Approval':s==='hired'?'🏆 Hired':'⏳ Pending'; }
+function nextStatus(s){ return s==='preapproval'?'pending':s==='pending'?'ready':s==='ready'?'hired':'preapproval'; }
 
 function render(){
   const dash = document.getElementById('dash');
@@ -380,7 +461,7 @@ function render(){
       <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
       <div class="progress-label">${covered}<span>/${total} covered</span></div>
       <button class="last-updated" onclick="stampDate(${si})" title="Click to stamp today's date">🕒 ${lastUpd}</button>
-      <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Add slots</button>`;
+      <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>`;
     card.appendChild(pb);
 
     // Slots grid
@@ -424,29 +505,86 @@ function render(){
       else if(field === 'drvName') data.sections[si].drivers[+el.dataset.di].name = val;
       else if(field === 'drvCompany') data.sections[si].drivers[+el.dataset.di].company = val;
       else if(field === 'drvMeta') data.sections[si].drivers[+el.dataset.di].meta = val;
-      save();
+      autoStamp(si); save();
     });
     el.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); el.blur(); } });
   });
 }
 
-function stampDate(si){
+function getWeekRange(){
+  const now = new Date();
+  const day = now.getDay();
+  const mon = new Date(now); mon.setDate(now.getDate() - (day===0?6:day-1)); mon.setHours(0,0,0,0);
+  const sun = new Date(mon); sun.setDate(mon.getDate() + 6); sun.setHours(23,59,59,999);
+  return {start: mon.getTime(), end: sun.getTime()};
+}
+function renderHired(){
+  const {start, end} = getWeekRange();
+  const weekDrivers = data.hiredLog.filter(d => d.hiredAt >= start && d.hiredAt <= end);
+  document.getElementById('hiredCount').textContent = weekDrivers.length;
+  const mon = new Date(start), sun = new Date(end);
+  document.getElementById('hiredWeekLabel').textContent =
+    `${mon.toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${sun.toLocaleDateString('en-US',{month:'short',day:'numeric'})}`;
+  const grid = document.getElementById('hiredGrid');
+  if(weekDrivers.length === 0){
+    grid.innerHTML = '<div class="hired-empty">No drivers hired this week yet 💪</div>';
+  } else {
+    grid.innerHTML = '<div class="hired-grid">' + weekDrivers.map((d,i) => `
+      <div class="hired-card">
+        <div class="hired-card-name">${d.name}</div>
+        <div class="hired-card-division">${d.divisionIcon} ${d.division}</div>
+        <div class="hired-card-meta">${d.company||''}${d.position?' · '+d.position:''}</div>
+        <div class="hired-card-date">📅 Hired ${d.dateHired}</div>
+        <button class="hired-card-delete" onclick="removeHired(${data.hiredLog.indexOf(d)})">✕</button>
+      </div>`).join('') + '</div>';
+  }
+}
+function toggleHiredReport(){
+  const body = document.getElementById('hiredReportBody');
+  const toggle = document.getElementById('hiredToggle');
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function removeHired(idx){ data.hiredLog.splice(idx,1); save(); renderHired(); }
+function clearHired(){
+  const {start,end} = getWeekRange();
+  data.hiredLog = data.hiredLog.filter(d => d.hiredAt < start || d.hiredAt > end);
+  save(); renderHired();
+}
+
+function autoStamp(si){
   const now = new Date();
   data.sections[si].lastUpdated = now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  save(); render();
 }
+function stampDate(si){ autoStamp(si); save(); render(); }
 function cycleDivStatus(si){
   const cur = data.sections[si].divStatus;
   data.sections[si].divStatus = cur === 'hiring' ? 'urgent' : cur === 'urgent' ? 'full' : 'hiring';
-  save(); render();
+  autoStamp(si); save(); render();
 }
 function cycleStatus(si, di){
-  data.sections[si].drivers[di].status = nextStatus(data.sections[si].drivers[di].status);
-  save(); render();
+  const drv = data.sections[si].drivers[di];
+  const next = nextStatus(drv.status);
+  if(next === 'hired'){
+    const hired = {
+      ...drv,
+      division: data.sections[si].title,
+      divisionIcon: data.sections[si].icon,
+      dateHired: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      hiredAt: Date.now()
+    };
+    data.hiredLog.unshift(hired);
+    data.sections[si].drivers.splice(di, 1);
+    autoStamp(si); save(); render(); renderHired();
+  } else {
+    drv.status = next;
+    autoStamp(si); save(); render();
+  }
 }
 function deleteDriver(si, di){
   data.sections[si].drivers.splice(di, 1);
-  save(); render();
+  autoStamp(si); save(); render();
 }
 
 let _ms = null;
@@ -488,7 +626,7 @@ function saveModalEntry(){
     meta: document.getElementById('inp_meta').value.trim(),
     status: document.getElementById('inp_status').value
   });
-  closeModal(); save(); render();
+  closeModal(); autoStamp(_ms); save(); render();
 }
 
 let _ssi = null;
@@ -501,7 +639,7 @@ function openSlotsModal(si){
 function closeSlotsModal(){ document.getElementById('slotsModalOverlay').classList.remove('open'); }
 function saveSlotsCount(){
   const val = parseInt(document.getElementById('slotsCountInput').value);
-  if(!isNaN(val) && val >= 1){ data.sections[_ssi].totalSlots = val; save(); render(); }
+  if(!isNaN(val) && val >= 1){ data.sections[_ssi].totalSlots = val; autoStamp(_ssi); save(); render(); }
   closeSlotsModal();
 }
 
@@ -514,6 +652,7 @@ document.addEventListener('keydown', e => {
 });
 
 render();
+renderHired();
 </script>
 </body>
 </html>
