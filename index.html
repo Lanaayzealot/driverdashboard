@@ -106,6 +106,14 @@
     white-space: nowrap;
   }
   .slots-count-edit:hover { border-color: var(--accent); color: var(--accent); }
+  .last-updated {
+    font-size: 0.72rem; color: var(--muted); cursor: pointer;
+    background: none; border: 1px dashed var(--border); padding: 3px 9px;
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .last-updated:hover { border-color: var(--accent2); color: var(--accent2); }
 
   .slots-section { padding: 16px 20px; }
   .slots-grid {
@@ -355,10 +363,12 @@ function render(){
 
     // Progress bar
     const pb = document.createElement('div');
+    const lastUpd = sec.lastUpdated ? sec.lastUpdated : '—';
     pb.className = 'progress-bar-wrap';
     pb.innerHTML = `
       <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
       <div class="progress-label">${covered}<span>/${total} covered</span></div>
+      <button class="last-updated" onclick="stampDate(${si})" title="Click to stamp today's date">🕒 ${lastUpd}</button>
       <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>`;
     card.appendChild(pb);
 
@@ -409,6 +419,11 @@ function render(){
   });
 }
 
+function stampDate(si){
+  const now = new Date();
+  data.sections[si].lastUpdated = now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  save(); render();
+}
 function cycleDivStatus(si){
   const cur = data.sections[si].divStatus;
   data.sections[si].divStatus = cur === 'hiring' ? 'urgent' : cur === 'urgent' ? 'full' : 'hiring';
