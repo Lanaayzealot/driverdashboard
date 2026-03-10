@@ -190,18 +190,18 @@
   }
   .hired-report-header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px; background: linear-gradient(135deg, #1a3a3a, #2a5454);
+    padding: 16px 20px; background: #f8f9fd; border-bottom: 1px solid var(--border);
     cursor: pointer;
   }
   .hired-report-header-left { display: flex; align-items: center; gap: 10px; }
-  .hired-report-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
+  .hired-report-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); }
   .hired-count-badge {
     background: var(--accent3); color: #fff;
     font-family: 'Montserrat', sans-serif; font-weight: 800;
     font-size: 0.8rem; padding: 3px 10px; border-radius: 20px;
   }
-  .hired-week-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
-  .hired-toggle { color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: transform 0.2s; }
+  .hired-week-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .hired-toggle { color: var(--muted); font-size: 0.85rem; transition: transform 0.2s; }
   .hired-toggle.open { transform: rotate(180deg); }
   .hired-report-body { padding: 16px 20px; }
   .hired-empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 0; }
