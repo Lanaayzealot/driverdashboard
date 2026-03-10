@@ -33,6 +33,8 @@
     color: var(--text);
   }
   header p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; letter-spacing: 2px; text-transform: uppercase; }
+  .live-clock { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); margin-top: 8px; letter-spacing: 1px; }
+  .live-clock span { color: var(--muted); font-size: 0.75rem; font-weight: 400; font-family: 'DM Sans', sans-serif; margin-left: 6px; letter-spacing: 1.5px; text-transform: uppercase; }
 
   .save-indicator {
     position: fixed; top: 16px; right: 16px;
@@ -238,6 +240,7 @@
 <header>
   <h1>🚛 Driver Recruitment Dashboard</h1>
   <p id="headerDate"></p>
+  <div class="live-clock" id="liveClock">--:-- --<span>CDT</span></div>
 </header>
 
 <div class="grid" id="dash"></div>
@@ -271,6 +274,14 @@
 
 <script>
 document.getElementById('headerDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+function updateClock(){
+  const now = new Date();
+  const cdt = now.toLocaleTimeString('en-US',{timeZone:'America/Chicago', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true});
+  document.getElementById('liveClock').innerHTML = `${cdt}<span>CDT</span>`;
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 const STORAGE_KEY = 'driverDash_v4';
 
