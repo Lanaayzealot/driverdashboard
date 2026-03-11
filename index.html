@@ -35,15 +35,26 @@
   .div-status-urgent{background:rgba(224,62,62,0.15);border:1px solid var(--accent-red);color:var(--accent-red);animation:urgentPulse 1.2s ease-in-out infinite;}
   @keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(224,62,62,0.35);}50%{box-shadow:0 0 0 5px rgba(224,62,62,0);}}
 
-  .progress-bar-wrap{padding:12px 20px 10px;border-bottom:1px solid var(--border);background:#fafbfe;display:flex;align-items:center;gap:14px;}
-  .progress-bar-track{flex:1;height:8px;background:#e8ecf5;border-radius:99px;overflow:hidden;}
-  .progress-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent3),#0fd47a);transition:width 0.4s ease;}
-  .progress-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.82rem;white-space:nowrap;min-width:60px;text-align:right;}
-  .progress-label span{color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif;}
+  /* ── NEW PROGRESS BAR ── */
+  .progress-bar-wrap{padding:16px 20px 14px;border-bottom:1px solid var(--border);background:#fafbfe;}
+  .progress-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .progress-bar-meta{display:flex;align-items:center;gap:8px;}
+  .progress-label{font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.9rem;color:var(--text);}
+  .progress-label span{color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif;font-size:0.82rem;}
+  .progress-bar-actions{display:flex;gap:8px;}
   .slots-count-edit{font-size:0.74rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .slots-count-edit:hover{border-color:var(--accent);color:var(--accent);}
   .last-updated{font-size:0.72rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .last-updated:hover{border-color:var(--accent2);color:var(--accent2);}
+
+  .progress-bar-area{position:relative;padding-bottom:22px;}
+  .progress-emoji-row{display:flex;justify-content:space-between;margin-bottom:6px;padding:0 2px;}
+  .progress-emoji{font-size:1.1rem;line-height:1;transition:transform 0.3s;}
+  .progress-emoji.active{transform:scale(1.35);}
+  .progress-bar-track{height:18px;background:#e4e8f0;border-radius:99px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);}
+  .progress-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#f87171,#fb923c,#facc15,#4ade80);transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+  .progress-tick-row{display:flex;justify-content:space-between;padding:0 2px;margin-top:5px;}
+  .progress-tick{font-size:0.68rem;color:var(--muted);font-family:'Montserrat',sans-serif;font-weight:700;}
 
   .slots-section{padding:16px 20px;}
   .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
@@ -373,7 +384,33 @@ function render(){
     hdr.innerHTML=`<div class="card-icon">${sec.icon}</div><div class="card-title" contenteditable="true" data-si="${si}" data-field="title">${sec.title}</div><div class="div-status ${dsc}" onclick="cycleDivStatus(${si})">${dsl}</div>`;
     card.appendChild(hdr);
     const pb=document.createElement('div');pb.className='progress-bar-wrap';
-    pb.innerHTML=`<div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div><div class="progress-label">${covered}<span>/${total} covered</span></div><button class="last-updated" onclick="stampDate(${si})">🕒 ${sec.lastUpdated||'—'}</button><button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>`;
+    const _e1=pct<30?'active':'',_e2=(pct>=30&&pct<75)?'active':'',_e3=pct>=75?'active':'';
+    const _mid=Math.round(total/2);
+    pb.innerHTML=`
+      <div class="progress-bar-top">
+        <div class="progress-bar-meta">
+          <span class="progress-label">${covered}<span> / ${total} covered</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(${si})">🕒 ${sec.lastUpdated||'—'}</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>
+        </div>
+      </div>
+      <div class="progress-bar-area">
+        <div class="progress-emoji-row">
+          <span class="progress-emoji ${_e1}">😞</span>
+          <span class="progress-emoji ${_e2}">🙂</span>
+          <span class="progress-emoji ${_e3}">🎉</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width:${pct}%"></div>
+        </div>
+        <div class="progress-tick-row">
+          <span class="progress-tick">0</span>
+          <span class="progress-tick">${_mid}</span>
+          <span class="progress-tick">${total}</span>
+        </div>
+      </div>`;
     card.appendChild(pb);
     const sg=document.createElement('div');sg.className='slots-section';
     const grid=document.createElement('div');grid.className='slots-grid';
