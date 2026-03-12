@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -31,9 +31,9 @@
   .card-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);flex:1;}
   .div-status{font-size:0.72rem;padding:4px 12px;border-radius:20px;white-space:nowrap;cursor:pointer;user-select:none;font-weight:700;letter-spacing:0.5px;transition:transform 0.1s;}
   .div-status:active{transform:scale(0.95);}
-  .div-status-hiring{background:rgba(224,62,62,0.1);border:1px solid rgba(224,62,62,0.35);color:var(--accent-red);}
-  .div-status-full{background:rgba(26,170,106,0.1);border:1px solid rgba(26,170,106,0.35);color:var(--accent3);}
-  .div-status-urgent{background:rgba(224,62,62,0.15);border:1px solid var(--accent-red);color:var(--accent-red);animation:urgentPulse 1.2s ease-in-out infinite;}
+  .div-status-hiring{background:#fff;border:2px solid var(--accent-red);color:var(--accent-red);}
+  .div-status-full{background:#fff;border:2px solid var(--accent3);color:var(--accent3);}
+  .div-status-urgent{background:#fff;border:2px solid var(--accent-red);color:var(--accent-red);animation:urgentPulse 1.2s ease-in-out infinite;}
   @keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(224,62,62,0.35);}50%{box-shadow:0 0 0 5px rgba(224,62,62,0);}}
 
   /* ── PROGRESS BAR ── */
@@ -116,7 +116,7 @@
   .badge:hover{transform:scale(1.03);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
   .badge:active{transform:scale(0.97);}
   .badge::after{content:'▾';font-size:0.6rem;opacity:0.5;margin-left:2px;}
-  .badge-ready      {border:1.5px solid #1aaa6a; color:#1aaa6a;}
+  .badge-ready      {border:1.5px solid #16a34a; color:#16a34a;}
   .badge-preapproval{border:1.5px solid #1a8fe0; color:#1a8fe0;}
   .badge-pending    {border:1.5px solid #c49a0a; color:#c49a0a;}
   .badge-hired      {border:1.5px solid #1aaa6a; color:#1aaa6a;}
@@ -311,6 +311,7 @@ const STATUSES=[
   {key:'preapproval',label:'Pre-Approval',    icon:'🔍',badgeCls:'badge-preapproval'},
   {key:'drugtest',   label:'Drug Test Pending',icon:'🧪',badgeCls:'badge-drugtest'},
   {key:'onhold',     label:'On Hold',          icon:'⏸', badgeCls:'badge-onhold'},
+  {key:'ready',      label:'Ready to Go',      icon:'✅',badgeCls:'badge-ready'},
   null,
   {key:'hired',      label:'Hired',            icon:'🏆',badgeCls:'badge-hired'},
   {key:'disqualified',label:'Disqualified',    icon:'🚫',badgeCls:'badge-disqualified'},
@@ -513,9 +514,10 @@ function openAddDriver(si, presetPosition=''){
     <div class="form-group"><label>Position</label><select id="inp_position"><option value="">— Select Position —</option>${posHtml}</select></div>
     <div class="form-group"><label>Notes</label><input id="inp_meta" placeholder="e.g. Drug test pending"></div>
     <div class="form-group"><label>Status</label><select id="inp_status">
-      <option value="preapproval">🔵 Pre-Approval</option>
+      <option value="preapproval">🔍 Pre-Approval</option>
       <option value="drugtest">🧪 Drug Test Pending</option>
       <option value="onhold">⏸ On Hold</option>
+      <option value="ready">✅ Ready to Go</option>
     </select></div>`;
   document.getElementById('modalOverlay').classList.add('open');
   setTimeout(()=>document.getElementById('inp_name').focus(),50);
