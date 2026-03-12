@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,6 +11,7 @@
     --accent:#c49a0a; --accent2:#2a7fd4; --accent3:#1aaa6a;
     --accent-red:#e03e3e; --text:#1a1e2e; --muted:#8892a4;
     --purple:#7c3aed; --orange:#d97706;
+    --oo:#2a7fd4; --cd:#1aaa6a;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
@@ -35,27 +36,48 @@
   .div-status-urgent{background:rgba(224,62,62,0.15);border:1px solid var(--accent-red);color:var(--accent-red);animation:urgentPulse 1.2s ease-in-out infinite;}
   @keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(224,62,62,0.35);}50%{box-shadow:0 0 0 5px rgba(224,62,62,0);}}
 
-  /* ── NEW PROGRESS BAR ── */
+  /* ── PROGRESS BAR ── */
   .progress-bar-wrap{padding:16px 20px 14px;border-bottom:1px solid var(--border);background:#fafbfe;}
-  .progress-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-  .progress-bar-meta{display:flex;align-items:center;gap:8px;}
-  .progress-label{font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.9rem;color:var(--text);}
-  .progress-label span{color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif;font-size:0.82rem;}
+  .progress-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
   .progress-bar-actions{display:flex;gap:8px;}
   .slots-count-edit{font-size:0.74rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .slots-count-edit:hover{border-color:var(--accent);color:var(--accent);}
   .last-updated{font-size:0.72rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .last-updated:hover{border-color:var(--accent2);color:var(--accent2);}
 
-  .progress-bar-area{position:relative;padding-bottom:22px;}
-  .progress-emoji-row{display:flex;justify-content:space-between;margin-bottom:6px;padding:0 2px;}
-  .progress-emoji{font-size:1.1rem;line-height:1;}
-  .progress-bar-track{height:18px;background:#e4e8f0;border-radius:99px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.08);}
-  .progress-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#f87171,#fb923c,#facc15,#4ade80);transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(0,0,0,0.15);}
-  .progress-tick-row{display:flex;justify-content:space-between;padding:0 2px;margin-top:5px;}
-  .progress-tick{font-size:0.68rem;color:var(--muted);font-family:'Montserrat',sans-serif;font-weight:700;}
+  /* OO / CD split bars */
+  .slot-bars{display:flex;flex-direction:column;gap:10px;}
+  .slot-bar-row{display:flex;align-items:center;gap:10px;}
+  .slot-bar-label{font-size:0.72rem;font-weight:700;width:28px;flex-shrink:0;}
+  .slot-bar-label.oo{color:var(--oo);}
+  .slot-bar-label.cd{color:var(--cd);}
+  .slot-bar-track{flex:1;height:14px;background:#e4e8f0;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,0.08);}
+  .slot-bar-fill{height:100%;border-radius:99px;transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 1px 4px rgba(0,0,0,0.12);}
+  .slot-bar-fill.oo{background:linear-gradient(90deg,#60a5fa,#2a7fd4);}
+  .slot-bar-fill.cd{background:linear-gradient(90deg,#4ade80,#1aaa6a);}
+  .slot-bar-count{font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.8rem;min-width:52px;text-align:right;white-space:nowrap;}
+  .slot-bar-count.oo{color:var(--oo);}
+  .slot-bar-count.cd{color:var(--cd);}
+  .slot-bar-count span{font-weight:400;font-family:'DM Sans',sans-serif;color:var(--muted);font-size:0.75rem;}
 
-  .slots-section{padding:16px 20px;}
+  /* emoji row */
+  .progress-bar-area{position:relative;padding-bottom:4px;margin-top:8px;}
+  .progress-emoji-row{display:flex;justify-content:space-between;margin-bottom:5px;padding:0 2px;}
+  .progress-emoji{font-size:1.0rem;line-height:1;}
+  .progress-bar-track-main{height:10px;background:#e4e8f0;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,0.08);}
+  .progress-bar-fill-main{height:100%;border-radius:99px;background:linear-gradient(90deg,#f87171,#fb923c,#facc15,#4ade80);transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 1px 6px rgba(0,0,0,0.12);}
+  .progress-tick-row{display:flex;justify-content:space-between;padding:0 2px;margin-top:4px;}
+  .progress-tick{font-size:0.65rem;color:var(--muted);font-family:'Montserrat',sans-serif;font-weight:700;}
+
+  /* ── SLOT GROUPS ── */
+  .slots-group-label{font-size:0.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px 0 7px;font-family:'Montserrat',sans-serif;}
+  .slots-group-label.oo{color:var(--oo);}
+  .slots-group-label.cd{color:var(--cd);}
+  .slots-section{padding:4px 20px 16px;}
+  .slots-section > div + div { border-top:1px solid var(--border); margin-top:4px; padding-top:4px; }
+
+  /* ── SLOTS ── */
+
   .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
   .slot-covered{background:#f8f9fd;border:1px solid var(--border);border-radius:10px;padding:10px 12px;position:relative;transition:box-shadow 0.15s;animation:slotIn 0.2s ease;}
   .slot-covered:hover{box-shadow:0 3px 12px rgba(0,0,0,0.08);}
@@ -63,14 +85,13 @@
   .slot-covered.status-onhold{background:#fffbf0;border-color:rgba(217,119,6,0.2);}
   .slot-covered.status-drugtest{background:#f5f3ff;border-color:rgba(124,58,237,0.2);}
   @keyframes slotIn{from{opacity:0;transform:scale(0.96);}to{opacity:1;transform:scale(1);}}
-
   .slot-name{font-weight:600;font-size:0.88rem;color:var(--text);}
-  .slot-company{font-size:0.74rem;color:var(--muted);margin-top:2px;}
-  .slot-position{font-size:0.74rem;color:var(--accent2);font-weight:600;margin-top:2px;}
+  .slot-company{font-size:0.74rem;color:#4b5563;font-weight:700;margin-top:6px;}
+  .slot-position{font-size:0.74rem;font-weight:700;margin-top:2px;}
+  .slot-position.oo{color:var(--oo);}
+  .slot-position.cd{color:var(--cd);}
   .slot-notes{font-size:0.74rem;color:var(--muted);margin-top:2px;font-style:italic;min-height:14px;}
   .slot-badge-row{margin-top:8px;}
-
-  /* BADGE */
   .badge{font-size:0.68rem;padding:4px 10px;border-radius:20px;white-space:nowrap;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px;font-weight:700;transition:transform 0.1s,box-shadow 0.1s;}
   .badge:hover{transform:scale(1.04);box-shadow:0 2px 8px rgba(0,0,0,0.1);}
   .badge:active{transform:scale(0.96);}
@@ -82,7 +103,6 @@
   .badge-drugtest   {background:rgba(124,58,237,0.1);  border:1px solid rgba(124,58,237,0.3); color:var(--purple);}
   .badge-onhold     {background:rgba(217,119,6,0.1);   border:1px solid rgba(217,119,6,0.3);  color:var(--orange);}
   .badge-disqualified{background:rgba(224,62,62,0.1);  border:1px solid rgba(224,62,62,0.3);  color:var(--accent-red);}
-
   .slot-delete{position:absolute;top:5px;right:5px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.72rem;padding:2px 5px;border-radius:4px;opacity:0;transition:opacity 0.2s,color 0.2s;}
   .slot-covered:hover .slot-delete{opacity:1;}
   .slot-delete:hover{color:var(--accent-red);}
@@ -91,17 +111,7 @@
   .slot-empty-plus{font-size:1.5rem;line-height:1;}
 
   /* ── STATUS DROPDOWN ── */
-  .sdrop{
-    position:fixed;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:0 12px 40px rgba(0,0,0,0.16);
-    z-index:9999;
-    width:210px;
-    padding:8px;
-    animation:dropIn 0.15s ease;
-  }
+  .sdrop{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.16);z-index:9999;width:210px;padding:8px;animation:dropIn 0.15s ease;}
   @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
   .sdrop-header{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;padding:4px 8px 8px;border-bottom:1px solid var(--border);margin-bottom:6px;}
   .sdrop-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;cursor:pointer;transition:background 0.1s;font-size:0.82rem;font-weight:600;color:var(--text);}
@@ -110,7 +120,7 @@
   .sdrop-item.active::after{content:'✓';position:absolute;right:10px;font-size:0.78rem;font-weight:800;color:var(--accent3);}
   .sdrop-divider{height:1px;background:var(--border);margin:6px 0;}
 
-  /* REPORT PANELS */
+  /* ── REPORT PANELS ── */
   .report-panel{max-width:1200px;margin:0 auto 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
   .report-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#f8f9fd;border-bottom:1px solid var(--border);cursor:pointer;}
   .report-header-left{display:flex;align-items:center;gap:10px;}
@@ -144,17 +154,22 @@
   [contenteditable="true"]:hover{background:rgba(0,0,0,0.04);}
   [contenteditable="true"]:focus{background:rgba(196,154,10,0.08);box-shadow:0 0 0 1px rgba(196,154,10,0.35);}
 
+  /* ── MODALS ── */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:1000;align-items:center;justify-content:center;}
   .modal-overlay.open{display:flex;}
   .modal{background:var(--surface);border-radius:16px;padding:28px;width:min(420px,95vw);box-shadow:0 20px 60px rgba(0,0,0,0.18);animation:modalIn 0.2s ease;}
-  .slots-modal{background:var(--surface);border-radius:16px;padding:24px;width:min(300px,90vw);box-shadow:0 20px 60px rgba(0,0,0,0.18);animation:modalIn 0.2s ease;}
+  .slots-modal{background:var(--surface);border-radius:16px;padding:24px;width:min(340px,95vw);box-shadow:0 20px 60px rgba(0,0,0,0.18);animation:modalIn 0.2s ease;}
   @keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(10px);}to{opacity:1;transform:none;}}
   .modal h3,.slots-modal h3{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;margin-bottom:20px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .form-group{margin-bottom:14px;}
   .form-group label{display:block;font-size:0.78rem;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
   .form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.88rem;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);outline:none;transition:border-color 0.15s;}
-  .form-group input[type=number]{font-size:1.2rem;font-family:'Montserrat',sans-serif;font-weight:700;text-align:center;}
+  .form-group input[type=number]{font-size:1.3rem;font-family:'Montserrat',sans-serif;font-weight:800;text-align:center;padding:12px;}
   .form-group input:focus,.form-group select:focus{border-color:var(--accent);}
+  .slots-type-label{font-size:0.72rem;font-weight:700;text-align:center;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;}
+  .slots-type-label.oo{color:var(--oo);}
+  .slots-type-label.cd{color:var(--cd);}
   .modal-actions{display:flex;gap:10px;margin-top:20px;}
   .btn-primary{flex:1;padding:10px;background:var(--text);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:0.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;}
   .btn-primary:hover{background:#2d3450;}
@@ -164,25 +179,16 @@
 </head>
 <body>
 <div class="save-indicator" id="saveInd">✓ Saved</div>
-
 <header>
   <h1>🚛 Driver Recruitment Dashboard</h1>
   <p id="headerDate"></p>
   <div class="live-clock" id="liveClock">--:-- --<span>CDT</span></div>
 </header>
 
-<!-- HIRED THIS WEEK -->
 <div class="report-panel">
   <div class="report-header" onclick="togglePanel('hired')">
-    <div class="report-header-left">
-      <span style="font-size:1.3rem">🏆</span>
-      <span class="report-title">Hired This Week</span>
-      <span class="report-count report-count-green" id="hiredCount">0</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <span class="report-week-label" id="hiredWeekLabel"></span>
-      <span class="report-toggle" id="hiredToggle">▼</span>
-    </div>
+    <div class="report-header-left"><span style="font-size:1.3rem">🏆</span><span class="report-title">Hired This Week</span><span class="report-count report-count-green" id="hiredCount">0</span></div>
+    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="hiredWeekLabel"></span><span class="report-toggle" id="hiredToggle">▼</span></div>
   </div>
   <div id="hiredBody" style="display:none;">
     <div class="report-body" id="hiredGrid"></div>
@@ -190,18 +196,10 @@
   </div>
 </div>
 
-<!-- DISQUALIFIED -->
 <div class="report-panel">
   <div class="report-header" onclick="togglePanel('disq')">
-    <div class="report-header-left">
-      <span style="font-size:1.3rem">🚫</span>
-      <span class="report-title">Disqualified</span>
-      <span class="report-count report-count-red" id="disqCount">0</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <span class="report-week-label" id="disqWeekLabel"></span>
-      <span class="report-toggle" id="disqToggle">▼</span>
-    </div>
+    <div class="report-header-left"><span style="font-size:1.3rem">🚫</span><span class="report-title">Disqualified</span><span class="report-count report-count-red" id="disqCount">0</span></div>
+    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="disqWeekLabel"></span><span class="report-toggle" id="disqToggle">▼</span></div>
   </div>
   <div id="disqBody" style="display:none;">
     <div class="report-body" id="disqGrid"></div>
@@ -211,7 +209,6 @@
 
 <div class="grid" id="dash"></div>
 
-<!-- Add Driver Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3>➕ Add Driver</h3>
@@ -223,11 +220,19 @@
   </div>
 </div>
 
-<!-- Slots Modal -->
 <div class="modal-overlay" id="slotsModalOverlay">
   <div class="slots-modal">
-    <h3>✏️ Set Total Slots</h3>
-    <div class="form-group"><label>Total spots for this division</label><input type="number" id="slotsCountInput" min="1" max="99" value="10"></div>
+    <h3>✏️ Edit Slots</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <div class="slots-type-label oo">🔵 OO</div>
+        <input type="number" id="slotsOO" min="0" max="99" value="5">
+      </div>
+      <div class="form-group">
+        <div class="slots-type-label cd">🟢 CD</div>
+        <input type="number" id="slotsCD" min="0" max="99" value="5">
+      </div>
+    </div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeSlotsModal()">Cancel</button>
       <button class="btn-primary" onclick="saveSlotsCount()">Save</button>
@@ -240,23 +245,23 @@ document.getElementById('headerDate').textContent=new Date().toLocaleDateString(
 function updateClock(){const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});document.getElementById('liveClock').innerHTML=`${t}<span>CDT</span>`;}
 updateClock();setInterval(updateClock,1000);
 
-const STORAGE_KEY='driverDash_v6';
+const STORAGE_KEY='driverDash_v7';
 const defaultData={hiredLog:[],disqLog:[],sections:[
-  {id:"reefer",icon:"❄️",title:"Reefer",divStatus:"hiring",totalSlots:10,drivers:[
+  {id:"reefer",icon:"❄️",title:"Reefer",divStatus:"hiring",slotsOO:6,slotsCD:4,drivers:[
     {name:"Oybek Yusupov",company:"Sayram Express LLC",position:"Owner Operator",meta:"Ready Mar 2",status:"ready"},
     {name:"Odil Nazarov",company:"Sayram Express LLC",position:"Owner Operator",meta:"Ready Mar 2",status:"ready"},
     {name:"Driver TBD",company:"Iconic Logistics LLC",position:"Company Driver",meta:"Pre-approval",status:"preapproval"},
     {name:"Driver TBD",company:"Sayram Logistics Co",position:"Owner Operator",meta:"Pre-approval",status:"preapproval"}
   ]},
-  {id:"walmart",icon:"🛒",title:"Walmart",divStatus:"hiring",totalSlots:5,drivers:[]},
-  {id:"amazon",icon:"📦",title:"Amazon",divStatus:"full",totalSlots:4,drivers:[
+  {id:"walmart",icon:"🛒",title:"Walmart",divStatus:"hiring",slotsOO:3,slotsCD:2,drivers:[]},
+  {id:"amazon",icon:"📦",title:"Amazon",divStatus:"full",slotsOO:2,slotsCD:2,drivers:[
     {name:"Amazon Driver 1",company:"Golden Mile LLC",position:"Company Driver",meta:"Active",status:"ready"},
     {name:"Amazon Driver 2",company:"Golden Mile LLC",position:"Company Driver",meta:"Active",status:"ready"},
-    {name:"Amazon Driver 3",company:"Money Express INC",position:"Company Driver",meta:"Active",status:"ready"},
-    {name:"Amazon Driver 4",company:"Money Express INC",position:"Company Driver",meta:"Active",status:"ready"}
+    {name:"Amazon Driver 3",company:"Money Express INC",position:"Owner Operator",meta:"Active",status:"ready"},
+    {name:"Amazon Driver 4",company:"Money Express INC",position:"Owner Operator",meta:"Active",status:"ready"}
   ]},
-  {id:"portage",icon:"🏭",title:"Portage",divStatus:"hiring",totalSlots:6,drivers:[]},
-  {id:"dryvan",icon:"🚐",title:"Dry Van",divStatus:"full",totalSlots:3,drivers:[
+  {id:"portage",icon:"🏭",title:"Portage",divStatus:"hiring",slotsOO:4,slotsCD:2,drivers:[]},
+  {id:"dryvan",icon:"🚐",title:"Dry Van",divStatus:"full",slotsOO:2,slotsCD:1,drivers:[
     {name:"Dry Van Driver 1",company:"Sayram Express LLC",position:"Owner Operator",meta:"Active",status:"ready"},
     {name:"Dry Van Driver 2",company:"Iconic Logistics LLC",position:"Company Driver",meta:"Active",status:"ready"},
     {name:"Dry Van Driver 3",company:"Sayram Logistics Co",position:"Company Driver",meta:"Active",status:"ready"}
@@ -270,7 +275,8 @@ try{
   if(!data.hiredLog)data.hiredLog=[];
   if(!data.disqLog)data.disqLog=[];
   data.sections.forEach((s,i)=>{
-    if(!s.totalSlots)s.totalSlots=defaultData.sections[i]?.totalSlots||10;
+    if(!s.slotsOO)s.slotsOO=defaultData.sections[i]?.slotsOO||5;
+    if(!s.slotsCD)s.slotsCD=defaultData.sections[i]?.slotsCD||5;
     if(!s.divStatus)s.divStatus='hiring';
     if(!s.drivers)s.drivers=[];
   });
@@ -278,14 +284,19 @@ try{
 
 function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));const i=document.getElementById('saveInd');i.classList.add('show');setTimeout(()=>i.classList.remove('show'),1500);}
 
-// STATUS CONFIG
+// ── POSITION HELPERS ──
+function isOO(pos){return pos&&(pos.toLowerCase().includes('owner')||pos.toLowerCase().includes('lease'));}
+function isCD(pos){return pos&&pos.toLowerCase().includes('company');}
+function posClass(pos){return isOO(pos)?'oo':isCD(pos)?'cd':'';}
+
+// ── STATUS CONFIG ──
 const STATUSES=[
-  {key:'preapproval', label:'Pre-Approval',    icon:'🔵', badgeCls:'badge-preapproval'},
-  {key:'drugtest',    label:'Drug Test Pending',icon:'🧪', badgeCls:'badge-drugtest'},
-  {key:'onhold',      label:'On Hold',          icon:'⏸', badgeCls:'badge-onhold'},
-  null, // divider
-  {key:'hired',       label:'Hired',            icon:'🏆', badgeCls:'badge-hired'},
-  {key:'disqualified',label:'Disqualified',     icon:'🚫', badgeCls:'badge-disqualified'},
+  {key:'preapproval',label:'Pre-Approval',    icon:'🔵',badgeCls:'badge-preapproval'},
+  {key:'drugtest',   label:'Drug Test Pending',icon:'🧪',badgeCls:'badge-drugtest'},
+  {key:'onhold',     label:'On Hold',          icon:'⏸', badgeCls:'badge-onhold'},
+  null,
+  {key:'hired',      label:'Hired',            icon:'🏆',badgeCls:'badge-hired'},
+  {key:'disqualified',label:'Disqualified',    icon:'🚫',badgeCls:'badge-disqualified'},
 ];
 function getStatus(key){return STATUSES.find(s=>s&&s.key===key)||STATUSES[0];}
 function badgeClass(s){return getStatus(s).badgeCls;}
@@ -295,60 +306,30 @@ function autoStamp(si){data.sections[si].lastUpdated=new Date().toLocaleDateStri
 function stampDate(si){autoStamp(si);save();render();}
 function cycleDivStatus(si){const c=data.sections[si].divStatus;data.sections[si].divStatus=c==='hiring'?'urgent':c==='urgent'?'full':'hiring';autoStamp(si);save();render();}
 
-// ── SMART DROPDOWN ──
+// ── DROPDOWN ──
 let _activeDrop=null;
 function closeDropdown(){if(_activeDrop){_activeDrop.remove();_activeDrop=null;}}
-
 function openStatusMenu(si,di,badgeEl){
   closeDropdown();
   const currentKey=data.sections[si].drivers[di].status;
-
-  const drop=document.createElement('div');
-  drop.className='sdrop';
-
-  const hdr=document.createElement('div');
-  hdr.className='sdrop-header';
-  hdr.textContent='Change Status';
-  drop.appendChild(hdr);
-
+  const drop=document.createElement('div');drop.className='sdrop';
+  const hdr=document.createElement('div');hdr.className='sdrop-header';hdr.textContent='Change Status';drop.appendChild(hdr);
   STATUSES.forEach(st=>{
-    if(st===null){
-      const div=document.createElement('div');
-      div.className='sdrop-divider';
-      drop.appendChild(div);
-      return;
-    }
+    if(st===null){const dv=document.createElement('div');dv.className='sdrop-divider';drop.appendChild(dv);return;}
     const item=document.createElement('div');
     item.className='sdrop-item'+(st.key===currentKey?' active':'');
     item.innerHTML=`<span>${st.icon} ${st.label}</span>`;
     item.onclick=(e)=>{e.stopPropagation();setStatus(si,di,st.key);closeDropdown();};
     drop.appendChild(item);
   });
-
-  document.body.appendChild(drop);
-  _activeDrop=drop;
-
-  // Smart positioning — always fully visible
-  const rect=badgeEl.getBoundingClientRect();
-  const dropH=280, dropW=210;
-  const spaceBelow=window.innerHeight-rect.bottom-8;
-  const spaceAbove=rect.top-8;
-
-  let top, left;
-  // vertical
-  if(spaceBelow>=dropH||spaceBelow>=spaceAbove){
-    top=rect.bottom+window.scrollY+6;
-  } else {
-    top=rect.top+window.scrollY-dropH-6;
-  }
-  // horizontal
-  left=rect.left+window.scrollX;
-  if(left+dropW>window.innerWidth-8) left=window.innerWidth-dropW-8;
-  if(left<8) left=8;
-
-  drop.style.top=top+'px';
-  drop.style.left=left+'px';
-
+  document.body.appendChild(drop);_activeDrop=drop;
+  const rect=badgeEl.getBoundingClientRect(),dropH=250,dropW=210;
+  const spaceBelow=window.innerHeight-rect.bottom-8,spaceAbove=rect.top-8;
+  let top=spaceBelow>=dropH||spaceBelow>=spaceAbove?rect.bottom+window.scrollY+6:rect.top+window.scrollY-dropH-6;
+  let left=rect.left+window.scrollX;
+  if(left+dropW>window.innerWidth-8)left=window.innerWidth-dropW-8;
+  if(left<8)left=8;
+  drop.style.top=top+'px';drop.style.left=left+'px';
   setTimeout(()=>document.addEventListener('click',closeDropdown,{once:true}),0);
 }
 
@@ -357,79 +338,116 @@ function setStatus(si,di,newKey){
   const dateStr=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
   if(newKey==='hired'){
     data.hiredLog.unshift({...drv,division:data.sections[si].title,divisionIcon:data.sections[si].icon,dateHired:dateStr,hiredAt:Date.now()});
-    data.sections[si].drivers.splice(di,1);
-    autoStamp(si);save();render();renderReports();
-  } else if(newKey==='disqualified'){
+    data.sections[si].drivers.splice(di,1);autoStamp(si);save();render();renderReports();
+  }else if(newKey==='disqualified'){
     data.disqLog.unshift({...drv,division:data.sections[si].title,divisionIcon:data.sections[si].icon,dateDisq:dateStr,disqAt:Date.now()});
-    data.sections[si].drivers.splice(di,1);
-    autoStamp(si);save();render();renderReports();
-  } else {
-    drv.status=newKey;
-    autoStamp(si);save();render();
-  }
+    data.sections[si].drivers.splice(di,1);autoStamp(si);save();render();renderReports();
+  }else{drv.status=newKey;autoStamp(si);save();render();}
 }
-
 function deleteDriver(si,di){data.sections[si].drivers.splice(di,1);autoStamp(si);save();render();}
 
+// ── RENDER ──
 function render(){
   closeDropdown();
   const dash=document.getElementById('dash');dash.innerHTML='';
   data.sections.forEach((sec,si)=>{
-    const covered=sec.drivers.length,total=sec.totalSlots||10,empty=Math.max(0,total-covered),pct=total>0?Math.round((covered/total)*100):0;
+    const totalOO=sec.slotsOO||0, totalCD=sec.slotsCD||0;
+    const total=totalOO+totalCD;
+    const coveredOO=sec.drivers.filter(d=>isOO(d.position)).length;
+    const coveredCD=sec.drivers.filter(d=>isCD(d.position)).length;
+    const coveredOther=sec.drivers.filter(d=>!isOO(d.position)&&!isCD(d.position)).length;
+    const covered=sec.drivers.length;
+    const pctOO=totalOO>0?Math.min(100,Math.round((coveredOO/totalOO)*100)):0;
+    const pctCD=totalCD>0?Math.min(100,Math.round((coveredCD/totalCD)*100)):0;
+    const pctTotal=total>0?Math.min(100,Math.round((covered/total)*100)):0;
+    const emptySlots=Math.max(0,total-covered);
+
     const card=document.createElement('div');card.className='card';
+
+    // Header
     const dsl=sec.divStatus==='hiring'?'🔴 Hiring':sec.divStatus==='urgent'?'🚨 Urgent Hire':'🟢 Full';
     const dsc=sec.divStatus==='hiring'?'div-status-hiring':sec.divStatus==='urgent'?'div-status-urgent':'div-status-full';
     const hdr=document.createElement('div');hdr.className='card-header';
     hdr.innerHTML=`<div class="card-icon">${sec.icon}</div><div class="card-title" contenteditable="true" data-si="${si}" data-field="title">${sec.title}</div><div class="div-status ${dsc}" onclick="cycleDivStatus(${si})">${dsl}</div>`;
     card.appendChild(hdr);
+
+    // Progress bar
     const pb=document.createElement('div');pb.className='progress-bar-wrap';
-    const _e1=pct<30?'active':'',_e2=(pct>=30&&pct<75)?'active':'',_e3=pct>=75?'active':'';
-    const _mid=Math.round(total/2);
+    const _e1=pctTotal<30?'active':'',_e2=(pctTotal>=30&&pctTotal<75)?'active':'',_e3=pctTotal>=75?'active':'';
     pb.innerHTML=`
       <div class="progress-bar-top">
-        <div class="progress-bar-meta">
-          <span class="progress-label">${covered}<span> / ${total} covered</span></span>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;color:var(--text);">${covered}<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:'DM Sans',sans-serif"> / ${total} covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:'Montserrat',sans-serif;">CD: ${coveredCD}</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:'Montserrat',sans-serif;">OO: ${coveredOO}</span></span>
         </div>
         <div class="progress-bar-actions">
           <button class="last-updated" onclick="stampDate(${si})">🕒 ${sec.lastUpdated||'—'}</button>
           <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>
         </div>
       </div>
+
       <div class="progress-bar-area">
         <div class="progress-emoji-row">
-          <span class="progress-emoji ${_e1}">😞</span>
-          <span class="progress-emoji ${_e2}">🙂</span>
-          <span class="progress-emoji ${_e3}">🏆</span>
+          <span class="progress-emoji">😞</span>
+          <span class="progress-emoji">🙂</span>
+          <span class="progress-emoji">🏆</span>
         </div>
-        <div class="progress-bar-track">
-          <div class="progress-bar-fill" style="width:${pct}%"></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:${pctTotal}%"></div>
         </div>
         <div class="progress-tick-row">
           <span class="progress-tick">0</span>
-          <span class="progress-tick">${_mid}</span>
+          <span class="progress-tick">${Math.round(total/2)}</span>
           <span class="progress-tick">${total}</span>
         </div>
       </div>`;
     card.appendChild(pb);
+
+    // Slots — separated by OO and CD
     const sg=document.createElement('div');sg.className='slots-section';
-    const grid=document.createElement('div');grid.className='slots-grid';
-    sec.drivers.forEach((drv,di)=>{
-      const slot=document.createElement('div');
-      slot.className=`slot-covered status-${drv.status}`;
-      slot.innerHTML=`
-        <div class="slot-name" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvName">${drv.name}</div>
-        <div class="slot-company" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvCompany">${drv.company}</div>
-        ${drv.position?`<div class="slot-position">${drv.position}</div>`:''}
-        <div class="slot-notes" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvMeta">${drv.meta||''}</div>
-        <div class="slot-badge-row">
-          <div class="badge ${badgeClass(drv.status)}" onclick="openStatusMenu(${si},${di},this)">${badgeLabel(drv.status)}</div>
-        </div>
-        <button class="slot-delete" onclick="deleteDriver(${si},${di})">✕</button>`;
-      grid.appendChild(slot);
-    });
-    for(let e=0;e<empty;e++){const slot=document.createElement('div');slot.className='slot-empty';slot.onclick=()=>openAddDriver(si);slot.innerHTML=`<div class="slot-empty-plus">＋</div><div>Add Driver</div>`;grid.appendChild(slot);}
-    sg.appendChild(grid);card.appendChild(sg);dash.appendChild(card);
+
+    function makeSlotGroup(label, colorClass, drivers, emptyCount, addFn) {
+      const wrap=document.createElement('div');
+      wrap.innerHTML=`<div class="slots-group-label ${colorClass}">${label}</div>`;
+      const grid=document.createElement('div');grid.className='slots-grid';
+      drivers.forEach((drv,_di)=>{
+        const di=sec.drivers.indexOf(drv);
+        const pc=posClass(drv.position);
+        const slot=document.createElement('div');
+        slot.className=`slot-covered status-${drv.status}`;
+        slot.innerHTML=`
+          <div class="slot-name" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvName">${drv.name}</div>
+          <div class="slot-company" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvCompany">${drv.company}</div>
+          ${drv.position?`<div class="slot-position ${pc}">${drv.position}</div>`:''}
+          <div class="slot-notes" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvMeta">${drv.meta||''}</div>
+          <div class="slot-badge-row">
+            <div class="badge ${badgeClass(drv.status)}" onclick="openStatusMenu(${si},${di},this)">${badgeLabel(drv.status)}</div>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(${si},${di})">✕</button>`;
+        grid.appendChild(slot);
+      });
+      for(let e=0;e<emptyCount;e++){
+        const slot=document.createElement('div');slot.className='slot-empty';slot.onclick=addFn;
+        slot.innerHTML=`<div class="slot-empty-plus">＋</div><div>Add Driver</div>`;
+        grid.appendChild(slot);
+      }
+      wrap.appendChild(grid);
+      return wrap;
+    }
+
+    const ooDrivers=sec.drivers.filter(d=>isOO(d.position));
+    const cdDrivers=sec.drivers.filter(d=>isCD(d.position));
+    const otherDrivers=sec.drivers.filter(d=>!isOO(d.position)&&!isCD(d.position));
+    const emptyOO=Math.max(0,totalOO-ooDrivers.length);
+    const emptyCD=Math.max(0,totalCD-cdDrivers.length);
+
+    sg.appendChild(makeSlotGroup('🔵 Owner Operators','oo',ooDrivers,emptyOO,()=>openAddDriver(si,'Owner Operator')));
+    sg.appendChild(makeSlotGroup('🟢 Company Drivers','cd',cdDrivers,emptyCD,()=>openAddDriver(si,'Company Driver')));
+    if(otherDrivers.length>0) sg.appendChild(makeSlotGroup('👤 Other','',otherDrivers,0,()=>openAddDriver(si,'')));
+
+    card.appendChild(sg);dash.appendChild(card);
   });
+
   dash.querySelectorAll('[contenteditable="true"]').forEach(el=>{
     el.addEventListener('blur',()=>{
       const si=+el.dataset.si,field=el.dataset.field,val=el.innerText.trim();
@@ -443,7 +461,7 @@ function render(){
   });
 }
 
-// REPORTS
+// ── REPORTS ──
 function getWeekRange(){const now=new Date(),day=now.getDay(),mon=new Date(now);mon.setDate(now.getDate()-(day===0?6:day-1));mon.setHours(0,0,0,0);const sun=new Date(mon);sun.setDate(mon.getDate()+6);sun.setHours(23,59,59,999);return{start:mon.getTime(),end:sun.getTime()};}
 function renderReports(){
   const {start,end}=getWeekRange();
@@ -464,10 +482,12 @@ function togglePanel(type){const body=document.getElementById(`${type}Body`),tog
 function removeLog(type,idx){if(type==='hired')data.hiredLog.splice(idx,1);else data.disqLog.splice(idx,1);save();renderReports();}
 function clearLog(type){const {start,end}=getWeekRange();if(type==='hired')data.hiredLog=data.hiredLog.filter(d=>d.hiredAt<start||d.hiredAt>end);else data.disqLog=data.disqLog.filter(d=>d.disqAt<start||d.disqAt>end);save();renderReports();}
 
-// ADD DRIVER
+// ── ADD DRIVER MODAL ──
 let _ms=null;
-function openAddDriver(si){
+function openAddDriver(si, presetPosition=''){
   _ms=si;
+  const posOpts=['Owner Operator','Lease Operator','Company Driver'];
+  const posHtml=posOpts.map(p=>`<option value="${p}"${p===presetPosition?' selected':''}>${p}</option>`).join('');
   document.getElementById('modalBody').innerHTML=`
     <div class="form-group"><label>Full Name</label><input id="inp_name" placeholder="e.g. John Smith"></div>
     <div class="form-group"><label>Company</label><select id="inp_company">
@@ -475,10 +495,7 @@ function openAddDriver(si){
       <option>Sayram Express LLC</option><option>Iconic Logistics LLC</option>
       <option>Sayram Logistics Co</option><option>Golden Mile LLC</option><option>Money Express INC</option>
     </select></div>
-    <div class="form-group"><label>Position</label><select id="inp_position">
-      <option value="">— Select Position —</option>
-      <option>Company Driver</option><option>Lease Operator</option><option>Owner Operator</option>
-    </select></div>
+    <div class="form-group"><label>Position</label><select id="inp_position"><option value="">— Select Position —</option>${posHtml}</select></div>
     <div class="form-group"><label>Notes</label><input id="inp_meta" placeholder="e.g. Drug test pending"></div>
     <div class="form-group"><label>Status</label><select id="inp_status">
       <option value="preapproval">🔵 Pre-Approval</option>
@@ -495,10 +512,24 @@ function saveModalEntry(){
   closeModal();autoStamp(_ms);save();render();
 }
 
+// ── SLOTS MODAL ──
 let _ssi=null;
-function openSlotsModal(si){_ssi=si;document.getElementById('slotsCountInput').value=data.sections[si].totalSlots||10;document.getElementById('slotsModalOverlay').classList.add('open');setTimeout(()=>document.getElementById('slotsCountInput').select(),50);}
+function openSlotsModal(si){
+  _ssi=si;
+  document.getElementById('slotsOO').value=data.sections[si].slotsOO||0;
+  document.getElementById('slotsCD').value=data.sections[si].slotsCD||0;
+  document.getElementById('slotsModalOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('slotsOO').select(),50);
+}
 function closeSlotsModal(){document.getElementById('slotsModalOverlay').classList.remove('open');}
-function saveSlotsCount(){const v=parseInt(document.getElementById('slotsCountInput').value);if(!isNaN(v)&&v>=1){data.sections[_ssi].totalSlots=v;autoStamp(_ssi);save();render();}closeSlotsModal();}
+function saveSlotsCount(){
+  const oo=parseInt(document.getElementById('slotsOO').value)||0;
+  const cd=parseInt(document.getElementById('slotsCD').value)||0;
+  data.sections[_ssi].slotsOO=oo;
+  data.sections[_ssi].slotsCD=cd;
+  autoStamp(_ssi);save();render();
+  closeSlotsModal();
+}
 
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 document.getElementById('slotsModalOverlay').addEventListener('click',function(e){if(e.target===this)closeSlotsModal();});
