@@ -393,7 +393,7 @@ function setStatus(si,di,newKey){
 function deleteDriver(si,di){data.sections[si].drivers.splice(di,1);autoStamp(si);save();render();}
 
 // ── EXPORT TO GOOGLE SHEETS ──
-const SHEETS_URL = 'https://script.google.com/a/macros/sayramexpress.com/s/AKfycbzYmJzxZv2lI8B7dIzkr8b_SdPh7ZVpEmFqYSnvH04n-CsZk7Jb0fpkEi4aMdL7wTfALg/exec'; // paste your Google Apps Script Web App URL here
+const SHEETS_URL = 'https://script.google.com/a/macros/sayramexpress.com/s/AKfycbzYmJzxZv2lI8B7dIzkr8b_SdPh7ZVpEmFqYSnvH04n-CsZk7Jb0fpkEi4aMdL7wTfALg/exec';
 
 function exportToSheets(type) {
   if(!SHEETS_URL) {
