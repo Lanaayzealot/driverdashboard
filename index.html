@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+ v<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,7 +11,7 @@
     --accent:#c49a0a; --accent2:#2a7fd4; --accent3:#1aaa6a;
     --accent-red:#e03e3e; --text:#1a1e2e; --muted:#8892a4;
     --purple:#7c3aed; --orange:#d97706;
-    --oo:#2a7fd4; --cd:#1aaa6a;
+    --oo:#1a8fe0; --cd:#006D5B; --teal:#1a8fe0;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
@@ -42,7 +42,7 @@
   .progress-bar-actions{display:flex;gap:8px;}
   .slots-count-edit{font-size:0.74rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .slots-count-edit:hover{border-color:var(--accent);color:var(--accent);}
-  .last-updated{font-size:0.72rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
+  .last-updated{font-size:0.72rem;color:#4b5563;font-weight:700;cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .last-updated:hover{border-color:var(--accent2);color:var(--accent2);}
 
   /* OO / CD split bars */
@@ -61,13 +61,12 @@
   .slot-bar-count span{font-weight:400;font-family:'DM Sans',sans-serif;color:var(--muted);font-size:0.75rem;}
 
   /* emoji row */
-  .progress-bar-area{position:relative;padding-bottom:4px;margin-top:8px;}
-  .progress-emoji-row{display:flex;justify-content:space-between;margin-bottom:5px;padding:0 2px;}
-  .progress-emoji{font-size:1.0rem;line-height:1;}
-  .progress-bar-track-main{height:10px;background:#e4e8f0;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,0.08);}
-  .progress-bar-fill-main{height:100%;border-radius:99px;background:linear-gradient(90deg,#f87171,#fb923c,#facc15,#4ade80);transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 1px 6px rgba(0,0,0,0.12);}
-  .progress-tick-row{display:flex;justify-content:space-between;padding:0 2px;margin-top:4px;}
-  .progress-tick{font-size:0.65rem;color:var(--muted);font-family:'Montserrat',sans-serif;font-weight:700;}
+  .progress-bar-area{position:relative;padding-bottom:4px;margin-top:12px;}
+  .progress-pill-row{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .progress-pill-label{background:rgba(26,143,224,0.12);color:#1a8fe0;font-size:0.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:99px;font-family:'Montserrat',sans-serif;white-space:nowrap;}
+  .progress-pill-pct{font-size:0.8rem;font-weight:800;color:#1a8fe0;font-family:'Montserrat',sans-serif;margin-left:auto;}
+  .progress-bar-track-main{height:7px;background:#e8edf5;border-radius:99px;overflow:hidden;}
+  .progress-bar-fill-main{height:100%;border-radius:99px;background:#1a8fe0;transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);}
 
   /* ── SLOT GROUPS ── */
   .slots-group-label{font-size:0.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px 0 7px;font-family:'Montserrat',sans-serif;}
@@ -76,39 +75,49 @@
   .slots-section{padding:4px 20px 16px;}
   .slots-section > div + div { border-top:1px solid var(--border); margin-top:4px; padding-top:4px; }
 
-  /* ── SLOTS ── */
-
-  .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
-  .slot-covered{background:#f8f9fd;border:1px solid var(--border);border-radius:10px;padding:10px 12px;position:relative;transition:box-shadow 0.15s;animation:slotIn 0.2s ease;}
-  .slot-covered:hover{box-shadow:0 3px 12px rgba(0,0,0,0.08);}
+  /* ── SLOT ROWS ── */
+  .slots-grid{display:flex;flex-direction:column;gap:6px;}
+  .slot-covered{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 16px;position:relative;display:flex;align-items:center;gap:16px;transition:box-shadow 0.15s;animation:slotIn 0.2s ease;}
+  .slot-covered:hover{box-shadow:0 2px 10px rgba(0,0,0,0.07);}
   .slot-covered.status-disqualified{background:#fff5f5;border-color:rgba(224,62,62,0.2);opacity:0.75;}
   .slot-covered.status-onhold{background:#fffbf0;border-color:rgba(217,119,6,0.2);}
   .slot-covered.status-drugtest{background:#f5f3ff;border-color:rgba(124,58,237,0.2);}
+  .slot-row-name{font-weight:700;font-size:0.88rem;color:var(--text);min-width:140px;flex-shrink:0;}
+  .slot-row-company{font-size:0.78rem;color:#4b5563;font-weight:700;min-width:150px;flex-shrink:0;}
+  .slot-row-position{font-size:0.75rem;font-weight:700;min-width:120px;flex-shrink:0;}
+  .slot-row-position.oo{color:var(--oo);}
+  .slot-row-position.cd{color:var(--cd);}
+  .slot-row-notes{font-size:0.75rem;color:var(--muted);flex:1;}
+  .slot-row-badge{flex-shrink:0;}
+  .slot-empty{border:1.5px dashed #d6dce8;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;color:#b0bac9;transition:border-color 0.2s,background 0.2s,color 0.2s;font-size:0.78rem;animation:slotIn 0.2s ease;}
+  .slot-empty:hover{border-color:var(--accent);background:rgba(196,154,10,0.03);color:var(--accent);}
+  .slot-empty-plus{font-size:1.1rem;line-height:1;}
+
+  /* ── SLOTS ── */
+
+  /* slot styles moved to rows */
   @keyframes slotIn{from{opacity:0;transform:scale(0.96);}to{opacity:1;transform:scale(1);}}
   .slot-name{font-weight:600;font-size:0.88rem;color:var(--text);}
   .slot-company{font-size:0.74rem;color:#4b5563;font-weight:700;margin-top:6px;}
-  .slot-position{font-size:0.74rem;font-weight:700;margin-top:2px;}
+  .slot-position{font-size:0.74rem;font-weight:700;margin-top:6px;}
   .slot-position.oo{color:var(--oo);}
   .slot-position.cd{color:var(--cd);}
-  .slot-notes{font-size:0.74rem;color:var(--muted);margin-top:2px;font-style:italic;min-height:14px;}
+  .slot-notes{font-size:0.74rem;color:var(--muted);margin-top:6px;font-style:normal;min-height:14px;}
   .slot-badge-row{margin-top:8px;}
-  .badge{font-size:0.68rem;padding:4px 10px;border-radius:20px;white-space:nowrap;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px;font-weight:700;transition:transform 0.1s,box-shadow 0.1s;}
-  .badge:hover{transform:scale(1.04);box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-  .badge:active{transform:scale(0.96);}
-  .badge::after{content:'▾';font-size:0.6rem;opacity:0.6;margin-left:1px;}
-  .badge-ready      {background:rgba(26,170,106,0.1); border:1px solid rgba(26,170,106,0.3); color:var(--accent3);}
-  .badge-preapproval{background:rgba(42,127,212,0.1); border:1px solid rgba(42,127,212,0.3); color:var(--accent2);}
-  .badge-pending    {background:rgba(196,154,10,0.1);  border:1px solid rgba(196,154,10,0.3); color:var(--accent);}
-  .badge-hired      {background:rgba(26,170,106,0.15); border:1px solid rgba(26,170,106,0.4); color:var(--accent3);}
-  .badge-drugtest   {background:rgba(124,58,237,0.1);  border:1px solid rgba(124,58,237,0.3); color:var(--purple);}
-  .badge-onhold     {background:rgba(217,119,6,0.1);   border:1px solid rgba(217,119,6,0.3);  color:var(--orange);}
-  .badge-disqualified{background:rgba(224,62,62,0.1);  border:1px solid rgba(224,62,62,0.3);  color:var(--accent-red);}
-  .slot-delete{position:absolute;top:5px;right:5px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.72rem;padding:2px 5px;border-radius:4px;opacity:0;transition:opacity 0.2s,color 0.2s;}
+  .badge{font-size:0.68rem;padding:4px 12px;border-radius:99px;white-space:nowrap;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px;font-weight:600;transition:transform 0.1s,box-shadow 0.1s;background:#fff;letter-spacing:0.2px;}
+  .badge:hover{transform:scale(1.03);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+  .badge:active{transform:scale(0.97);}
+  .badge::after{content:'▾';font-size:0.6rem;opacity:0.5;margin-left:2px;}
+  .badge-ready      {border:1.5px solid #1aaa6a; color:#1aaa6a;}
+  .badge-preapproval{border:1.5px solid #1a8fe0; color:#1a8fe0;}
+  .badge-pending    {border:1.5px solid #c49a0a; color:#c49a0a;}
+  .badge-hired      {border:1.5px solid #1aaa6a; color:#1aaa6a;}
+  .badge-drugtest   {border:1.5px solid #7c3aed; color:#7c3aed;}
+  .badge-onhold     {border:1.5px solid #d97706; color:#d97706;}
+  .badge-disqualified{border:1.5px solid #e03e3e; color:#e03e3e;}
+  .slot-delete{position:absolute;top:50%;right:10px;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.72rem;padding:2px 5px;border-radius:4px;opacity:0;transition:opacity 0.2s,color 0.2s;}
   .slot-covered:hover .slot-delete{opacity:1;}
   .slot-delete:hover{color:var(--accent-red);}
-  .slot-empty{border:2px dashed #d6dce8;border-radius:10px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:#b0bac9;transition:border-color 0.2s,background 0.2s,color 0.2s;min-height:80px;font-size:0.78rem;animation:slotIn 0.2s ease;}
-  .slot-empty:hover{border-color:var(--accent);background:rgba(196,154,10,0.04);color:var(--accent);}
-  .slot-empty-plus{font-size:1.5rem;line-height:1;}
 
   /* ── STATUS DROPDOWN ── */
   .sdrop{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.16);z-index:9999;width:210px;padding:8px;animation:dropIn 0.15s ease;}
@@ -291,7 +300,7 @@ function posClass(pos){return isOO(pos)?'oo':isCD(pos)?'cd':'';}
 
 // ── STATUS CONFIG ──
 const STATUSES=[
-  {key:'preapproval',label:'Pre-Approval',    icon:'🔵',badgeCls:'badge-preapproval'},
+  {key:'preapproval',label:'Pre-Approval',    icon:'🩵',badgeCls:'badge-preapproval'},
   {key:'drugtest',   label:'Drug Test Pending',icon:'🧪',badgeCls:'badge-drugtest'},
   {key:'onhold',     label:'On Hold',          icon:'⏸', badgeCls:'badge-onhold'},
   null,
@@ -382,23 +391,14 @@ function render(){
         </div>
         <div class="progress-bar-actions">
           <button class="last-updated" onclick="stampDate(${si})">🕒 ${sec.lastUpdated||'—'}</button>
-          <button class="slots-count-edit" onclick="openSlotsModal(${si})">✏️ Edit slots</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(${si})">➕ Add Slots</button>
         </div>
       </div>
 
       <div class="progress-bar-area">
-        <div class="progress-emoji-row">
-          <span class="progress-emoji">😞</span>
-          <span class="progress-emoji">🙂</span>
-          <span class="progress-emoji">🏆</span>
-        </div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">${pctTotal}%</span></div>
         <div class="progress-bar-track-main">
           <div class="progress-bar-fill-main" style="width:${pctTotal}%"></div>
-        </div>
-        <div class="progress-tick-row">
-          <span class="progress-tick">0</span>
-          <span class="progress-tick">${Math.round(total/2)}</span>
-          <span class="progress-tick">${total}</span>
         </div>
       </div>`;
     card.appendChild(pb);
@@ -416,11 +416,11 @@ function render(){
         const slot=document.createElement('div');
         slot.className=`slot-covered status-${drv.status}`;
         slot.innerHTML=`
-          <div class="slot-name" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvName">${drv.name}</div>
-          <div class="slot-company" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvCompany">${drv.company}</div>
-          ${drv.position?`<div class="slot-position ${pc}">${drv.position}</div>`:''}
-          <div class="slot-notes" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvMeta">${drv.meta||''}</div>
-          <div class="slot-badge-row">
+          <div class="slot-row-name" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvName">${drv.name}</div>
+          <div class="slot-row-company" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvCompany">${drv.company}</div>
+          ${drv.position?`<div class="slot-row-position ${pc}">${drv.position}</div>`:''}
+          <div class="slot-row-notes" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvMeta">${drv.meta||''}</div>
+          <div class="slot-row-badge">
             <div class="badge ${badgeClass(drv.status)}" onclick="openStatusMenu(${si},${di},this)">${badgeLabel(drv.status)}</div>
           </div>
           <button class="slot-delete" onclick="deleteDriver(${si},${di})">✕</button>`;
