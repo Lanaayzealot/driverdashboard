@@ -40,9 +40,9 @@
   .progress-bar-wrap{padding:16px 28px 16px;border-bottom:1px solid var(--border);background:#fafbfe;}
   .progress-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
   .progress-bar-actions{display:flex;gap:8px;}
-  .slots-count-edit{font-size:0.74rem;color:var(--muted);cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
+  .slots-count-edit{font-size:0.74rem;color:var(--muted);cursor:pointer;background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:8px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .slots-count-edit:hover{border-color:var(--accent);color:var(--accent);}
-  .last-updated{font-size:0.72rem;color:#4b5563;font-weight:700;cursor:pointer;background:none;border:1px dashed var(--border);padding:3px 9px;border-radius:6px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
+  .last-updated{font-size:0.72rem;color:#4b5563;font-weight:700;cursor:pointer;background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:8px;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
   .last-updated:hover{border-color:var(--accent2);color:var(--accent2);}
 
   /* OO / CD split bars */
@@ -112,17 +112,17 @@
   .slot-position.cd{color:var(--cd);}
   .slot-notes{font-size:0.74rem;color:var(--muted);margin-top:6px;font-style:normal;min-height:14px;}
   .slot-badge-row{margin-top:8px;}
-  .badge{font-size:0.68rem;padding:4px 12px;border-radius:99px;white-space:nowrap;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px;font-weight:600;transition:transform 0.1s,box-shadow 0.1s;background:#fff;letter-spacing:0.2px;}
+  .badge{font-size:0.68rem;padding:4px 12px;border-radius:99px;white-space:nowrap;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px;font-weight:600;transition:transform 0.1s,box-shadow 0.1s;background:#fff;letter-spacing:0.2px;border-width:2px!important;}
   .badge:hover{transform:scale(1.03);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
   .badge:active{transform:scale(0.97);}
   .badge::after{content:'▾';font-size:0.6rem;opacity:0.5;margin-left:2px;}
-  .badge-ready      {border:1.5px solid #16a34a; color:#16a34a;}
-  .badge-preapproval{border:1.5px solid #1a8fe0; color:#1a8fe0;}
-  .badge-pending    {border:1.5px solid #c49a0a; color:#c49a0a;}
-  .badge-hired      {border:1.5px solid #1aaa6a; color:#1aaa6a;}
-  .badge-drugtest   {border:1.5px solid #7c3aed; color:#7c3aed;}
-  .badge-onhold     {border:1.5px solid #d97706; color:#d97706;}
-  .badge-disqualified{border:1.5px solid #e03e3e; color:#e03e3e;}
+  .badge-ready      {border:2px solid #16a34a; color:#16a34a;}
+  .badge-preapproval{border:2px solid #1a8fe0; color:#1a8fe0;}
+  .badge-pending    {border:2px solid #c49a0a; color:#c49a0a;}
+  .badge-hired      {border:2px solid #1aaa6a; color:#1aaa6a;}
+  .badge-drugtest   {border:2px solid #7c3aed; color:#7c3aed;}
+  .badge-onhold     {border:2px solid #d97706; color:#d97706;}
+  .badge-disqualified{border:2px solid #e03e3e; color:#e03e3e;}
   .slot-delete{position:absolute;top:50%;right:10px;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.72rem;padding:2px 5px;border-radius:4px;opacity:0;transition:opacity 0.2s,color 0.2s;}
   .slot-covered:hover .slot-delete{opacity:1;}
   .slot-delete:hover{color:var(--accent-red);}
@@ -398,7 +398,7 @@ function render(){
     pb.innerHTML=`
       <div class="progress-bar-top">
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;color:var(--text);">${covered}<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:'DM Sans',sans-serif"> / ${total} covered</span></span>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">${covered}<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:'DM Sans',sans-serif"> / ${total} covered</span></span>
           <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:'Montserrat',sans-serif;">CD: ${coveredCD}</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:'Montserrat',sans-serif;">OO: ${coveredOO}</span></span>
         </div>
         <div class="progress-bar-actions">
@@ -518,6 +518,8 @@ function openAddDriver(si, presetPosition=''){
       <option value="drugtest">🧪 Drug Test Pending</option>
       <option value="onhold">⏸ On Hold</option>
       <option value="ready">✅ Ready to Go</option>
+      <option value="hired">🏆 Hired</option>
+      <option value="disqualified">🚫 Disqualified</option>
     </select></div>`;
   document.getElementById('modalOverlay').classList.add('open');
   setTimeout(()=>document.getElementById('inp_name').focus(),50);
