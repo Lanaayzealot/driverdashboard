@@ -17,7 +17,7 @@
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
   header{text-align:center;margin-bottom:40px;}
   header h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;color:var(--text);}
-  header p{color:var(--muted);font-size:0.85rem;margin-top:6px;letter-spacing:2px;text-transform:uppercase;}
+  header p{color:var(--oo);font-size:0.85rem;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
   .live-clock{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-top:8px;letter-spacing:1px;}
   .live-clock span{color:var(--muted);font-size:0.75rem;font-weight:400;font-family:'DM Sans',sans-serif;margin-left:6px;letter-spacing:1.5px;text-transform:uppercase;}
   .save-indicator{position:fixed;top:16px;right:16px;background:var(--accent3);color:#fff;padding:6px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;opacity:0;transition:opacity 0.3s;z-index:999;}
@@ -74,6 +74,14 @@
   .slots-group-label.cd{color:var(--cd);}
   .slots-section{padding:8px 28px 20px;}
   .slots-section > div + div { border-top:1px solid var(--border); margin-top:4px; padding-top:4px; }
+
+  /* ── NATIVE SELECTS ── */
+  .native-select{font-size:0.78rem;font-weight:700;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;outline:none;}
+  .native-select:hover{opacity:0.8;}
+
+  /* ── COMPANY DROPDOWN ── */
+  .company-select{font-size:0.78rem;color:#4b5563;font-weight:700;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;outline:none;min-width:100px;}
+  .company-select:hover{color:var(--oo);}
 
   /* ── SLOT ROWS ── */
   .slots-grid{display:flex;flex-direction:column;gap:6px;}
@@ -300,7 +308,7 @@ function posClass(pos){return isOO(pos)?'oo':isCD(pos)?'cd':'';}
 
 // ── STATUS CONFIG ──
 const STATUSES=[
-  {key:'preapproval',label:'Pre-Approval',    icon:'🩵',badgeCls:'badge-preapproval'},
+  {key:'preapproval',label:'Pre-Approval',    icon:'🔍',badgeCls:'badge-preapproval'},
   {key:'drugtest',   label:'Drug Test Pending',icon:'🧪',badgeCls:'badge-drugtest'},
   {key:'onhold',     label:'On Hold',          icon:'⏸', badgeCls:'badge-onhold'},
   null,
@@ -354,6 +362,9 @@ function setStatus(si,di,newKey){
   }else{drv.status=newKey;autoStamp(si);save();render();}
 }
 function deleteDriver(si,di){data.sections[si].drivers.splice(di,1);autoStamp(si);save();render();}
+
+// ── UPDATE COMPANY ──
+function updateCompany(si,di,val){data.sections[si].drivers[di].company=val;autoStamp(si);save();}
 
 // ── RENDER ──
 function render(){
@@ -417,11 +428,15 @@ function render(){
         slot.className=`slot-covered status-${drv.status}`;
         slot.innerHTML=`
           <div class="slot-row-name" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvName">${drv.name}</div>
-          <div class="slot-row-company" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvCompany">${drv.company}</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(${si},${di},this.value)">
+            ${['Sayram Express LLC','Sayram Logistics Co','Iconic Logistics LLC','Golden Mile LLC','Money Express Inc'].map(c=>`<option value="${c}" ${drv.company===c?'selected':''}>${c}</option>`).join('')}
+          </select>
           ${drv.position?`<div class="slot-row-position ${pc}">${drv.position}</div>`:''}
           <div class="slot-row-notes" contenteditable="true" data-si="${si}" data-di="${di}" data-field="drvMeta">${drv.meta||''}</div>
           <div class="slot-row-badge">
-            <div class="badge ${badgeClass(drv.status)}" onclick="openStatusMenu(${si},${di},this)">${badgeLabel(drv.status)}</div>
+            <select class="native-select badge ${badgeClass(drv.status)}" onchange="setStatus(${si},${di},this.value)">
+              ${STATUSES.filter(s=>s).map(s=>`<option value="${s.key}" ${drv.status===s.key?'selected':''}>${s.icon} ${s.label}</option>`).join('')}
+            </select>
           </div>
           <button class="slot-delete" onclick="deleteDriver(${si},${di})">✕</button>`;
         grid.appendChild(slot);
