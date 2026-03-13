@@ -1,10 +1,334 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0042)https://driverdashboard-68sf.onrender.com/ -->
+<html lang="en" class="js-focus-visible" data-js-focus-visible=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--mui-inject-first--><style data-jss="" data-meta="MuiTouchRipple">
+.MuiTouchRipple-root {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.MuiTouchRipple-ripple {
+  opacity: 0;
+  position: absolute;
+}
+.MuiTouchRipple-rippleVisible {
+  opacity: 0.3;
+  animation: MuiTouchRipple-keyframes-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+}
+.MuiTouchRipple-ripplePulsate {
+  animation-duration: 200ms;
+}
+.MuiTouchRipple-child {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.MuiTouchRipple-childLeaving {
+  opacity: 0;
+  animation: MuiTouchRipple-keyframes-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.MuiTouchRipple-childPulsate {
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: MuiTouchRipple-keyframes-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes MuiTouchRipple-keyframes-pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style><style data-jss="" data-meta="MuiButtonBase">
+.MuiButtonBase-root {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.MuiButtonBase-root::-moz-focus-inner {
+  border-style: none;
+}
+.MuiButtonBase-root.Mui-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+@media print {
+  .MuiButtonBase-root {
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style><style data-jss="" data-meta="MuiButton">
+.MuiButton-root {
+  color: rgba(0, 0, 0, 0.87);
+  padding: 6px 16px;
+  font-size: 0.9375rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: Lato, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 20px;
+  border-radius: 4px;
+  text-transform: none;
+}
+.MuiButton-root:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.MuiButton-root.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .MuiButton-root:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-root:hover.Mui-disabled {
+  background-color: transparent;
+}
+.MuiButton-label {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}
+.MuiButton-text {
+  padding: 6px 8px;
+}
+.MuiButton-textPrimary {
+  color: #066FAC;
+}
+.MuiButton-textPrimary:hover {
+  background-color: rgba(6, 111, 172, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-textPrimary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-textSecondary {
+  color: #FF8800;
+}
+.MuiButton-textSecondary:hover {
+  background-color: rgba(255, 136, 0, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-textSecondary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-outlined {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 5px 15px;
+}
+.MuiButton-outlined.Mui-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.MuiButton-outlinedPrimary {
+  color: #066FAC;
+  border: 1px solid rgba(6, 111, 172, 0.5);
+}
+.MuiButton-outlinedPrimary:hover {
+  border: 1px solid #066FAC;
+  background-color: rgba(6, 111, 172, 0.04);
+}
+@media (hover: none) {
+  .MuiButton-outlinedPrimary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-outlinedSecondary {
+  color: #FF8800;
+  border: 1px solid rgba(255, 136, 0, 0.5);
+}
+.MuiButton-outlinedSecondary:hover {
+  border: 1px solid #FF8800;
+  background-color: rgba(255, 136, 0, 0.04);
+}
+.MuiButton-outlinedSecondary.Mui-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .MuiButton-outlinedSecondary:hover {
+    background-color: transparent;
+  }
+}
+.MuiButton-contained {
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+  background-color: #e0e0e0;
+}
+.MuiButton-contained:hover {
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+  background-color: #d5d5d5;
+}
+.MuiButton-contained.Mui-focusVisible {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.MuiButton-contained:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.MuiButton-contained.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+@media (hover: none) {
+  .MuiButton-contained:hover {
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+}
+.MuiButton-contained:hover.Mui-disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.MuiButton-containedPrimary {
+  color: #fff;
+  background-color: #066FAC;
+}
+.MuiButton-containedPrimary:hover {
+  background-color: rgb(4, 77, 120);
+}
+@media (hover: none) {
+  .MuiButton-containedPrimary:hover {
+    background-color: #066FAC;
+  }
+}
+.MuiButton-containedSecondary {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #FF8800;
+}
+.MuiButton-containedSecondary:hover {
+  background-color: rgb(178, 95, 0);
+}
+@media (hover: none) {
+  .MuiButton-containedSecondary:hover {
+    background-color: #FF8800;
+  }
+}
+.MuiButton-disableElevation {
+  box-shadow: none;
+}
+.MuiButton-disableElevation:hover {
+  box-shadow: none;
+}
+.MuiButton-disableElevation.Mui-focusVisible {
+  box-shadow: none;
+}
+.MuiButton-disableElevation:active {
+  box-shadow: none;
+}
+.MuiButton-disableElevation.Mui-disabled {
+  box-shadow: none;
+}
+.MuiButton-colorInherit {
+  color: inherit;
+  border-color: currentColor;
+}
+.MuiButton-textSizeSmall {
+  padding: 4px 5px;
+  font-size: 0.8125rem;
+}
+.MuiButton-textSizeLarge {
+  padding: 8px 11px;
+  font-size: 0.9375rem;
+}
+.MuiButton-outlinedSizeSmall {
+  padding: 3px 9px;
+  font-size: 0.8125rem;
+}
+.MuiButton-outlinedSizeLarge {
+  padding: 7px 21px;
+  font-size: 0.9375rem;
+}
+.MuiButton-containedSizeSmall {
+  padding: 4px 10px;
+  font-size: 0.8125rem;
+}
+.MuiButton-containedSizeLarge {
+  padding: 8px 22px;
+  font-size: 0.9375rem;
+}
+.MuiButton-fullWidth {
+  width: 100%;
+}
+.MuiButton-startIcon {
+  display: inherit;
+  margin-left: -4px;
+  margin-right: 8px;
+}
+.MuiButton-startIcon.MuiButton-iconSizeSmall {
+  margin-left: -2px;
+}
+.MuiButton-endIcon {
+  display: inherit;
+  margin-left: 8px;
+  margin-right: -4px;
+}
+.MuiButton-endIcon.MuiButton-iconSizeSmall {
+  margin-right: -2px;
+}
+.MuiButton-iconSizeSmall > *:first-child {
+  font-size: 18px;
+}
+.MuiButton-iconSizeMedium > *:first-child {
+  font-size: 20px;
+}
+.MuiButton-iconSizeLarge > *:first-child {
+  font-size: 22px;
+}
+</style>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Driver Recruitment Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="./Driver Recruitment Dashboard_files/css2" rel="stylesheet">
 <style>
   :root {
     --bg:#f4f6fa; --surface:#fff; --border:#e0e4ef;
@@ -200,55 +524,417 @@
   .back-to-top.visible{opacity:1;pointer-events:auto;}
   .back-to-top:hover{transform:translateY(-2px);}
 </style>
-</head>
+<style type="text/css">.video-ads{display:none!important}#watch7-sidebar-ads{display:none!important}#AdSense{display:none!important}#homepage-sidebar-ads{display:none!important}#page-container>#page>#header{display:none!important}ytd-promoted-sparkles-web-renderer{display:none!important}ytd-compact-promoted-item-renderer{display:none!important}ytd-display-ad-renderer{display:none!important}#feedmodule-PRO{display:none!important}#homepage-chrome-side-promo{display:none!important}#search-pva{display:none!important}#watch-branded-actions{display:none!important}#watch-buy-urls{display:none!important}.carousel-offer-url-container{display:none!important}.promoted-videos{display:none!important}.watch-extra-info-column{display:none!important}.watch-extra-info-right{display:none!important}a[href^="http://www.youtube.com/cthru?"]{display:none!important}#masthead-ad{display:none!important}#player-ads{display:none!important}.yt-ad-main-right{display:none!important}[target-id="engagement-panel-ads"]{display:none!important}ytd-ad-slot-renderer{display:none!important}</style><style data-styled="active" data-styled-version="5.3.3">.dqDCDr{width:1em;height:1em;stroke-width:0;stroke:currentColor;fill:currentColor;pointer-events:none;}.bhNaXq{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;font-size:inherit;}.vfXGH{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:48px;height:48px;color:#666666;border-radius:50%;-webkit-transition:background 150ms cubic-bezier(0.4,0,0.2,1) 0ms;transition:background 150ms cubic-bezier(0.4,0,0.2,1) 0ms;cursor:pointer;box-shadow:0px 1px 3px 0px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 2px 1px -1px rgba(0,0,0,0.12);-webkit-transition:background-color 250ms cubic-bezier(0.4,0,0.2,1) 0ms,box-shadow 250ms cubic-bezier(0.4,0,0.2,1) 0ms,border 250ms cubic-bezier(0.4,0,0.2,1) 0ms;transition:background-color 250ms cubic-bezier(0.4,0,0.2,1) 0ms,box-shadow 250ms cubic-bezier(0.4,0,0.2,1) 0ms,border 250ms cubic-bezier(0.4,0,0.2,1) 0ms;font-size:24px;}.vfXGH:active{box-shadow:0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);}@media (hover:hover) and (pointer:fine){.vfXGH:hover{background-color:rgba(102,102,102,0.08);color:rgba(102,102,102,0.88);}}.vfXGH:active{color:#666666;}.vfXGH.focus-visible,.vfXGH[data-focus-visible-added]{background-color:rgba(102,102,102,0.16);}.vfXGH.focus-visible:active,.vfXGH[data-focus-visible-added]:active{color:rgba(102,102,102,0.88);}.vfXGH.RcIconButton-persistBg{background-color:rgba(102,102,102,0.12);}.vfXGH.RcIconButton-disabled{color:#C7C7C7;}.vfXGH.RcIconButton-invisible{opacity:0;visibility:hidden;width:0;height:0;}.vfXGH.RcIconButton-outline{border:1px solid #C7C7C7;}.vfXGH.RcIconButton-contained{color:#fff;background-color:#666666;}.vfXGH.RcIconButton-contained.RcIconButton-disabled{background-color:#E5E5E5;color:#939393;}.vfXGH.RcIconButton-contained:before{content:'';left:0;right:0;top:0;bottom:0;width:100%;height:100%;border-radius:50%;position:absolute;}@media (hover:hover) and (pointer:fine){.vfXGH.RcIconButton-contained:hover{color:#fff;}.vfXGH.RcIconButton-contained:hover:before{background-color:rgba(255,255,255,0.08);}}.vfXGH.RcIconButton-contained.focus-visible,.vfXGH.RcIconButton-contained[data-focus-visible-added]{color:#fff;}.vfXGH.RcIconButton-contained.focus-visible:before,.vfXGH.RcIconButton-contained[data-focus-visible-added]:before{background-color:rgba(255,255,255,0.16);}.vfXGH.RcIconButton-contained:active{color:#fff;}.vfXGH .RcIconButtonTouchRipple-ripplePulsate{border-radius:0;-webkit-animation-name:none;animation-name:none;opacity:0;}.lnudDN{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:32px;height:32px;color:#666666;border-radius:50%;-webkit-transition:background 150ms cubic-bezier(0.4,0,0.2,1) 0ms;transition:background 150ms cubic-bezier(0.4,0,0.2,1) 0ms;cursor:pointer;font-size:16px;}@media (hover:hover) and (pointer:fine){.lnudDN:hover{background-color:rgba(102,102,102,0.08);color:rgba(102,102,102,0.88);}}.lnudDN:active{color:#666666;}.lnudDN.focus-visible,.lnudDN[data-focus-visible-added]{background-color:rgba(102,102,102,0.16);}.lnudDN.focus-visible:active,.lnudDN[data-focus-visible-added]:active{color:rgba(102,102,102,0.88);}.lnudDN.RcIconButton-persistBg{background-color:rgba(102,102,102,0.12);}.lnudDN.RcIconButton-disabled{color:#C7C7C7;}.lnudDN.RcIconButton-invisible{opacity:0;visibility:hidden;width:0;height:0;}.lnudDN.RcIconButton-outline{border:1px solid #C7C7C7;}.lnudDN.RcIconButton-contained{color:#fff;background-color:#666666;}.lnudDN.RcIconButton-contained.RcIconButton-disabled{background-color:#E5E5E5;color:#939393;}.lnudDN.RcIconButton-contained:before{content:'';left:0;right:0;top:0;bottom:0;width:100%;height:100%;border-radius:50%;position:absolute;}@media (hover:hover) and (pointer:fine){.lnudDN.RcIconButton-contained:hover{color:#fff;}.lnudDN.RcIconButton-contained:hover:before{background-color:rgba(255,255,255,0.08);}}.lnudDN.RcIconButton-contained.focus-visible,.lnudDN.RcIconButton-contained[data-focus-visible-added]{color:#fff;}.lnudDN.RcIconButton-contained.focus-visible:before,.lnudDN.RcIconButton-contained[data-focus-visible-added]:before{background-color:rgba(255,255,255,0.16);}.lnudDN.RcIconButton-contained:active{color:#fff;}.lnudDN .RcIconButtonTouchRipple-ripplePulsate{border-radius:0;-webkit-animation-name:none;animation-name:none;opacity:0;}.iwLYty{text-transform:none;font-size:0.9375rem;font-weight:700;font-family:Lato,Helvetica,Arial,sans-serif;text-align:center;box-shadow:unset;border-radius:4px;}.iwLYty .RcButton-startIcon{margin-right:8px;margin-left:0;}.iwLYty .RcButton-endIcon{margin-left:8px;margin-right:0;}.iwLYty.RcButton-text{color:#066FAC;padding:4px;min-width:unset;line-height:1;}.iwLYty.RcButton-text.RcButton-disabled{color:#C7C7C7;}@media (hover:hover) and (pointer:fine){.iwLYty.RcButton-text:hover{background-color:rgba(6,111,172,0.08);}}@media (hover:hover) and (pointer:fine){.iwLYty.RcButton-text:hover{color:rgba(6,111,172,0.8);background-color:transparent;}}.iwLYty.RcButton-text.focus-visible,.iwLYty.RcButton-text[data-focus-visible-added]{background-color:transparent;}.iwLYty.RcButton-text.focus-visible:after,.iwLYty.RcButton-text[data-focus-visible-added]:after{pointer-events:none;content:'';position:absolute;inset:0;margin:calc(-0px - 0px);border-radius:calc(0px + 4px);box-shadow:inset 0 0 0 2px #066FAC;}.iwLYty.RcButton-text:active.RcButton-text{color:rgba(6,111,172,0.64);}.iwLYty.RcButton-contained{color:#fff;background-color:#066FAC;}@media (hover:hover) and (pointer:fine){.iwLYty.RcButton-contained:hover{background-color:rgba(6,111,172,0.92);}}.iwLYty.RcButton-contained.RcButton-disabled{background-color:#E5E5E5;color:#939393;}.iwLYty.RcButton-outlined{color:#066FAC;border-color:#066FAC;padding:0px 15px;}@media (hover:hover) and (pointer:fine){.iwLYty.RcButton-outlined:hover{background-color:rgba(6,111,172,0.08);}}.iwLYty.RcButton-outlined.RcButton-disabled{color:#C7C7C7;border-color:#C7C7C7;}</style><style>#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk {
+  user-select: none;
+  user-drag: none;
+  display: none;
+  height: 30px;
+  top: 0;
+  left: 0;
+  position: fixed;
+  transition: opacity 0.1s 0s linear;
+  z-index: 2147483647;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_visible_mEW3O {
+  display: block;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_c2dWrapper_v8pYg {
+  user-select: none;
+  user-drag: none;
+  position: relative;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  border: 1px solid #cfcfcf;
+  border-radius: 4px;
+  font-size: 0px;
+  height: 30px;
+  white-space: nowrap;
+  margin: 0 0 0 5px;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_c2dWrapper_v8pYg > img.src-widgets-BuiltinWidget-_styles_c2dLogo_gBsgM {
+  height: 30px;
+  width: 30px;
+  max-width: 30px;
+  min-width: 30px;
+  margin: -1px 0 0 -1px;
+  vertical-align: baseline !important;
+  display: inline-block !important;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_arrow_pWfWX {
+  position: absolute;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #cfcfcf;
+  top: calc(50% - 5px);
+  left: 0;
+  height: 0;
+  width: 0;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_innerArrow_L1vrh {
+  position: absolute;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid var(--c2d-arrow-color, #ff8800);
+  top: calc(50% - 5px);
+  left: 1px;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_left_kmAO8 .src-widgets-BuiltinWidget-_styles_c2dWrapper_v8pYg {
+  margin: 0 5px 0 0;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_left_kmAO8 .src-widgets-BuiltinWidget-_styles_arrow_pWfWX {
+  border-right: none;
+  border-left: 5px solid #cfcfcf;
+  left: initial;
+  right: 0;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_left_kmAO8 .src-widgets-BuiltinWidget-_styles_innerArrow_L1vrh {
+  border-right: none;
+  border-left: 5px solid #fff;
+  left: initial;
+  right: 1px;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_btn_lsv7O, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_textBtn_BlZA5, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_callBtn_ZQO39 {
+  display: none;
+  position: relative;
+  vertical-align: top;
+  cursor: pointer;
+  font-size: 18px;
+  height: 28px;
+  width: 28px;
+  line-height: 28px;
+  text-align: center;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_btn_lsv7O svg, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_textBtn_BlZA5 svg, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_callBtn_ZQO39 svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  overflow: visible !important;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_btn_lsv7O svg > path, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_textBtn_BlZA5 svg > path, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_callBtn_ZQO39 svg > path {
+  fill: #066fac;
+  stroke: #066fac;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_btn_lsv7O:hover, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_textBtn_BlZA5:hover, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_callBtn_ZQO39:hover {
+  opacity: 0.6;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_btn_lsv7O.src-widgets-BuiltinWidget-_styles_visible_mEW3O, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_visible_mEW3O.src-widgets-BuiltinWidget-_styles_textBtn_BlZA5, #src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_visible_mEW3O.src-widgets-BuiltinWidget-_styles_callBtn_ZQO39 {
+  display: inline-block;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_separatorLine_RYpwW {
+  display: none;
+  width: 1px;
+  height: 19px;
+  margin: 5px 0;
+  background: #cdcdcd;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_separatorLine_RYpwW:hover {
+  opacity: 0.6;
+}
+#src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk.src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk .src-widgets-BuiltinWidget-_styles_separatorLine_RYpwW.src-widgets-BuiltinWidget-_styles_visible_mEW3O {
+  display: inline-block;
+}
+.src-widgets-BuiltinWidget-_styles_hack_nGodw {
+  background: url("https://rc-hack-c2d.detect");
+}</style></head>
 <body>
 <div class="save-indicator" id="saveInd">✓ Saved</div>
 
-</div>
 
-</div>
+
+
 
 <header>
   <h1>Driver Recruitment Dashboard</h1>
-  <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-top:8px;letter-spacing:0.5px;">WEEK: <span id="weekRange"></span></div>
+  <div style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-top:8px;letter-spacing:0.5px;">WEEK: <span id="weekRange">Mar 9 – Mar 13</span></div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex-wrap:wrap;gap:8px;">
-    <div style="font-size:0.8rem;color:var(--oo);font-weight:700;letter-spacing:1px;font-family:'Montserrat',sans-serif;" id="headerDate"></div>
-    <div class="live-clock" id="liveClock" style="margin-top:0;">--:-- --<span>CDT</span></div>
+    <div style="font-size:0.8rem;color:var(--oo);font-weight:700;letter-spacing:1px;font-family:&#39;Montserrat&#39;,sans-serif;" id="headerDate">Friday, March 13, 2026</div>
+    <div class="live-clock" id="liveClock" style="margin-top:0;">12:29:58 PM<span>CDT</span></div>
   </div>
 </header>
 
 <div class="report-panel">
-  <div class="report-header" onclick="togglePanel('hired')">
-    <div class="report-header-left"><span style="font-size:1.3rem">🏆</span><span class="report-title">Hired</span><span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;color:#7A9A5B;" id="hiredCount">0</span></div>
-    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="hiredWeekLabel"></span><span class="report-toggle" id="hiredToggle">▼</span></div>
+  <div class="report-header" onclick="togglePanel(&#39;hired&#39;)">
+    <div class="report-header-left"><span style="font-size:1.3rem">🏆</span><span class="report-title">Hired</span><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1.1rem;color:#7A9A5B;" id="hiredCount">0</span></div>
+    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="hiredWeekLabel">Mar 9 – Mar 15</span><span class="report-toggle" id="hiredToggle">▼</span></div>
   </div>
   <div id="hiredBody" style="display:none;">
-    <div class="report-body" id="hiredGrid"></div>
-    <div class="report-footer" style="display:flex;justify-content:space-between;align-items:center;"><button class="export-btn" onclick="exportToSheets('hired')">📤 Export to Google Sheets</button><button class="clear-btn" onclick="clearLog('hired')">🗑 Clear this week</button></div>
+    <div class="report-body" id="hiredGrid"><div class="report-empty">No drivers hired this week yet 💪</div></div>
+    <div class="report-footer" style="display:flex;justify-content:space-between;align-items:center;"><button class="export-btn" onclick="exportToSheets(&#39;hired&#39;)">📤 Export to Google Sheets</button><button class="clear-btn" onclick="clearLog(&#39;hired&#39;)">🗑 Clear this week</button></div>
   </div>
 </div>
 
 <div class="report-panel">
-  <div class="report-header" onclick="togglePanel('disq')">
-    <div class="report-header-left"><span style="font-size:1.3rem">🚫</span><span class="report-title">Disqualified</span><span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;color:#E05C5C;" id="disqCount">0</span></div>
-    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="disqWeekLabel"></span><span class="report-toggle" id="disqToggle">▼</span></div>
+  <div class="report-header" onclick="togglePanel(&#39;disq&#39;)">
+    <div class="report-header-left"><span style="font-size:1.3rem">🚫</span><span class="report-title">Disqualified</span><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1.1rem;color:#E05C5C;" id="disqCount">0</span></div>
+    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="disqWeekLabel">Mar 9 – Mar 15</span><span class="report-toggle" id="disqToggle">▼</span></div>
   </div>
   <div id="disqBody" style="display:none;">
-    <div class="report-body" id="disqGrid"></div>
-    <div class="report-footer" style="display:flex;justify-content:space-between;align-items:center;"><button class="export-btn" onclick="exportToSheets('disq')">📤 Export to Google Sheets</button><button class="clear-btn" onclick="clearLog('disq')">🗑 Clear this week</button></div>
+    <div class="report-body" id="disqGrid"><div class="report-empty">No disqualified drivers this week 👍</div></div>
+    <div class="report-footer" style="display:flex;justify-content:space-between;align-items:center;"><button class="export-btn" onclick="exportToSheets(&#39;disq&#39;)">📤 Export to Google Sheets</button><button class="clear-btn" onclick="clearLog(&#39;disq&#39;)">🗑 Clear this week</button></div>
   </div>
 </div>
 
 <nav class="sticky-nav" id="stickyNav">
   <span style="font-size:0.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:4px;">Jump to:</span>
-  <div id="navLinks" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+  <div id="navLinks" style="display:flex;gap:8px;flex-wrap:wrap;"><a class="nav-link" href="https://driverdashboard-68sf.onrender.com/#div-reefer">❄️ Reefer</a><a class="nav-link" href="https://driverdashboard-68sf.onrender.com/#div-walmart">🛒 Walmart</a><a class="nav-link" href="https://driverdashboard-68sf.onrender.com/#div-amazon">📦 Amazon</a><a class="nav-link" href="https://driverdashboard-68sf.onrender.com/#div-portage">🏭 Portage</a><a class="nav-link" href="https://driverdashboard-68sf.onrender.com/#div-dryvan">🚐 Dry Van</a></div>
 </nav>
-<div class="grid" id="dash"></div>
+<div class="grid" id="dash"><div class="card" id="div-reefer"><div class="card-header"><div class="card-icon">❄️</div><div class="card-title" contenteditable="true" data-si="0" data-field="title">Reefer</div><div class="div-status div-status-hiring" onclick="cycleDivStatus(0)">🔴 Hiring</div></div><div class="progress-bar-wrap">
+      <div class="progress-bar-top">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">9<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:&#39;DM Sans&#39;,sans-serif"> / 16 covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">CD: 9</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">OO: 0</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(0)">🕒 Mar 13, 2026</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(0)">➕ Add Slots</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-area">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">56%</span></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:56%"></div>
+        </div>
+      </div></div><div class="slots-section"><div><div class="slots-group-label oo">🔵 Owner Operators</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div><div><div class="slots-group-label cd">🟢 Company Drivers</div><div class="slots-grid"><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="0" data-field="drvName">Askar Kaliyev</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,0,this.value)">
+            <option value="Sayram Express LLC" selected="">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="0" data-field="drvMeta">truck 104 switch to sayram exp / drug test done, result pending</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(0,0,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,0)">✕</button></div><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="1" data-field="drvName">Odene Stephenson</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,1,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC" selected="">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="1" data-field="drvMeta">drug test pending sat 03-14-26</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(0,1,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,1)">✕</button></div><div class="slot-covered status-ready">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="2" data-field="drvName">Yazan Alansari</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,2,this.value)">
+            <option value="Sayram Express LLC" selected="">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="2" data-field="drvMeta">truck 001 / ready to go Mon - march 16 (additional forms&nbsp; need to fill out)</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-ready" onchange="setStatus(0,2,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready" selected="">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,2)">✕</button></div><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="3" data-field="drvName">Morquincy Mosby</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,3,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC" selected="">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="3" data-field="drvMeta">ready to go in 1 1/2 week (approx March 25-26)</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(0,3,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,3)">✕</button></div><div class="slot-covered status-preapproval">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="4" data-field="drvName">Tommy Lee Ellis</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,4,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC" selected="">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="4" data-field="drvMeta">CANT GET A HOLD OF HIM DAMN IT 😢</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-preapproval" onchange="setStatus(0,4,this.value)">
+              <option value="preapproval" selected="">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,4)">✕</button></div><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="5" data-field="drvName">Jaymoy Lawrence</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,5,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="5" data-field="drvMeta">available after April 1st</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(0,5,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,5)">✕</button></div><div class="slot-covered status-disqualified">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="6" data-field="drvName">Jamie Whatley</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,6,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC" selected="">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="6" data-field="drvMeta">Disqualified due to the horrible MVR</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-disqualified" onchange="setStatus(0,6,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified" selected="">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,6)">✕</button></div><div class="slot-covered status-disqualified">
+          <div class="slot-row-name focus-visible" contenteditable="true" data-si="0" data-di="7" data-field="drvName" data-focus-visible-added="">Marcus Landrum</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,7,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC" selected="">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="7" data-field="drvMeta">bad Clearing House record</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-disqualified" onchange="setStatus(0,7,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified" selected="">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,7)">✕</button></div><div class="slot-covered status-preapproval">
+          <div class="slot-row-name" contenteditable="true" data-si="0" data-di="8" data-field="drvName">second test</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(0,8,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position cd">Company Driver</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="0" data-di="8" data-field="drvMeta"></div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-preapproval" onchange="setStatus(0,8,this.value)">
+              <option value="preapproval" selected="">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(0,8)">✕</button></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div></div></div><div class="card" id="div-walmart"><div class="card-header"><div class="card-icon">🛒</div><div class="card-title" contenteditable="true" data-si="1" data-field="title">Walmart</div><div class="div-status div-status-hiring" onclick="cycleDivStatus(1)">🔴 Hiring</div></div><div class="progress-bar-wrap">
+      <div class="progress-bar-top">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">2<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:&#39;DM Sans&#39;,sans-serif"> / 8 covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">CD: 0</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">OO: 2</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(1)">🕒 Mar 12, 2026</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(1)">➕ Add Slots</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-area">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">25%</span></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:25%"></div>
+        </div>
+      </div></div><div class="slots-section"><div><div class="slots-group-label oo">🔵 Owner Operators</div><div class="slots-grid"><div class="slot-covered status-preapproval">
+          <div class="slot-row-name" contenteditable="true" data-si="1" data-di="0" data-field="drvName">Turar</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(1,0,this.value)">
+            <option value="Sayram Express LLC" selected="">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position oo">Owner Operator</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="1" data-di="0" data-field="drvMeta">emailed , docs / truck info pending</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-preapproval" onchange="setStatus(1,0,this.value)">
+              <option value="preapproval" selected="">🔍 Pre-Approval</option><option value="drugtest">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(1,0)">✕</button></div><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="1" data-di="1" data-field="drvName">Omar Mccray</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(1,1,this.value)">
+            <option value="Sayram Express LLC" selected="">Sayram Express LLC</option><option value="Sayram Logistics Co">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position oo">Owner Operator</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="1" data-di="1" data-field="drvMeta">available after 2 weesk (spoke on 03-12-2026)</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(1,1,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(1,1)">✕</button></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div><div><div class="slots-group-label cd">🟢 Company Drivers</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div></div></div><div class="card" id="div-amazon"><div class="card-header"><div class="card-icon">📦</div><div class="card-title" contenteditable="true" data-si="2" data-field="title">Amazon</div><div class="div-status div-status-full" onclick="cycleDivStatus(2)">🟢 Full</div></div><div class="progress-bar-wrap">
+      <div class="progress-bar-top">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">0<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:&#39;DM Sans&#39;,sans-serif"> / 4 covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">CD: 0</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">OO: 0</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(2)">🕒 Mar 12, 2026</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(2)">➕ Add Slots</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-area">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">0%</span></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:0%"></div>
+        </div>
+      </div></div><div class="slots-section"><div><div class="slots-group-label oo">🔵 Owner Operators</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div><div><div class="slots-group-label cd">🟢 Company Drivers</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div></div></div><div class="card" id="div-portage"><div class="card-header"><div class="card-icon">🏭</div><div class="card-title" contenteditable="true" data-si="3" data-field="title">Portage</div><div class="div-status div-status-hiring" onclick="cycleDivStatus(3)">🔴 Hiring</div></div><div class="progress-bar-wrap">
+      <div class="progress-bar-top">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">1<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:&#39;DM Sans&#39;,sans-serif"> / 6 covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">CD: 0</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">OO: 1</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(3)">🕒 Mar 13, 2026</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(3)">➕ Add Slots</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-area">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">17%</span></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:17%"></div>
+        </div>
+      </div></div><div class="slots-section"><div><div class="slots-group-label oo">🔵 Owner Operators</div><div class="slots-grid"><div class="slot-covered status-drugtest">
+          <div class="slot-row-name" contenteditable="true" data-si="3" data-di="0" data-field="drvName">Kuanysh Daliyev</div>
+          <select class="slot-row-company company-select" onchange="updateCompany(3,0,this.value)">
+            <option value="Sayram Express LLC">Sayram Express LLC</option><option value="Sayram Logistics Co" selected="">Sayram Logistics Co</option><option value="Iconic Logistics LLC">Iconic Logistics LLC</option><option value="Golden Mile LLC">Golden Mile LLC</option><option value="Money Express Inc">Money Express Inc</option>
+          </select>
+          <div class="slot-row-position oo">Owner Operator</div>
+          <div class="slot-row-notes" contenteditable="true" data-si="3" data-di="0" data-field="drvMeta">he wanst to come on monday/ drug test om 03/13/26</div>
+          <div class="slot-row-badge">
+            <select class="native-select badge badge-drugtest" onchange="setStatus(3,0,this.value)">
+              <option value="preapproval">🔍 Pre-Approval</option><option value="drugtest" selected="">🧪 Drug Test Pending</option><option value="onhold">⏸ On Hold</option><option value="ready">✅ Ready to Go</option><option value="hired">🏆 Hired</option><option value="disqualified">🚫 Disqualified</option>
+            </select>
+          </div>
+          <button class="slot-delete" onclick="deleteDriver(3,0)">✕</button></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div><div><div class="slots-group-label cd">🟢 Company Drivers</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div></div></div><div class="card" id="div-dryvan"><div class="card-header"><div class="card-icon">🚐</div><div class="card-title" contenteditable="true" data-si="4" data-field="title">Dry Van</div><div class="div-status div-status-full" onclick="cycleDivStatus(4)">🟢 Full</div></div><div class="progress-bar-wrap">
+      <div class="progress-bar-top">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:1rem;color:var(--oo);">0<span style="color:var(--muted);font-weight:600;font-size:0.85rem;font-family:&#39;DM Sans&#39;,sans-serif"> / 3 covered</span></span>
+          <span style="font-size:0.78rem;color:#4b5563;font-weight:700;">In process: <span style="color:#0e6dba;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">CD: 0</span> &nbsp;/&nbsp; <span style="color:#0a7a4a;font-weight:900;font-family:&#39;Montserrat&#39;,sans-serif;">OO: 0</span></span>
+        </div>
+        <div class="progress-bar-actions">
+          <button class="last-updated" onclick="stampDate(4)">🕒 Mar 12, 2026</button>
+          <button class="slots-count-edit" onclick="openSlotsModal(4)">➕ Add Slots</button>
+        </div>
+      </div>
+
+      <div class="progress-bar-area">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:4px;"><span class="progress-pill-pct">0%</span></div>
+        <div class="progress-bar-track-main">
+          <div class="progress-bar-fill-main" style="width:0%"></div>
+        </div>
+      </div></div><div class="slots-section"><div><div class="slots-group-label oo">🔵 Owner Operators</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div><div><div class="slots-group-label cd">🟢 Company Drivers</div><div class="slots-grid"><div class="slot-empty"><div class="slot-empty-plus">＋</div><div>Add Driver</div></div></div></div></div></div></div>
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3>➕ Add Driver</h3>
-    <div id="modalBody"></div>
+    <div id="modalBody" data-protonpass-form="">
+    <div class="form-group"><label>Full Name</label><input id="inp_name" placeholder="e.g. John Smith" class=""></div>
+    <div class="form-group"><label>Company</label><select id="inp_company">
+      <option value="">— Select Company —</option>
+      <option>Sayram Express LLC</option><option>Iconic Logistics LLC</option>
+      <option>Sayram Logistics Co</option><option>Golden Mile LLC</option><option>Money Express INC</option>
+    </select></div>
+    <div class="form-group"><label>Position</label><select id="inp_position"><option value="">— Select Position —</option><option value="Owner Operator">Owner Operator</option><option value="Lease Operator">Lease Operator</option><option value="Company Driver" selected="">Company Driver</option></select></div>
+    <div class="form-group"><label>Notes</label><input id="inp_meta" placeholder="e.g. Drug test pending"></div>
+    <div class="form-group"><label>Status</label><select id="inp_status">
+      <option value="preapproval">🔍 Pre-Approval</option>
+      <option value="drugtest">🧪 Drug Test Pending</option>
+      <option value="onhold">⏸ On Hold</option>
+      <option value="ready">✅ Ready to Go</option>
+      <option value="hired">🏆 Hired</option>
+      <option value="disqualified">🚫 Disqualified</option>
+    </select></div></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
       <button class="btn-primary" onclick="saveModalEntry()">Save Driver</button>
@@ -686,6 +1372,27 @@ function buildNav(){
   });
 }
 </script>
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
-</body>
-</html>
+<button class="back-to-top visible" id="backToTop" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;})">↑ Back to Top</button>
+
+
+<root id="rc-crm-extension-quick-access-button"><div><div style="bottom: 100px; right: 0px; position: fixed; z-index: 99999;"><div class="react-draggable" style="display: flex; flex-direction: row; align-items: center; transform: translate(0px, 0px);"><button class="MuiButtonBase-root sc-iCfMLu sc-furwcr vfXGH RcIconButton-root RcIconButton-contained" tabindex="0" type="button" style="padding: 0px; background: rgb(255, 255, 255);"><span class="sc-eCImPb bhNaXq icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="sc-hKwDye dqDCDr"><g clip-path="url(#clip0_82_87)"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.2314 0.875C14.5859 0.875 16.0508 2.04175 16.6261 4.37525H20.1404C21.889 4.37525 23.6342 6.11715 23.6342 7.89277V11.3734C25.9614 11.9862 27.125 13.456 27.125 15.7829C27.125 18.1098 25.9614 19.569 23.6342 20.1603V23.6286C23.6342 25.4019 21.8713 27.125 20.1062 27.125C18.9295 27.125 13.6871 27.125 4.37917 27.125C2.62572 27.125 0.875 25.3878 0.875 23.6286V7.89277C0.875 6.12755 2.63285 4.37525 4.37917 4.37525H7.98335C8.46088 2.04175 9.8769 0.875 12.2314 0.875Z" fill="#FF7A00"></path><path d="M8.29215 22.7458C8.3399 22.7481 8.38758 22.7397 8.43229 22.7231C8.47701 22.7064 8.51789 22.6799 8.55203 22.6465C8.58536 22.6125 8.61183 22.5716 8.62927 22.5269C8.64671 22.4822 8.65506 22.4344 8.65277 22.3868V12.2696C8.64671 12.2264 8.65049 12.1817 8.66416 12.14C8.67776 12.0984 8.70126 12.0605 8.73231 12.0295C8.76335 11.9984 8.80127 11.9749 8.84214 11.9613C8.88309 11.9477 8.9278 11.9431 8.97097 11.9491H15.5311C15.5743 11.9446 15.6174 11.9499 15.6576 11.9643C15.6978 11.9787 15.7349 12.0022 15.7644 12.0332C15.7947 12.0643 15.8167 12.1014 15.8303 12.1423C15.844 12.1832 15.8477 12.2264 15.8417 12.2696V15.4278C15.8477 15.4703 15.844 15.5142 15.8311 15.5551C15.8182 15.596 15.7955 15.6339 15.7652 15.6649C15.7349 15.696 15.6985 15.7195 15.6576 15.7339C15.6167 15.7483 15.5735 15.7536 15.5303 15.7483H12.5749C12.531 15.7415 12.4863 15.7445 12.4438 15.7581C12.4014 15.7718 12.3627 15.7952 12.331 15.8263C12.2991 15.8574 12.2756 15.896 12.2613 15.9376C12.2469 15.9793 12.2431 16.0248 12.2499 16.0688V17.4687C12.2438 17.7876 12.2741 18.1058 12.3401 18.4172C12.4082 18.699 12.5271 18.9671 12.69 19.2073L14.7288 22.4064C14.7992 22.5208 14.9 22.6125 15.0204 22.6731C15.1409 22.7337 15.275 22.7587 15.4083 22.7474H18.0683C18.2024 22.7474 18.2888 22.7117 18.3296 22.6367C18.3478 22.5928 18.3539 22.5443 18.3471 22.4966C18.3403 22.4488 18.3198 22.4049 18.2895 22.3678L16.2675 19.102C16.1743 18.9679 16.2084 18.8626 16.3682 18.7815L17.7865 18.1422C18.2433 17.9581 18.6312 17.6361 18.8971 17.2217C19.1433 16.7854 19.2646 16.29 19.2486 15.7892V11.1499C19.2486 10.3629 19.0456 9.76664 18.6387 9.35983C18.2319 8.95302 17.6357 8.75 16.8485 8.75H7.65045C6.87998 8.75 6.28753 8.95302 5.87236 9.35983C5.4572 9.76664 5.25037 10.3629 5.25037 11.1499V22.3875C5.2481 22.4352 5.25643 22.4829 5.2731 22.5276C5.28976 22.5723 5.31628 22.6132 5.34962 22.6474C5.38371 22.6807 5.42462 22.7064 5.46932 22.7239C5.51401 22.7413 5.56175 22.7488 5.60947 22.7465H8.28912L8.29215 22.7458Z" fill="white"></path></g><defs><clippath id="clip0_82_87"><rect width="28" height="28" fill="white"></rect></clippath></defs></svg></span><span class="MuiTouchRipple-root"></span></button><button class="MuiButtonBase-root sc-iCfMLu sc-furwcr lnudDN RcIconButton-root RcIconButton-round" tabindex="0" type="button" style="position: absolute; top: -4px; right: 20px; background: rgb(255, 122, 0); border-radius: 50%; height: 16px; width: 16px; color: white; border: 2px solid white;"><span class="sc-eCImPb bhNaXq arrow_up icon"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="sc-hKwDye dqDCDr"><path d="M9.636 18.95a.999.999 0 0 0 1.414 0L16 14l4.95 4.95a.999.999 0 1 0 1.414-1.414l-5.657-5.657a.999.999 0 0 0-1.414 0l-5.657 5.657a.999.999 0 0 0 0 1.414z"></path></svg></span><span class="MuiTouchRipple-root"></span></button><div style="cursor: grab; display: inherit;"><button class="MuiButtonBase-root MuiButton-root MuiButton-text RcButton-text sc-kfPuZi iwLYty rc-huddle-menu-handle" tabindex="0" type="button" style="padding: 0px;"><span class="MuiButton-label"><img src="data:image/png;base64,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L25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjdhMjM1YWVhLTM4MDEtNGNiNi05ZmUwLThjZTU5M2UxY2NkNiIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1Y2Q4Yzc5NS1kMDk1LTQ1OTAtYTdiMi0xYTU2YWZmYjkxNjkiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4YWI4NmZiZS0wNGJiLTRjZWItYjJhYS1jMThkYjBmYmNjOTUiCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJXaW5kb3dzIgogICBHSU1QOlRpbWVTdGFtcD0iMTcwNTAyNzkyMzk4Mjg2OCIKICAgR0lNUDpWZXJzaW9uPSIyLjEwLjI0IgogICB0aWZmOk9yaWVudGF0aW9uPSIxIgogICB4bXA6Q3JlYXRvclRvb2w9IkdJTVAgMi4xMCI+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBzdEV2dDpjaGFuZ2VkPSIvIgogICAgICBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjc4MWFiMWNhLWE1NmEtNDYzNS1hZTQ1LTA5YmRjNTM4YWNmMyIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iR2ltcCAyLjEwIChXaW5kb3dzKSIKICAgICAgc3RFdnQ6d2hlbj0iMjAyMy0wNS0wOVQxMDoyMzoyMCIvPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NmY1ZmFkZC0wNzQ1LTQ4YzktYWQ0YS05NWE5YTcwNTdiOTAiCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoV2luZG93cykiCiAgICAgIHN0RXZ0OndoZW49IjIwMjMtMDUtMDlUMTA6MzM6NTkiLz4KICAgICA8cmRmOmxpCiAgICAgIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiCiAgICAgIHN0RXZ0OmNoYW5nZWQ9Ii8iCiAgICAgIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NTMzNDlmYWItZjViMy00Mjk1LWFkZmUtZTk1MDFhZmUxY2U2IgogICAgICBzdEV2dDpzb2Z0d2FyZUFnZW50PSJHaW1wIDIuMTAgKFdpbmRvd3MpIgogICAgICBzdEV2dDp3aGVuPSIyMDI0LTAxLTEyVDEwOjUyOjAzIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/Pmu5WP0AAAAGYktHRADHAMcAxzOWWGIAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfoAQwCNANg0tNkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAERJREFUWMPt1DEOABAQRcHl2A7g2tRbERUx0wr5UbwI4G3l9OJoMdJDPb+1Ot9Vb/9BA0EHddBA0EEdNBB0UAcNBP41AWV6GB3jqSqkAAAAAElFTkSuQmCC" style="pointer-events: none; width: 20px; height: 20px;"></span></button></div></div></div><div></div></div></root><rc-c2d-widget id="src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk" class="src-widgets-BuiltinWidget-_styles_c2dWidget_uE0yk" style="--c2d-arrow-color: #ff8800;">
+      <div class="src-widgets-BuiltinWidget-_styles_c2dWrapper_v8pYg">
+        <img class="src-widgets-BuiltinWidget-_styles_c2dLogo_gBsgM" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAJbnpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHja1ZhZkuW4DUX/uQovgfOwHE6I8A68fB9QesqxurPK/umnSlGiSBDEvRhYZv/n32L+xS+4ZE1MpeaWs+UXW2y+81Dt9Rvn7mw89/Pz9yfeP/Sb54OnK9CG67W9Pmz6eXb3e7sXca/xL0GvB9d5Sm8fer/7x8f+cQv09bOgW4PgrpXtuifcgoK/NYrX+7w1yq2WD1tb81453l317S+G4nPKrkTu0dtScuO5ehsL9lyqqEzfjqB0GfTpeL2/hnp08ju4YLn7EC8tg/7F0GkddxcSxqYJvPiQz71c0AAlKqBpuxfq9jHme9u82egXv59s66bJocGD2iP7Ez+ep0/0KP3uD1f/m6D8tB9gffVD3o/94VnGf9Covq3s32s0i+0f9vwOVZFVRfYZbGKPmT3ne1OvrZwnBg611pmWuQp/iedyrsZVWWZCnWXsxKMGL815MBYX3XLdidunnW6iYvTbF1rvpw+nr4JF8/PAH/UyTnwJLaxQgX7ClUC3f3RxZ912lpuuwvvlGOkdwhwznsu8f/lfri+CRNRnnLP1sRV6efVC1FDk9M4oAHFy2xREzTGxewz9/qfABhBMx8yVDXY7LhEjuTduBcVZvT9xRXt5tyvrFoCJWDuhjAsgYDMO5bKzxfviHHas4NPRHKfzw5npXEp+oaWPIWTAwQtYmznFnbE++aub6AkQCZ8sQNNCB6wYE/QpsRo41FNIMaWUU0k1tdRzyOphOZesYbiXUGJJJZdSamml11BjTTXXUmtttTffgiFMp4Y/ttpa651FO5I7szsjeh9+hBFHGnmUUUcbfUKfGWeaeZZZZ5t9+RXMwpFXXmXV1VbfbkOlHXfaeZddd9tdoJoEiZIkS5EqTfqD2o3qR9Q+I/fXqLkbNX+ACoZbeVCju5SXCKfhJClmIOajA/GiCEBor5jZ6mL0itzAawx5B69IHi2TgrOcIgaCcTufxD3YvSH3LW4m1j/CzX9Gzih0/w/kjEL3CbmvuH2D2tJwNw9ixwvNMaoNuB8Ddu2+dk2jv92aP534DxC09x4r+wECwC17+rUxtOwiJ2xJLna1KCAmQ4CtFZku7Dy7Hxsq+dGCrEzMll4UCzkg9CID04NV2e6IitIGK0qPQKFTPs6wrE266aY0qbqGy0dNaT3sWn+1h9ESXIAoXrkHOdI4AnszcHaMuebKe+TVZbOLtnMOw2/pq3hh5yNJT3CoNQk5uSSxLZc26vcZVFDcRhuUPUlP8HJZYQpft30/Kb6b8sxwJNqz/QhfDfurvkzsmXCkNH0qYxGEBY/YLQ8C1CrdbcJXBwYXE//gfKjpPFNRnda8Hp7WCX7mNYwnDIY7EMKjvjLkefg0h9Z86vCfp7Q4Pq0TEmustUj+mM4ti2GBHyt2PNilb/SnwjlP9kt7YNPHsokRwHxp9GVkGC8NUr2h9/P+5ihcTkd9BukY84kvY+cB+dLzQDoQIVQpfeDmmqI47bSEp3iJBJVo+HYvYD+3ge/XQOxCQLqmDeBMnhWWl96Cb8TUvpLpinFBaIenFqilDLG6qrJCUpkYjoBW5MU2QuUSCLaCEOq3lE0aL0YIse+GBaXTYuOCDmcQtIPVi60UWOqmVcwQFBkm0F6nIcS8pFj7QzmJLLBribNHsXzZ1EE9NfNen0bkLvCYZGKLmhn0Qt542RgSwxqTpITgJWyvTrkMSDVIDjOPgaHxVvO/Hsg7Q4hMZQ7U26WEg1djWYLJjTOw8in+MkIq/tfAiSFYz4+yB3fSFPb3i8x5LdCC80KoENMHpbjmI8m1CrlOSbZ6X5whqIXdaJmA1iEePk7oIDQggWyqXID7RNCdcRXje0U7QoYtI/h9pJSUXEMiNFTPx6uQUHKAC0FCWHUSoOYJcZr/ju6G+IiB8xvZH26zsSh+z1mIYBMXBKAP0Q/RVAxCuAEOA9vQdDCGtVTGxXlcoc7foPwm92su3zQrzxH2uoxYBdpZiU5zv97GnhSaWtJYLcfGQOEgfduJqQnIZuIGhGeNB/jm7jkTiM6tTDURWWVIbRLXnmPO5dEjkCgCsg5P4Rc+3QzlDohivRI1XFWKjDLizitQPoFiL3loWeLhQSLez4RFfaDSiFAch8ETtDHFcvw4oLIhvwjVNxj9IlLNSvZ3gedmGqy9BixfZe5pfpXBvuEkbKTUuUg5/HzWDGgZTVg2U1JVvckIsVA/kSDHFFK5vVr0zbIaaQ3fSY3EDeC9zYUl/bFmcEY4AEeCEWOwxpq9kOgDXi13dsNccc7QtCaQHe6KIAyCu87CfHvPkDn3b5bbonVDYlTcsY9WC77+xI4+qFOpB5Ujgs4rtqZ8DxqYlPac5AzmPbSPE7+8SUS1edESRwHRK+j7d3x88ZYUyOShH8xPmft3xDXfMVcpqxnitEHcOC5eiFRQoR/eFq2nNa9hZ8xcumGvFNmz0RSg4NCqLgqm7rj6Xe1QUVUNX3X3niKwwE8oOQgKJQ3mF7MKFXrFlmsOrZ/Qs4c5huV9sjy4x/qqnXCH/dUOx2Lmo8n+3GLm7339ZxY7uR+u24nvNQ4ABPm0T8ahN8OE7QOcxo8XZJaAo2e31Q6idoCVHHTIsWY10sDcpXPIYGH8JOBLLgRLmkIMpRoVE7Mnm2mXb7R1I0bBFu/awnxTssxV7pKlRSTlH9U25hQ3Cd+jKtUKCtUaSN17JyEO6qaqFEmxswWMR9ihiHDu8uiB0S1bU88mBB7zLU5mUm/XptpYF+NwE4IeFUcLWkCEiqGpybTmYRavgdBrFvluEEQo+Qf9dcGxgQozbV+0Gt8LRUCbTE26w0mTDxTT3pOUmt+l4acpLUOsDGRHS9IgDvMNpi4NWj3hvZTaV3BMM+b5GClpIakmej2INYAIhS+LzH2dQMhmehZ5yYCwfKpfK9m3KpjyOL1VwSl1jp1UoZAGOyPAJ0wPAqErkaExe2X5J8KRedgtdCD4Zz0UM4boVRfmKSf7dDxUfEl3jVjxvOc4cqUdOfVWHG7MUxkZuGdZdOvW9P8XO8SpVEAytB4begji0BSulRl0dkhWyYRacD3FdYw5mNnvqtqmNysoJ9U0r4cxA6I5Ih9m4ODt1EoEiXMQ1mn6H+NYX0L/eW3+7cBvXOTH7YX9fRIyq3KWqjg6Cbpr4XLqcig3OG+uccjMMf9FhY05w3dMMOn7w85vt/8wQVTfpHxrzX8B+EFUk3J3fBsAAAGFaUNDUElDQyBwcm9maWxlAAB4nH2RPUjDUBSFT1OLIpUOdlARyVCdLIiKOEoVi2ChtBVadTB56R80aUhSXBwF14KDP4tVBxdnXR1cBUHwB8TZwUnRRUq8Lym0iPHC432cd8/hvfsAoVFhqtk1AaiaZaTiMTGbWxW7X+FDCAEMYkRipp5IL2bgWV/31E11F+VZ3n1/Vp+SNxngE4nnmG5YxBvEM5uWznmfOMxKkkJ8Tjxu0AWJH7kuu/zGueiwwDPDRiY1TxwmFosdLHcwKxkq8TRxRFE1yheyLiuctzirlRpr3ZO/MJjXVtJcpzWMOJaQQBIiZNRQRgUWorRrpJhI0XnMwz/k+JPkkslVBiPHAqpQITl+8D/4PVuzMDXpJgVjQODFtj9Gge5doFm37e9j226eAP5n4Epr+6sNYPaT9HpbixwBoW3g4rqtyXvA5Q4w8KRLhuRIflpCoQC8n9E35YD+W6B3zZ1b6xynD0CGZrV8AxwcAmNFyl73eHdP59z+7WnN7wdSEHKarN+qWAAADRhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4KIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgIHhtbG5zOkdJTVA9Imh0dHA6Ly93d3cuZ2ltcC5vcmcveG1wLyIKICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICB4bXBNTTpEb2N1bWVudElEPSJnaW1wOmRvY2lkOmdpbXA6ZDM5M2JiNWYtZGMxZS00NzhhLWIwNDgtNjdlNDgzMzhmOWQ4IgogICB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjIzNDMyZWFiLWRmNTUtNDk5MC1iYTJjLTJhZGE3NjA5YjVhOCIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOmY1NTBiN2UyLWM0ZWYtNDMxOC04NGIwLWQxZmQzYmI2ZTI5ZSIKICAgZGM6Rm9ybWF0PSJpbWFnZS9wbmciCiAgIEdJTVA6QVBJPSIyLjAiCiAgIEdJTVA6UGxhdGZvcm09IldpbmRvd3MiCiAgIEdJTVA6VGltZVN0YW1wPSIxNzA1Mjk2Mzg4OTQ1MjI0IgogICBHSU1QOlZlcnNpb249IjIuMTAuMjQiCiAgIHRpZmY6T3JpZW50YXRpb249IjEiCiAgIHhtcDpDcmVhdG9yVG9vbD0iR0lNUCAyLjEwIj4KICAgPHhtcE1NOkhpc3Rvcnk+CiAgICA8cmRmOlNlcT4KICAgICA8cmRmOmxpCiAgICAgIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiCiAgICAgIHN0RXZ0OmNoYW5nZWQ9Ii8iCiAgICAgIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MDFjYzE0YzMtNmNmMC00MjEwLWEyM2QtOWE2MThiYjdjOTQ0IgogICAgICBzdEV2dDpzb2Z0d2FyZUFnZW50PSJHaW1wIDIuMTAgKFdpbmRvd3MpIgogICAgICBzdEV2dDp3aGVuPSIyMDI0LTAxLTE1VDEzOjI2OjI4Ii8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PiqGG40AAAAGYktHRADHAMcAxzOWWGIAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfoAQ8FGhzxJ27WAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAsRJREFUWMPt109oXFUUBvDfnTeZmkmrKCq1tJIKtaAWTMRCF2LbRcGdGze60pUrwY2WWRWEgYqC0IULqQqiICgIImqhVEQX0lpDhFgRSTehrVGcpDV/JjPzXLxJOpn3ZjIzjSvzweNxz7vv3u9859xz3mML/3eEfibHJffiebyAvbiM93E6lF37TwnEJUW8hpeQb3lUw9sohbIbt0wgLgliQxhGbm1e8DA+wu6Mda7gWbFJxE1bQ7CAWiiv2XoicAQn8UgLgdW5hS7OVFs2TwgwgVfwfScS+QzbSTw+QDizyB3C63gSK70SGE+bojYxOqGBervxURQx1yuBaN1o+2HuO8i2kQ1yNqa6yNWLzJ9tJZLrxj7f1aGRJ3jqBPsfI8pvLEC9zvTPfI75Mz3FrcuqOe4ZY98Yw9t7z4S9B9g53q5CGIBAoDBy0/NGnet/s1LNWGWI2+8iFxFFFFZPcH1184fikguhbKm/ELRieZEz7zL9LaHFoThm90GefpnijiyHC/gQ78Ulb4WyymAE4piFCpUv1q8f484HiBvd3r4fr+IvnGoL9KDIE+4gVyREvVT12/Di4CFox4ETPHgoCUdxB4VtLap0VGPf5hCIMTrG+JG050v/MH+12aNSuLR5CtRrSV6sJuRKlbk/ufAVV75sawtgsdk1N4nAzBRLR2/WiEvnOXuK2Y+zZk/jdLObuvUkDPjlAy5PJSrAzlGqlU5d8jm8EcrpfjD4KahO8fWbVGaT8d27OHacaE9WxvwaypY71Ntuca4mBWhpIbnXltfn3OxnfPcJN+aS53v2M/pMp7TttxTXmfmGTxEVks1nzqXV/ekdrv3G0HBSrv+Y7LeapLCCoeRI/cjvE+tJpUr0BNOTLcexkfWR0OjS8lI4l1Ji7droQ6SepfZFLPSjwPGmO4fXlBiwUuCHZg+obf0BbaET/gUF7c6e6npB6QAAAABJRU5ErkJggg==" style="">
+        <div class="src-widgets-BuiltinWidget-_styles_callBtn_ZQO39 src-widgets-BuiltinWidget-_styles_visible_mEW3O" style="" title="Call with RingCentral">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 26">
+    <path fill="#0083BF" fill-rule="evenodd" stroke="#066FAC" stroke-width=".9" d="M6.656 17.651C.942 10.547.28 4.627 2.545 2.607c.592-.522 2.16-1.323 2.892-1.427.801-.14 1.602.243 2.02 1.01.802 1.636 1.777 3.238 2.788 4.805.452.697.348 1.567-.244 2.16-.349.348-.767.557-1.15.765a3.18 3.18 0 0 0-.801.523s-.105.104-.105.313c-.035.453.035 1.707 2.02 4.214 2.16 2.647 3.45 2.82 3.798 2.82.14 0 .244-.034.244-.034.244-.21.453-.453.662-.697.314-.348.593-.696 1.01-.975.697-.452 1.638-.348 2.16.21 1.325 1.323 2.753 2.576 4.112 3.76.662.557.906 1.428.557 2.16-.244.66-1.359 2.02-2.02 2.541-.558.488-1.324.697-2.195.697-3.345 0-7.7-2.925-11.637-7.8z"></path>
+</svg>
+
+        </div>
+        <div class="src-widgets-BuiltinWidget-_styles_separatorLine_RYpwW src-widgets-BuiltinWidget-_styles_visible_mEW3O" style=""></div>
+        <div class="src-widgets-BuiltinWidget-_styles_textBtn_BlZA5 src-widgets-BuiltinWidget-_styles_visible_mEW3O" style="" title="SMS with RingCentral">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 21">
+    <path fill="#066FAC" fill-rule="nonzero" d="M10.944.014C4.91.014.007 4.068.007 9.316c0 2.86 1.54 5.626 4.085 7.417-.094.534-.377 1.257-1.162 2.64l-.692 1.131h1.383a6.976 6.976 0 0 0 4.84-1.917c.817.157 1.634.252 2.483.252 6.034 0 10.936-4.275 10.936-9.523 0-5.28-4.902-9.302-10.936-9.302z"></path>
+</svg>
+
+        </div>
+      </div>
+      <div class="src-widgets-BuiltinWidget-_styles_arrow_pWfWX" style="">
+        <div class="src-widgets-BuiltinWidget-_styles_innerArrow_L1vrh"></div>
+      </div>
+    </rc-c2d-widget><protonpass-root-2dc9 data-protonpass-role="root" data-protonpass-theme="light"><template shadowrootmode="closed"></template></protonpass-root-2dc9></body></html>
