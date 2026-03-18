@@ -223,6 +223,7 @@
   <div class="header-footer">
     <div class="header-date" id="headerDate">Loading...</div>
     <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="manualRefresh()" style="font-size:0.72rem;color:#1a8fe0;cursor:pointer;background:none;border:1px solid #1a8fe0;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#1a8fe0';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#1a8fe0'" title="Manually refresh dashboard">🔄 Refresh</button>
       <button onclick="monthlyPurge()" style="font-size:0.72rem;color:#e03e3e;cursor:pointer;background:none;border:1px dashed #e03e3e;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#e03e3e';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#e03e3e'">🗑 Purge 30d+</button>
       <div class="live-clock" id="liveClock" style="margin-top:0;">Loading...<span>CDT</span></div>
     </div>
@@ -502,6 +503,52 @@ async function loadDrivers() {
   return drivers;
 }
 
+// ========== AUTO-REFRESH ==========
+let _refreshInterval = null;
+const AUTO_REFRESH_INTERVAL = 10000; // Refresh every 10 seconds
+
+async function autoRefreshData() {
+  try {
+    const newDivisions = await supabaseFetch('GET', 'divisions');
+    const newDrivers = await supabaseFetch('GET', 'drivers');
+    
+    if (newDivisions && newDrivers) {
+      const divisionsChanged = JSON.stringify(divisions) !== JSON.stringify(newDivisions);
+      const driversChanged = JSON.stringify(drivers) !== JSON.stringify(newDrivers);
+      
+      if (divisionsChanged || driversChanged) {
+        if (newDivisions) divisions = newDivisions;
+        if (newDrivers) drivers = newDrivers;
+        render();
+        renderReports();
+        console.log('Dashboard auto-refreshed');
+      }
+    }
+  } catch (error) {
+    console.error('Auto-refresh error:', error);
+  }
+}
+
+function startAutoRefresh() {
+  _refreshInterval = setInterval(autoRefreshData, AUTO_REFRESH_INTERVAL);
+}
+
+function stopAutoRefresh() {
+  if (_refreshInterval) {
+    clearInterval(_refreshInterval);
+    _refreshInterval = null;
+  }
+}
+
+async function manualRefresh() {
+  console.log('Manual refresh triggered...');
+  await loadDivisions();
+  await loadDrivers();
+  render();
+  renderReports();
+  showSuccessIndicator('✅ Dashboard refreshed');
+}
+
 async function init() {
   updateDate();
   updateWeekRange();
@@ -512,6 +559,9 @@ async function init() {
   await loadDrivers();
   render();
   renderReports();
+  
+  // Start auto-refresh
+  startAutoRefresh();
 }
 
 // ========== HELPER FUNCTIONS ==========
@@ -898,25 +948,32 @@ function openTasksPopup(e, driverId) {
   document.body.appendChild(popup);
   _activeTasksPopup = popup;
 
-  const btn = e.currentTarget;
-  const rect = btn.getBoundingClientRect();
-  let top = rect.bottom + window.scrollY + 4;
-  let left = rect.left + window.scrollX;
-  
-  // Adjust left if popup would go off-screen right
-  if (left + 280 > window.innerWidth - 8) left = window.innerWidth - 288;
-  
-  // Adjust top if popup would go off-screen bottom
-  const popupHeight = popup.offsetHeight || 400; // Fallback to max-height
-  if (top + popupHeight > window.innerHeight + window.scrollY) {
-    top = rect.top + window.scrollY - popupHeight - 4;
-  }
-  
-  // Ensure left doesn't go negative
-  if (left < 8) left = 8;
-  
-  popup.style.top = top + 'px';
-  popup.style.left = left + 'px';
+  // Position popup after it's rendered
+  requestAnimationFrame(() => {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    let top = rect.bottom + window.scrollY + 4;
+    let left = rect.left + window.scrollX;
+    
+    const popupHeight = popup.offsetHeight;
+    const popupWidth = 280;
+    
+    // Adjust left if popup would go off-screen right
+    if (left + popupWidth > window.innerWidth - 8) {
+      left = window.innerWidth - popupWidth - 8;
+    }
+    
+    // Adjust top if popup would go off-screen bottom
+    if (top + popupHeight > window.innerHeight + window.scrollY - 10) {
+      top = rect.top + window.scrollY - popupHeight - 4;
+    }
+    
+    // Ensure left doesn't go negative
+    if (left < 8) left = 8;
+    
+    popup.style.top = top + 'px';
+    popup.style.left = left + 'px';
+  });
 
   setTimeout(() => document.addEventListener('click', closeTasksPopup, { once: true }), 0);
 }
