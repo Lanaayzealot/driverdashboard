@@ -164,7 +164,7 @@
     .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.75rem;padding:3px 6px;color:var(--muted);transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
     .tasks-btn:hover{border-color:var(--oo);color:var(--oo);}
     .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);}
-    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:240px;padding:12px;animation:dropIn 0.15s ease;}
+    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;}
     @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
     .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
     .task-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
@@ -294,6 +294,7 @@
         <option value="drugtest">🧪 Drug Test</option>
         <option value="onhold">⏸ On Hold</option>
         <option value="ready">✅ Ready to Go</option>
+        <option value="ghosted">👻 Ghosted</option>
       </select></div>
       <div class="form-group"><label>Notes</label><input id="inp_meta" placeholder="e.g. Drug test pending"></div>
     </div>
@@ -537,11 +538,13 @@ const STATUSES = [
 ];
 
 const TASKS = [
-  'Schedule drug test',
-  'Complete forms',
-  'Create Datatruck record',
-  'Create Telegram topic',
-  'Medstop & Datatruck hire',
+  'Schedule Drug Test',
+  'Send Additional Forms',
+  'Create Datatruck Record',
+  'Create Telegram Group',
+  'Create ELD Account',
+  'Upload Files to Google',
+  'Mark Hire Date',
 ];
 
 function getStatus(key) {
@@ -873,14 +876,24 @@ function openTasksPopup(e, driverId) {
 
   const popup = document.createElement('div');
   popup.className = 'tasks-popup';
+
+  // Build preset tasks + any custom tasks saved on driver
+  const allTasks = [...TASKS, ...(drv.customTasks || [])];
+
   popup.innerHTML = `<div class="tasks-popup-title">📋 Tasks</div>` +
-    TASKS.map(task => {
+    allTasks.map(task => {
       const done = completedTasks.includes(task);
+      const isCustom = (drv.customTasks || []).includes(task);
       return `<div class="task-item ${done ? 'done' : ''}" onclick="toggleTask('${driverId}','${task}',this)">
         <input type="checkbox" ${done ? 'checked' : ''} onclick="event.stopPropagation();toggleTask('${driverId}','${task}',this.closest('.task-item'))">
         <label>${task}</label>
+        ${isCustom ? `<span onclick="event.stopPropagation();removeCustomTask('${driverId}','${task}')" style="margin-left:auto;color:#ccc;cursor:pointer;font-size:0.7rem;padding:0 2px;" title="Remove">✕</span>` : ''}
       </div>`;
-    }).join('');
+    }).join('') +
+    `<div style="display:flex;gap:6px;margin-top:10px;border-top:1px solid var(--border);padding-top:8px;">
+      <input id="customTaskInput_${driverId}" type="text" placeholder="Add custom task..." onclick="event.stopPropagation()" onkeydown="if(event.key==='Enter'){event.stopPropagation();addCustomTask('${driverId}')}" style="flex:1;font-size:0.78rem;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none;font-family:'DM Sans',sans-serif;">
+      <button onclick="event.stopPropagation();addCustomTask('${driverId}')" style="background:var(--oo);color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:0.78rem;font-weight:700;white-space:nowrap;">+ Add</button>
+    </div>`;
 
   document.body.appendChild(popup);
   _activeTasksPopup = popup;
@@ -913,6 +926,34 @@ async function toggleTask(driverId, task, itemEl) {
   await updateDriver(driverId, 'tasks', drv.tasks);
   // Update button badge
   render();
+}
+
+async function addCustomTask(driverId) {
+  const input = document.getElementById(`customTaskInput_${driverId}`);
+  if (!input) return;
+  const task = input.value.trim();
+  if (!task) return;
+  const drv = drivers.find(d => d.id === driverId);
+  if (!drv) return;
+  if (!drv.customTasks) drv.customTasks = [];
+  if (drv.customTasks.includes(task) || TASKS.includes(task)) { input.value = ''; return; }
+  drv.customTasks.push(task);
+  // Also mark it as done/checked immediately? No — just add it unchecked
+  await updateDriver(driverId, 'customTasks', drv.customTasks);
+  closeTasksPopup();
+  // Reopen popup to show new task
+  const btn = document.querySelector(`[onclick*="openTasksPopup"][onclick*="${driverId}"]`);
+  if (btn) btn.click();
+}
+
+async function removeCustomTask(driverId, task) {
+  const drv = drivers.find(d => d.id === driverId);
+  if (!drv) return;
+  drv.customTasks = (drv.customTasks || []).filter(t => t !== task);
+  drv.tasks = (drv.tasks || []).filter(t => t !== task);
+  await updateDriver(driverId, 'customTasks', drv.customTasks);
+  await updateDriver(driverId, 'tasks', drv.tasks);
+  closeTasksPopup();
 }
 
 // ========== STATISTICS PANEL ==========
@@ -995,6 +1036,8 @@ async function clearStats() {
   }
   saveIndicator();
 }
+
+function getWeekRange() {
   const now = new Date();
   const day = now.getDay();
   const mon = new Date(now);
@@ -1006,76 +1049,8 @@ async function clearStats() {
   return { start: mon.getTime(), end: sun.getTime() };
 }
 
-function renderReports() {
-  const { start, end } = getWeekRange();
-  const mon = new Date(start);
-  const sun = new Date(end);
-  const weekLabel = `${mon.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${sun.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-
-  const hired = drivers.filter(d => d.status === 'hired');
-  document.getElementById('hiredCount').textContent = hired.length;
-  document.getElementById('hiredWeekLabel').textContent = weekLabel;
-  document.getElementById('hiredGrid').innerHTML = hired.length === 0
-    ? '<div class="report-empty">No drivers hired this week yet 💪</div>'
-    : `<div class="report-grid">${hired.map((d) => `
-      <div class="report-card report-card-green">
-        <div class="report-card-name">${d.name}</div>
-        <div class="report-card-division report-card-division-green">${getDivisionIcon(d.division_id)} ${getDivisionTitle(d.division_id)}</div>
-        <div class="report-card-meta">${d.position || ''}${d.company ? ' · ' + d.company : ''}</div>
-        ${d.Truck ? `<div class="report-card-meta">🚚 ${d.Truck}</div>` : ''}
-        <div class="report-card-date">📅 ${new Date(d.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
-        <button class="report-card-delete" onclick="removeHired('${d.id}')">✕</button>
-      </div>
-    `).join('')}</div>`;
-
-  const disq = drivers.filter(d => d.status === 'disqualified');
-  document.getElementById('disqCount').textContent = disq.length;
-  document.getElementById('disqWeekLabel').textContent = weekLabel;
-  document.getElementById('disqGrid').innerHTML = disq.length === 0
-    ? '<div class="report-empty">No disqualified drivers this week 👍</div>'
-    : `<div class="report-grid">${disq.map((d) => `
-      <div class="report-card report-card-red">
-        <div class="report-card-name">${d.name}</div>
-        <div class="report-card-division report-card-division-red">${getDivisionIcon(d.division_id)} ${getDivisionTitle(d.division_id)}</div>
-        <div class="report-card-meta">${d.position || ''}${d.company ? ' · ' + d.company : ''}</div>
-        ${d.Truck ? `<div class="report-card-meta">🚚 ${d.Truck}</div>` : ''}
-        <div class="report-card-date">📅 ${new Date(d.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
-        <button class="report-card-delete" onclick="removeDisq('${d.id}')">✕</button>
-      </div>
-    `).join('')}</div>`;
-}
-
-async function removeHired(driverId) {
-  drivers = drivers.filter(d => d.id !== driverId);
-  await supabaseFetch('DELETE', 'drivers', { id: `eq.${driverId}` });
-  renderReports();
-  saveIndicator();
-}
-
-async function removeDisq(driverId) {
-  drivers = drivers.filter(d => d.id !== driverId);
-  await supabaseFetch('DELETE', 'drivers', { id: `eq.${driverId}` });
-  renderReports();
-  saveIndicator();
-}
-
-function togglePanel(type) {
-  const body = document.getElementById(`${type}Body`);
-  const toggle = document.getElementById(`${type}Toggle`);
-  const isOpen = body.style.display !== 'none';
-  body.style.display = isOpen ? 'none' : 'block';
-  toggle.classList.toggle('open', !isOpen);
-}
-
-function clearLog(type) {
-  if (type === 'hired') {
-    drivers = drivers.filter(d => d.status !== 'hired');
-  } else {
-    drivers = drivers.filter(d => d.status !== 'disqualified');
-  }
-  renderReports();
-  saveIndicator();
-}
+// renderReports now handled by renderStats()
+function renderReports() { renderStats(); }
 
 async function exportToGoogleSheets(sheetType) {
   const statusKey = sheetType === 'Hired' ? 'hired' : sheetType === 'Disqualified' ? 'disqualified' : 'ghosted';
