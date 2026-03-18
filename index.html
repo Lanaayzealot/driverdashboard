@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -160,17 +160,18 @@
     .slot-row-date{font-size:0.7rem;color:var(--muted);width:72px;flex-shrink:0;border-right:1px dashed var(--border);padding-right:8px;align-self:stretch;display:flex;align-items:center;white-space:nowrap;}
 
     /* ── TASKS ── */
-    .slot-row-tasks{flex-shrink:0;position:relative;width:36px;}
-    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.75rem;padding:3px 6px;color:var(--muted);transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
-    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);}
-    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);}
+    .slot-row-tasks{flex-shrink:0;position:relative;width:auto;margin-left:8px;}
+    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:0.85rem;padding:6px 12px;color:var(--muted);transition:all 0.15s;white-space:nowrap;font-weight:600;min-width:50px;text-align:center;}
+    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);background:rgba(26,143,224,0.04);transform:scale(1.05);}
+    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);background:rgba(26,170,106,0.06);}
+    .tasks-btn.has-tasks:hover{background:rgba(26,170,106,0.12);}
     .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;}
     @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
     .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
-    .task-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
+    .task-item{display:flex;align-items:center;gap:8px;padding:8px 6px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
     .task-item:hover{background:var(--bg);}
-    .task-item input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--accent3);}
-    .task-item label{font-size:0.8rem;color:var(--text);cursor:pointer;flex:1;}
+    .task-item input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--accent3);}
+    .task-item label{font-size:0.82rem;color:var(--text);cursor:pointer;flex:1;font-weight:500;}
     .task-item.done label{text-decoration:line-through;color:var(--muted);}
 
     /* ── GHOSTED STATUS ── */
