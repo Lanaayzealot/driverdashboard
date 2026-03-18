@@ -165,7 +165,7 @@
     .tasks-btn:hover{border-color:var(--oo);color:var(--oo);background:rgba(26,143,224,0.04);transform:scale(1.05);}
     .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);background:rgba(26,170,106,0.06);}
     .tasks-btn.has-tasks:hover{background:rgba(26,170,106,0.12);}
-    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;}
+    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;display:block;visibility:visible;opacity:1;}
     @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
     .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
     .task-item{display:flex;align-items:center;gap:8px;padding:8px 6px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
@@ -996,9 +996,15 @@ function openTasksPopup(e, driverId) {
     popup.style.top = top + 'px';
     popup.style.left = left + 'px';
     popup.style.display = 'block';
+    popup.style.visibility = 'visible';
+    popup.style.opacity = '1';
   });
 
-  setTimeout(() => document.addEventListener('click', closeTasksPopup, { once: true }), 0);
+  // Add click handler AFTER popup is positioned (with delay to prevent immediate closure)
+  setTimeout(() => {
+    document.addEventListener('click', closeTasksPopup, { once: true });
+  }, 100);
+  
   console.log('openTasksPopup complete');
 }
 
