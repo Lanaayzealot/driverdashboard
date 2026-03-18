@@ -969,8 +969,10 @@ function openTasksPopup(e, driverId) {
   // Position popup after it's rendered
   requestAnimationFrame(() => {
     console.log('Positioning popup');
-    let top = rect.bottom + window.scrollY + 4;
-    let left = rect.left + window.scrollX;
+    
+    // Use viewport-relative positioning (simpler and more reliable)
+    let top = rect.bottom + 4;  // Just below button, relative to viewport
+    let left = rect.left;       // Align with button, relative to viewport
     
     const popupHeight = popup.offsetHeight;
     const popupWidth = 280;
@@ -983,14 +985,17 @@ function openTasksPopup(e, driverId) {
       console.log('Adjusted left for right overflow:', left);
     }
     
-    // Adjust top if popup would go off-screen bottom
-    if (top + popupHeight > window.innerHeight + window.scrollY - 10) {
-      top = rect.top + window.scrollY - popupHeight - 4;
+    // Adjust top if popup would go off-screen bottom (viewport height)
+    if (top + popupHeight > window.innerHeight - 10) {
+      top = rect.top - popupHeight - 4;  // Position above button instead
       console.log('Adjusted top for bottom overflow:', top);
     }
     
     // Ensure left doesn't go negative
     if (left < 8) left = 8;
+    
+    // Ensure top doesn't go negative
+    if (top < 8) top = 8;
     
     console.log('Final position - top:', top, 'left:', left);
     popup.style.top = top + 'px';
