@@ -160,18 +160,17 @@
     .slot-row-date{font-size:0.7rem;color:var(--muted);width:72px;flex-shrink:0;border-right:1px dashed var(--border);padding-right:8px;align-self:stretch;display:flex;align-items:center;white-space:nowrap;}
 
     /* ── TASKS ── */
-    .slot-row-tasks{flex-shrink:0;position:relative;width:auto;margin-left:8px;}
-    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:0.85rem;padding:6px 12px;color:var(--muted);transition:all 0.15s;white-space:nowrap;font-weight:600;min-width:50px;text-align:center;}
-    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);background:rgba(26,143,224,0.04);transform:scale(1.05);}
-    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);background:rgba(26,170,106,0.06);}
-    .tasks-btn.has-tasks:hover{background:rgba(26,170,106,0.12);}
-    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;}
+    .slot-row-tasks{flex-shrink:0;position:relative;width:36px;}
+    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.75rem;padding:3px 6px;color:var(--muted);transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
+    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);}
+    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);}
+    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;}
     @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
     .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
-    .task-item{display:flex;align-items:center;gap:8px;padding:8px 6px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
+    .task-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
     .task-item:hover{background:var(--bg);}
-    .task-item input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--accent3);}
-    .task-item label{font-size:0.82rem;color:var(--text);cursor:pointer;flex:1;font-weight:500;}
+    .task-item input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--accent3);}
+    .task-item label{font-size:0.8rem;color:var(--text);cursor:pointer;flex:1;}
     .task-item.done label{text-decoration:line-through;color:var(--muted);}
 
     /* ── GHOSTED STATUS ── */
@@ -224,7 +223,6 @@
   <div class="header-footer">
     <div class="header-date" id="headerDate">Loading...</div>
     <div style="display:flex;align-items:center;gap:12px;">
-      <button onclick="manualRefresh()" style="font-size:0.72rem;color:#1a8fe0;cursor:pointer;background:none;border:1px solid #1a8fe0;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#1a8fe0';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#1a8fe0'" title="Manually refresh dashboard">🔄 Refresh</button>
       <button onclick="monthlyPurge()" style="font-size:0.72rem;color:#e03e3e;cursor:pointer;background:none;border:1px dashed #e03e3e;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#e03e3e';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#e03e3e'">🗑 Purge 30d+</button>
       <div class="live-clock" id="liveClock" style="margin-top:0;">Loading...<span>CDT</span></div>
     </div>
@@ -504,52 +502,6 @@ async function loadDrivers() {
   return drivers;
 }
 
-// ========== AUTO-REFRESH ==========
-let _refreshInterval = null;
-const AUTO_REFRESH_INTERVAL = 10000; // Refresh every 10 seconds
-
-async function autoRefreshData() {
-  try {
-    const newDivisions = await supabaseFetch('GET', 'divisions');
-    const newDrivers = await supabaseFetch('GET', 'drivers');
-    
-    if (newDivisions && newDrivers) {
-      const divisionsChanged = JSON.stringify(divisions) !== JSON.stringify(newDivisions);
-      const driversChanged = JSON.stringify(drivers) !== JSON.stringify(newDrivers);
-      
-      if (divisionsChanged || driversChanged) {
-        if (newDivisions) divisions = newDivisions;
-        if (newDrivers) drivers = newDrivers;
-        render();
-        renderReports();
-        console.log('Dashboard auto-refreshed');
-      }
-    }
-  } catch (error) {
-    console.error('Auto-refresh error:', error);
-  }
-}
-
-function startAutoRefresh() {
-  _refreshInterval = setInterval(autoRefreshData, AUTO_REFRESH_INTERVAL);
-}
-
-function stopAutoRefresh() {
-  if (_refreshInterval) {
-    clearInterval(_refreshInterval);
-    _refreshInterval = null;
-  }
-}
-
-async function manualRefresh() {
-  console.log('Manual refresh triggered...');
-  await loadDivisions();
-  await loadDrivers();
-  render();
-  renderReports();
-  showSuccessIndicator('✅ Dashboard refreshed');
-}
-
 async function init() {
   updateDate();
   updateWeekRange();
@@ -560,9 +512,6 @@ async function init() {
   await loadDrivers();
   render();
   renderReports();
-  
-  // Start auto-refresh
-  startAutoRefresh();
 }
 
 // ========== HELPER FUNCTIONS ==========
@@ -919,28 +868,17 @@ function closeTasksPopup() {
 }
 
 function openTasksPopup(e, driverId) {
-  console.log('openTasksPopup called with driverId:', driverId);
   e.stopPropagation();
   closeTasksPopup();
-  
   const drv = drivers.find(d => d.id === driverId);
-  console.log('Driver found:', drv);
-  
-  if (!drv) {
-    console.error('Driver not found for ID:', driverId);
-    return;
-  }
-  
+  if (!drv) return;
   const completedTasks = drv.tasks || [];
-  console.log('Completed tasks:', completedTasks);
-  console.log('TASKS constant:', TASKS);
 
   const popup = document.createElement('div');
   popup.className = 'tasks-popup';
 
   // Build preset tasks + any custom tasks saved on driver
   const allTasks = [...TASKS, ...(drv.customTasks || [])];
-  console.log('All tasks:', allTasks);
 
   popup.innerHTML = `<div class="tasks-popup-title">📋 Tasks</div>` +
     allTasks.map(task => {
@@ -957,49 +895,18 @@ function openTasksPopup(e, driverId) {
       <button onclick="event.stopPropagation();addCustomTask('${driverId}')" style="background:var(--oo);color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:0.78rem;font-weight:700;white-space:nowrap;">+ Add</button>
     </div>`;
 
-  console.log('Popup HTML created, appending to body');
   document.body.appendChild(popup);
   _activeTasksPopup = popup;
 
-  // Capture button reference BEFORE requestAnimationFrame
   const btn = e.currentTarget;
   const rect = btn.getBoundingClientRect();
-  console.log('Button rect:', rect);
-
-  // Position popup after it's rendered
-  requestAnimationFrame(() => {
-    console.log('Positioning popup');
-    let top = rect.bottom + window.scrollY + 4;
-    let left = rect.left + window.scrollX;
-    
-    const popupHeight = popup.offsetHeight;
-    const popupWidth = 280;
-    
-    console.log('Initial position - top:', top, 'left:', left, 'popupHeight:', popupHeight);
-    
-    // Adjust left if popup would go off-screen right
-    if (left + popupWidth > window.innerWidth - 8) {
-      left = window.innerWidth - popupWidth - 8;
-      console.log('Adjusted left for right overflow:', left);
-    }
-    
-    // Adjust top if popup would go off-screen bottom
-    if (top + popupHeight > window.innerHeight + window.scrollY - 10) {
-      top = rect.top + window.scrollY - popupHeight - 4;
-      console.log('Adjusted top for bottom overflow:', top);
-    }
-    
-    // Ensure left doesn't go negative
-    if (left < 8) left = 8;
-    
-    console.log('Final position - top:', top, 'left:', left);
-    popup.style.top = top + 'px';
-    popup.style.left = left + 'px';
-    popup.style.display = 'block';
-  });
+  let top = rect.bottom + window.scrollY + 4;
+  let left = rect.left + window.scrollX;
+  if (left + 240 > window.innerWidth - 8) left = window.innerWidth - 248;
+  popup.style.top = top + 'px';
+  popup.style.left = left + 'px';
 
   setTimeout(() => document.addEventListener('click', closeTasksPopup, { once: true }), 0);
-  console.log('openTasksPopup complete');
 }
 
 async function toggleTask(driverId, task, itemEl) {
