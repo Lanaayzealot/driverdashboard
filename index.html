@@ -948,10 +948,12 @@ function openTasksPopup(e, driverId) {
   document.body.appendChild(popup);
   _activeTasksPopup = popup;
 
+  // Capture button reference BEFORE requestAnimationFrame
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+
   // Position popup after it's rendered
   requestAnimationFrame(() => {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
     let top = rect.bottom + window.scrollY + 4;
     let left = rect.left + window.scrollX;
     
