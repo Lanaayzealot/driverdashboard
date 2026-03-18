@@ -155,6 +155,50 @@
     .back-to-top{position:fixed;bottom:28px;right:24px;background:#8b5e3c;color:#fff;border:none;border-radius:99px;padding:10px 20px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px rgba(139,94,60,0.35);transition:opacity 0.2s,transform 0.2s;z-index:999;opacity:0;pointer-events:none;}
     .back-to-top.visible{opacity:1;pointer-events:auto;}
     .back-to-top:hover{transform:translateY(-2px);}
+
+    /* ── DATE ADDED ── */
+    .slot-row-date{font-size:0.7rem;color:var(--muted);width:72px;flex-shrink:0;border-right:1px dashed var(--border);padding-right:8px;align-self:stretch;display:flex;align-items:center;white-space:nowrap;}
+
+    /* ── TASKS ── */
+    .slot-row-tasks{flex-shrink:0;position:relative;width:36px;}
+    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.75rem;padding:3px 6px;color:var(--muted);transition:border-color 0.15s,color 0.15s;white-space:nowrap;}
+    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);}
+    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);}
+    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:240px;padding:12px;animation:dropIn 0.15s ease;}
+    @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+    .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
+    .task-item{display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
+    .task-item:hover{background:var(--bg);}
+    .task-item input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--accent3);}
+    .task-item label{font-size:0.8rem;color:var(--text);cursor:pointer;flex:1;}
+    .task-item.done label{text-decoration:line-through;color:var(--muted);}
+
+    /* ── GHOSTED STATUS ── */
+    .slot-covered.status-ghosted{background:#F8F8F8;border-color:#ccc;opacity:0.7;}
+
+    /* ── STATISTICS PANEL ── */
+    .stats-panel{max-width:1200px;margin:0 auto 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+    .stats-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#f8f9fd;border-bottom:1px solid var(--border);cursor:pointer;}
+    .stats-header-left{display:flex;align-items:center;gap:10px;}
+    .stats-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;color:var(--text);}
+    .stats-body{padding:16px 20px;}
+    .stats-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .stats-tab{font-size:0.75rem;font-weight:700;padding:5px 14px;border-radius:99px;cursor:pointer;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+    .stats-tab.active-hired{border-color:var(--accent3);color:var(--accent3);background:rgba(26,170,106,0.06);}
+    .stats-tab.active-disq{border-color:var(--accent-red);color:var(--accent-red);background:rgba(224,62,62,0.06);}
+    .stats-tab.active-ghosted{border-color:#999;color:#666;background:rgba(0,0,0,0.04);}
+    .stats-grid{display:flex;flex-direction:column;gap:6px;}
+    .stats-row{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:8px;border-bottom:1px solid var(--border);}
+    .stats-row-hired{background:rgba(26,170,106,0.04);}
+    .stats-row-disq{background:rgba(224,62,62,0.04);}
+    .stats-row-ghosted{background:rgba(0,0,0,0.02);}
+    .stats-row-name{font-weight:700;font-size:0.86rem;width:150px;flex-shrink:0;}
+    .stats-row-div{font-size:0.72rem;font-weight:700;width:90px;flex-shrink:0;text-transform:uppercase;letter-spacing:0.5px;}
+    .stats-row-company{font-size:0.75rem;color:#4b5563;width:160px;flex-shrink:0;}
+    .stats-row-date{font-size:0.72rem;color:var(--muted);flex:1;font-style:italic;}
+    .stats-row-badge{font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:99px;}
+    .stats-empty{text-align:center;color:var(--muted);font-size:0.85rem;padding:20px 0;}
+    .stats-footer{padding:10px 20px 14px;display:flex;justify-content:space-between;align-items:center;}
   </style>
 </head>
 <body>
@@ -185,27 +229,36 @@
   </div>
 </header>
 
-<!-- HIRED REPORT -->
-<div class="report-panel">
-  <div class="report-header" onclick="togglePanel('hired')">
-    <div class="report-header-left"><span style="font-size:1.3rem">🏆</span><span class="report-title">Hired</span><span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;color:#7A9A5B;" id="hiredCount">0</span></div>
-    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="hiredWeekLabel">—</span><span class="report-toggle" id="hiredToggle">▼</span></div>
+<!-- STATISTICS PANEL -->
+<div class="stats-panel">
+  <div class="stats-header" onclick="toggleStats()">
+    <div class="stats-header-left">
+      <span style="font-size:1.3rem">📊</span>
+      <span class="stats-title">Statistics</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:0.9rem;color:var(--accent3);margin-left:4px;" id="statsHiredCount">0</span>
+      <span style="color:var(--muted);font-size:0.8rem;margin:0 4px;">/</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:0.9rem;color:var(--accent-red);" id="statsDisqCount">0</span>
+      <span style="color:var(--muted);font-size:0.8rem;margin:0 4px;">/</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:0.9rem;color:#888;" id="statsGhostCount">0</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="report-week-label" id="statsWeekLabel">—</span>
+      <span class="report-toggle" id="statsToggle">▼</span>
+    </div>
   </div>
-  <div id="hiredBody" style="display:none;">
-    <div class="report-body" id="hiredGrid"><div class="report-empty">No drivers hired this week yet 💪</div></div>
-    <div class="report-footer"><button class="export-btn" onclick="exportToGoogleSheets('Hired')">📤 Export to Sheets (This Week)</button><button class="clear-btn" onclick="clearLog('hired')">🗑 Clear this week</button></div>
-  </div>
-</div>
-
-<!-- DISQUALIFIED REPORT -->
-<div class="report-panel">
-  <div class="report-header" onclick="togglePanel('disq')">
-    <div class="report-header-left"><span style="font-size:1.3rem">🚫</span><span class="report-title">Disqualified</span><span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;color:#E05C5C;" id="disqCount">0</span></div>
-    <div style="display:flex;align-items:center;gap:12px;"><span class="report-week-label" id="disqWeekLabel">—</span><span class="report-toggle" id="disqToggle">▼</span></div>
-  </div>
-  <div id="disqBody" style="display:none;">
-    <div class="report-body" id="disqGrid"><div class="report-empty">No disqualified drivers this week 👍</div></div>
-    <div class="report-footer"><button class="export-btn" onclick="exportToGoogleSheets('Disqualified')">📤 Export to Sheets (This Week)</button><button class="clear-btn" onclick="clearLog('disq')">🗑 Clear this week</button></div>
+  <div id="statsBody" style="display:none;">
+    <div class="stats-body">
+      <div class="stats-tabs">
+        <button class="stats-tab active-hired" id="tab-hired" onclick="switchStatsTab('hired')">🏆 Hired</button>
+        <button class="stats-tab" id="tab-disq" onclick="switchStatsTab('disq')">🚫 Disqualified</button>
+        <button class="stats-tab" id="tab-ghosted" onclick="switchStatsTab('ghosted')">👻 Ghosted</button>
+      </div>
+      <div id="statsGrid"></div>
+    </div>
+    <div class="stats-footer">
+      <button class="export-btn" id="statsExportBtn" onclick="exportStats()">📤 Export to Sheets</button>
+      <button class="clear-btn" onclick="clearStats()">🗑 Clear current tab</button>
+    </div>
   </div>
 </div>
 
@@ -480,6 +533,15 @@ const STATUSES = [
   {key:'ready',label:'Ready to Go',icon:'✅'},
   {key:'hired',label:'Hired',icon:'🏆'},
   {key:'disqualified',label:'Disqualified',icon:'🚫'},
+  {key:'ghosted',label:'Ghosted',icon:'👻'},
+];
+
+const TASKS = [
+  'Schedule drug test',
+  'Complete forms',
+  'Create Datatruck record',
+  'Create Telegram topic',
+  'Medstop & Datatruck hire',
 ];
 
 function getStatus(key) {
@@ -506,7 +568,7 @@ async function render() {
   dash.innerHTML = '';
 
   divisions.forEach(div => {
-    const divDrivers = drivers.filter(d => d.division_id === div.id && d.status !== 'hired' && d.status !== 'disqualified');
+    const divDrivers = drivers.filter(d => d.division_id === div.id && d.status !== 'hired' && d.status !== 'disqualified' && d.status !== 'ghosted');
     const totalOO = div.slots_oo || 0;
     const totalCD = div.slots_cd || 0;
     const total = totalOO + totalCD;
@@ -576,10 +638,14 @@ async function render() {
             <option value="Money Express Inc" ${drv.company === 'Money Express Inc' ? 'selected' : ''}>Money Express Inc</option>
           </select>
           <input type="text" class="slot-row-truck" value="${drv.Truck || ''}" placeholder="Truck" data-driver-id="${drv.id}" onchange="updateDriver('${drv.id}', 'Truck', this.value)" title="Truck number">
+          <div class="slot-row-date" title="Date added">${drv.created_at ? new Date(drv.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—'}</div>
           <select class="slot-row-status" onchange="setStatus('${drv.id}', this.value)" title="Status">
             ${STATUSES.map(s => `<option value="${s.key}" ${drv.status === s.key ? 'selected' : ''}>${s.icon} ${s.label}</option>`).join('')}
           </select>
           <div class="slot-row-notes" contenteditable="true" data-driver-id="${drv.id}" data-field="notes" onblur="updateDriver('${drv.id}', 'notes', this.innerText.trim())">${drv.notes || ''}</div>
+          <div class="slot-row-tasks">
+            <button class="tasks-btn ${(drv.tasks && drv.tasks.length > 0) ? 'has-tasks' : ''}" onclick="openTasksPopup(event,'${drv.id}')" title="Tasks">✓${drv.tasks && drv.tasks.length > 0 ? ' '+drv.tasks.length : ''}</button>
+          </div>
           <button class="slot-delete" onclick="deleteDriver('${drv.id}')">✕</button>`;
         grid.appendChild(slot);
       });
@@ -673,9 +739,9 @@ async function setStatus(driverId, newStatus) {
   if (driver.division_id) {
     await stampDivDate(driver.division_id);
   }
-  
+
   render();
-  renderReports();
+  renderStats();
   saveIndicator();
 }
 
@@ -791,8 +857,144 @@ async function saveModalEntry() {
   }
 }
 
-// ========== REPORTS ==========
-function getWeekRange() {
+// ========== TASKS POPUP ==========
+let _activeTasksPopup = null;
+
+function closeTasksPopup() {
+  if (_activeTasksPopup) { _activeTasksPopup.remove(); _activeTasksPopup = null; }
+}
+
+function openTasksPopup(e, driverId) {
+  e.stopPropagation();
+  closeTasksPopup();
+  const drv = drivers.find(d => d.id === driverId);
+  if (!drv) return;
+  const completedTasks = drv.tasks || [];
+
+  const popup = document.createElement('div');
+  popup.className = 'tasks-popup';
+  popup.innerHTML = `<div class="tasks-popup-title">📋 Tasks</div>` +
+    TASKS.map(task => {
+      const done = completedTasks.includes(task);
+      return `<div class="task-item ${done ? 'done' : ''}" onclick="toggleTask('${driverId}','${task}',this)">
+        <input type="checkbox" ${done ? 'checked' : ''} onclick="event.stopPropagation();toggleTask('${driverId}','${task}',this.closest('.task-item'))">
+        <label>${task}</label>
+      </div>`;
+    }).join('');
+
+  document.body.appendChild(popup);
+  _activeTasksPopup = popup;
+
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  let top = rect.bottom + window.scrollY + 4;
+  let left = rect.left + window.scrollX;
+  if (left + 240 > window.innerWidth - 8) left = window.innerWidth - 248;
+  popup.style.top = top + 'px';
+  popup.style.left = left + 'px';
+
+  setTimeout(() => document.addEventListener('click', closeTasksPopup, { once: true }), 0);
+}
+
+async function toggleTask(driverId, task, itemEl) {
+  const drv = drivers.find(d => d.id === driverId);
+  if (!drv) return;
+  if (!drv.tasks) drv.tasks = [];
+  const idx = drv.tasks.indexOf(task);
+  if (idx === -1) {
+    drv.tasks.push(task);
+    itemEl.classList.add('done');
+    itemEl.querySelector('input').checked = true;
+  } else {
+    drv.tasks.splice(idx, 1);
+    itemEl.classList.remove('done');
+    itemEl.querySelector('input').checked = false;
+  }
+  await updateDriver(driverId, 'tasks', drv.tasks);
+  // Update button badge
+  render();
+}
+
+// ========== STATISTICS PANEL ==========
+let _statsTab = 'hired';
+
+function toggleStats() {
+  const body = document.getElementById('statsBody');
+  const toggle = document.getElementById('statsToggle');
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+
+function switchStatsTab(tab) {
+  _statsTab = tab;
+  ['hired','disq','ghosted'].forEach(t => {
+    const el = document.getElementById(`tab-${t}`);
+    el.className = 'stats-tab';
+    if (t === tab) el.classList.add(`active-${t}`);
+  });
+  renderStatsGrid();
+}
+
+function renderReports() { renderStats(); }
+
+function renderStats() {
+  const { start, end } = getWeekRange();
+  const mon = new Date(start), sun = new Date(end);
+  const weekLabel = `${mon.toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${sun.toLocaleDateString('en-US',{month:'short',day:'numeric'})}`;
+  document.getElementById('statsWeekLabel').textContent = weekLabel;
+  document.getElementById('statsHiredCount').textContent = drivers.filter(d => d.status === 'hired').length;
+  document.getElementById('statsDisqCount').textContent = drivers.filter(d => d.status === 'disqualified').length;
+  document.getElementById('statsGhostCount').textContent = drivers.filter(d => d.status === 'ghosted').length;
+  renderStatsGrid();
+}
+
+function renderStatsGrid() {
+  const grid = document.getElementById('statsGrid');
+  const tab = _statsTab;
+  const statusKey = tab === 'disq' ? 'disqualified' : tab;
+  const rows = drivers.filter(d => d.status === statusKey);
+
+  if (rows.length === 0) {
+    const msgs = { hired: 'No hired drivers yet 💪', disq: 'No disqualified drivers 👍', ghosted: 'No ghosted drivers 👻' };
+    grid.innerHTML = `<div class="stats-empty">${msgs[tab]}</div>`;
+    return;
+  }
+
+  const colors = { hired: 'hired', disq: 'disq', ghosted: 'ghosted' };
+  const badgeColors = { hired: 'color:#7A9A5B;background:rgba(26,170,106,0.1)', disq: 'color:#E05C5C;background:rgba(224,62,62,0.1)', ghosted: 'color:#888;background:rgba(0,0,0,0.06)' };
+  const badgeLabels = { hired: '🏆 Hired', disq: '🚫 Disqualified', ghosted: '👻 Ghosted' };
+
+  grid.innerHTML = `<div class="stats-grid">${rows.map(d => `
+    <div class="stats-row stats-row-${colors[tab]}">
+      <div class="stats-row-name">${d.name}</div>
+      <div class="stats-row-div" style="${tab==='hired'?'color:var(--accent3)':tab==='disq'?'color:var(--accent-red)':'color:#888'}">${getDivisionIcon(d.division_id)} ${getDivisionTitle(d.division_id)}</div>
+      <div class="stats-row-company">${d.company || ''}${d.position ? ' · ' + d.position : ''}</div>
+      <div class="stats-row-date">📅 ${d.created_at ? new Date(d.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—'}</div>
+      <div class="stats-row-badge" style="${badgeColors[tab]};border-radius:99px;padding:2px 8px;font-size:0.72rem;font-weight:700;">${badgeLabels[tab]}</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function exportStats() {
+  const statusKey = _statsTab === 'disq' ? 'disqualified' : _statsTab;
+  const rows = drivers.filter(d => d.status === statusKey);
+  if (rows.length === 0) { alert('No data to export!'); return; }
+  exportToGoogleSheets(_statsTab === 'hired' ? 'Hired' : _statsTab === 'disq' ? 'Disqualified' : 'Ghosted');
+}
+
+async function clearStats() {
+  const statusKey = _statsTab === 'disq' ? 'disqualified' : _statsTab;
+  if (!confirm(`Remove all ${statusKey} drivers from the board?`)) return;
+  const toDelete = drivers.filter(d => d.status === statusKey).map(d => d.id);
+  drivers = drivers.filter(d => d.status !== statusKey);
+  render();
+  renderStats();
+  for (const id of toDelete) {
+    await supabaseFetch('DELETE', 'drivers', { id: `eq.${id}` });
+  }
+  saveIndicator();
+}
   const now = new Date();
   const day = now.getDay();
   const mon = new Date(now);
@@ -875,19 +1077,16 @@ function clearLog(type) {
   saveIndicator();
 }
 
-// ========== EXPORT TO GOOGLE SHEETS ==========
 async function exportToGoogleSheets(sheetType) {
-  const rows = sheetType === 'Hired'
-    ? drivers.filter(d => d.status === 'hired')
-    : drivers.filter(d => d.status === 'disqualified');
+  const statusKey = sheetType === 'Hired' ? 'hired' : sheetType === 'Disqualified' ? 'disqualified' : 'ghosted';
+  const rows = drivers.filter(d => d.status === statusKey);
 
   if (rows.length === 0) {
-    alert('No data to export this week!');
+    alert('No data to export!');
     return;
   }
 
-  const type = sheetType === 'Hired' ? 'hired' : 'disqualified';
-  const btn = document.querySelector(`.export-btn[onclick="exportToGoogleSheets('${sheetType}')"]`);
+  const btn = document.getElementById('statsExportBtn');
   if (btn) { btn.textContent = '⏳ Exporting...'; btn.disabled = true; }
 
   try {
@@ -904,15 +1103,13 @@ async function exportToGoogleSheets(sheetType) {
       method: 'POST',
       mode: 'no-cors',
       headers: {'Content-Type': 'text/plain'},
-      body: JSON.stringify({ type: type, rows: exportRows })
+      body: JSON.stringify({ type: statusKey, rows: exportRows })
     });
 
-    if (btn) { btn.textContent = `✅ Exported ${exportRows.length}!`; setTimeout(() => { btn.textContent = '📤 Export to Sheets (This Week)'; btn.disabled = false; }, 2500); }
-    showSuccessIndicator(`Exported ${exportRows.length} to ${sheetType}`);
-
+    if (btn) { btn.textContent = `✅ Exported ${exportRows.length}!`; setTimeout(() => { btn.textContent = '📤 Export to Sheets'; btn.disabled = false; }, 2500); }
+    showSuccessIndicator(`Exported ${exportRows.length} rows`);
   } catch (error) {
-    console.error('Export error:', error);
-    if (btn) { btn.textContent = '❌ Failed'; setTimeout(() => { btn.textContent = '📤 Export to Sheets (This Week)'; btn.disabled = false; }, 2500); }
+    if (btn) { btn.textContent = '❌ Failed'; setTimeout(() => { btn.textContent = '📤 Export to Sheets'; btn.disabled = false; }, 2500); }
     showErrorIndicator('Export failed');
   }
 }
