@@ -17,13 +17,13 @@
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
-    header{margin-bottom:40px;padding:20px;background:#fff;border-radius:12px;border:1px solid var(--border);}
+    header{margin-bottom:40px;padding:24px;background:#fff;border-radius:12px;border:1px solid var(--border);}
     header h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;color:var(--peacock);}
     header p{color:var(--sapphire);font-size:0.85rem;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
     .header-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:20px;}
-    .live-clock{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;color:var(--oo);letter-spacing:1px;}
+    .live-clock{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;color:var(--sapphire);letter-spacing:1px;}
     .live-clock span{color:var(--muted);font-size:0.75rem;font-weight:400;font-family:'DM Sans',sans-serif;margin-left:6px;letter-spacing:1.5px;text-transform:uppercase;}
-    .header-date{font-size:0.8rem;color:var(--oo);font-weight:700;letter-spacing:1px;font-family:'Montserrat',sans-serif;}
+    .header-date{font-size:0.8rem;color:var(--sapphire);font-weight:700;letter-spacing:1px;font-family:'Montserrat',sans-serif;}
     .save-indicator{position:fixed;top:16px;right:16px;background:var(--accent3);color:#fff;padding:6px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;opacity:0;transition:opacity 0.3s;z-index:999;}
     .save-indicator.show{opacity:1;}
     .save-indicator.error{background:var(--accent-red);}
@@ -232,22 +232,22 @@
 </div>
 
 <header>
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
-    <div>
-      <h1>Driver Recruitment Dashboard</h1>
-      <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-top:8px;letter-spacing:0.5px;">WEEK: <span id="weekRange">Loading...</span></div>
-    </div>
-    <div style="display:flex;align-items:center;gap:20px;text-align:right;">
-      <div>
-        <div class="header-date" id="headerDate">Loading...</div>
-        <div class="live-clock" id="liveClock" style="margin-top:4px;">Loading...<span>CDT</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:40px;">
+    <!-- LEFT SIDE: Title, Week, Buttons -->
+    <div style="flex:1;">
+      <h1 style="margin:0;margin-bottom:8px;">Driver Recruitment Dashboard</h1>
+      <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--text);letter-spacing:0.5px;margin-bottom:16px;">WEEK: <span id="weekRange">Loading...</span></div>
+      <div style="display:flex;gap:12px;">
+        <button onclick="manualRefresh()" style="font-size:0.72rem;color:var(--sapphire);cursor:pointer;background:none;border:2px solid var(--sapphire);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--sapphire)';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='var(--sapphire)'" title="Manually refresh dashboard">🔄 Refresh</button>
+        <button onclick="monthlyPurge()" style="font-size:0.72rem;color:var(--peacock);cursor:pointer;background:none;border:2px dashed var(--lace);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--lace)';this.style.color='var(--peacock)'" onmouseout="this.style.background='none';this.style.color='var(--peacock)'" title="Purge records older than 30 days">🗑 Purge 30d+</button>
       </div>
     </div>
-  </div>
-  
-  <div style="display:flex;gap:12px;">
-    <button onclick="manualRefresh()" style="font-size:0.72rem;color:var(--sapphire);cursor:pointer;background:none;border:2px solid var(--sapphire);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--sapphire)';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='var(--sapphire)'" title="Manually refresh dashboard">🔄 Refresh</button>
-    <button onclick="monthlyPurge()" style="font-size:0.72rem;color:var(--peacock);cursor:pointer;background:none;border:2px dashed var(--lace);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--lace)';this.style.color='var(--peacock)'" onmouseout="this.style.background='none';this.style.color='var(--peacock)'" title="Purge records older than 30 days">🗑 Purge 30d+</button>
+    
+    <!-- RIGHT SIDE: Date and Clock -->
+    <div style="text-align:right;flex-shrink:0;">
+      <div class="header-date" id="headerDate" style="font-size:0.9rem;color:var(--sapphire);font-weight:600;margin-bottom:4px;">Loading...</div>
+      <div class="live-clock" id="liveClock" style="margin-top:0;font-size:0.9rem;">Loading...<span>CDT</span></div>
+    </div>
   </div>
 </header>
 
