@@ -17,9 +17,9 @@
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
-    header{text-align:center;margin-bottom:40px;}
-    header h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;color:var(--text);}
-    header p{color:var(--oo);font-size:0.85rem;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
+    header{margin-bottom:40px;padding:20px;background:#fff;border-radius:12px;border:1px solid var(--border);}
+    header h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;color:var(--peacock);}
+    header p{color:var(--sapphire);font-size:0.85rem;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
     .header-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:20px;}
     .live-clock{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;color:var(--oo);letter-spacing:1px;}
     .live-clock span{color:var(--muted);font-size:0.75rem;font-weight:400;font-family:'DM Sans',sans-serif;margin-left:6px;letter-spacing:1.5px;text-transform:uppercase;}
@@ -32,7 +32,7 @@
     .card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.08);}
     .card-header{display:flex;align-items:center;gap:10px;padding:20px 28px;border-bottom:1px solid var(--border);background:#f8f9fd;}
     .card-icon{font-size:1.4rem;}
-    .card-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);flex:1;}
+    .card-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;color:var(--peacock);flex:1;}
     .div-status{font-size:0.72rem;padding:4px 12px;border-radius:20px;white-space:nowrap;cursor:pointer;user-select:none;font-weight:700;letter-spacing:0.5px;transition:transform 0.1s;}
     .div-status:active{transform:scale(0.95);}
     .div-status-hiring{background:#fff;border:2px solid var(--sapphire);color:var(--sapphire);}
@@ -88,7 +88,7 @@
     .report-panel{max-width:1200px;margin:0 auto 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
     .report-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#f8f9fd;border-bottom:1px solid var(--border);cursor:pointer;}
     .report-header-left{display:flex;align-items:center;gap:10px;}
-    .report-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;color:var(--text);}
+    .report-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;color:var(--peacock);}
     .report-count{color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.8rem;padding:3px 10px;border-radius:20px;}
     .report-count-green{background:var(--accent3);}
     .report-count-red{background:var(--accent-red);}
@@ -194,7 +194,7 @@
     .stats-panel{max-width:1200px;margin:0 auto 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
     .stats-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#f8f9fd;border-bottom:1px solid var(--border);cursor:pointer;}
     .stats-header-left{display:flex;align-items:center;gap:10px;}
-    .stats-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;color:var(--text);}
+    .stats-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;color:var(--peacock);}
     .stats-body{padding:16px 20px;}
     .stats-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
     .stats-tab{font-size:0.75rem;font-weight:700;padding:5px 14px;border-radius:99px;cursor:pointer;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 0.15s;}
@@ -232,15 +232,22 @@
 </div>
 
 <header>
-  <h1>Driver Recruitment Dashboard</h1>
-  <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-top:8px;letter-spacing:0.5px;">WEEK: <span id="weekRange">Loading...</span></div>
-  <div class="header-footer">
-    <div class="header-date" id="headerDate">Loading...</div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <button onclick="manualRefresh()" style="font-size:0.72rem;color:var(--sapphire);cursor:pointer;background:none;border:2px solid var(--sapphire);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--sapphire)';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='var(--sapphire)'" title="Manually refresh dashboard">🔄 Refresh</button>
-      <button onclick="monthlyPurge()" style="font-size:0.72rem;color:var(--peacock);cursor:pointer;background:none;border:2px dashed var(--lace);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--lace)';this.style.color='var(--peacock)'" onmouseout="this.style.background='none';this.style.color='var(--peacock)'" title="Purge records older than 30 days">🗑 Purge 30d+</button>
-      <div class="live-clock" id="liveClock" style="margin-top:0;">Loading...<span>CDT</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+    <div>
+      <h1>Driver Recruitment Dashboard</h1>
+      <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-top:8px;letter-spacing:0.5px;">WEEK: <span id="weekRange">Loading...</span></div>
     </div>
+    <div style="display:flex;align-items:center;gap:20px;text-align:right;">
+      <div>
+        <div class="header-date" id="headerDate">Loading...</div>
+        <div class="live-clock" id="liveClock" style="margin-top:4px;">Loading...<span>CDT</span></div>
+      </div>
+    </div>
+  </div>
+  
+  <div style="display:flex;gap:12px;">
+    <button onclick="manualRefresh()" style="font-size:0.72rem;color:var(--sapphire);cursor:pointer;background:none;border:2px solid var(--sapphire);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--sapphire)';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='var(--sapphire)'" title="Manually refresh dashboard">🔄 Refresh</button>
+    <button onclick="monthlyPurge()" style="font-size:0.72rem;color:var(--peacock);cursor:pointer;background:none;border:2px dashed var(--lace);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--lace)';this.style.color='var(--peacock)'" onmouseout="this.style.background='none';this.style.color='var(--peacock)'" title="Purge records older than 30 days">🗑 Purge 30d+</button>
   </div>
 </header>
 
