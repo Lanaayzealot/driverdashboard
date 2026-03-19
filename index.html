@@ -8,10 +8,12 @@
   <style>
     :root {
       --bg:#f4f6fa; --surface:#fff; --border:#e0e4ef;
-      --accent:#c49a0a; --accent2:#2a7fd4; --accent3:#1aaa6a;
-      --accent-red:#e03e3e; --text:#1a1e2e; --muted:#8892a4;
+      --accent:#72B0AB; --accent2:#FFEDDI; --accent3:#B89D47;
+      --accent-red:#FFEDDI; --text:#053229; --muted:#8892a4;
       --purple:#7c3aed; --orange:#d97706;
-      --oo:#1a8fe0; --cd:#006D5B; --teal:#1a8fe0;
+      --oo:#72B0AB; --cd:#72B0AB; --teal:#72B0AB;
+      --sapphire:#72B0AB; --arctic:#BCDDDC; --lace:#FFEDDI;
+      --pistachio:#B89D47; --peacock:#053229;
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:32px 20px 60px;}
@@ -33,10 +35,10 @@
     .card-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);flex:1;}
     .div-status{font-size:0.72rem;padding:4px 12px;border-radius:20px;white-space:nowrap;cursor:pointer;user-select:none;font-weight:700;letter-spacing:0.5px;transition:transform 0.1s;}
     .div-status:active{transform:scale(0.95);}
-    .div-status-hiring{background:#fff;border:2px solid var(--accent-red);color:var(--accent-red);}
-    .div-status-full{background:#fff;border:2px solid var(--accent3);color:var(--accent3);}
-    .div-status-urgent{background:#fff;border:2px solid var(--accent-red);color:var(--accent-red);animation:urgentPulse 1.2s ease-in-out infinite;}
-    @keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(224,62,62,0.35);}50%{box-shadow:0 0 0 5px rgba(224,62,62,0);}}
+    .div-status-hiring{background:#fff;border:2px solid var(--sapphire);color:var(--sapphire);}
+    .div-status-full{background:#fff;border:2px solid var(--pistachio);color:var(--pistachio);}
+    .div-status-urgent{background:#fff;border:2px solid var(--sapphire);color:var(--sapphire);animation:urgentPulse 1.2s ease-in-out infinite;}
+    @keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(114,176,171,0.35);}50%{box-shadow:0 0 0 5px rgba(114,176,171,0);}}
 
     .progress-bar-wrap{padding:16px 28px 16px;border-bottom:1px solid var(--border);background:#fafbfe;}
     .progress-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
@@ -47,9 +49,9 @@
     .last-updated:hover{border-color:var(--accent2);color:var(--accent2);}
 
     .progress-bar-area{position:relative;padding-bottom:4px;margin-top:12px;}
-    .progress-pill-pct{font-size:0.8rem;font-weight:800;color:#1a8fe0;font-family:'Montserrat',sans-serif;margin-left:auto;}
+    .progress-pill-pct{font-size:0.8rem;font-weight:800;color:var(--sapphire);font-family:'Montserrat',sans-serif;margin-left:auto;}
     .progress-bar-track-main{height:7px;background:#e8edf5;border-radius:99px;overflow:hidden;}
-    .progress-bar-fill-main{height:100%;border-radius:99px;background:#1a8fe0;transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+    .progress-bar-fill-main{height:100%;border-radius:99px;background:linear-gradient(90deg, var(--sapphire) 0%, var(--pistachio) 100%);transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);}
 
     .slots-group-label{font-size:0.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px 0 7px;font-family:'Montserrat',sans-serif;}
     .slots-group-label.oo{color:var(--oo);}
@@ -150,8 +152,17 @@
     .password-modal-content .btn-skip:hover{background:var(--bg);}
 
     .sticky-nav{background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border:2px solid var(--border);border-radius:12px;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 auto 24px;box-shadow:0 2px 10px rgba(0,0,0,0.06);max-width:1200px;}
-    .nav-link{font-size:0.78rem;font-weight:700;padding:6px 20px;border-radius:99px;cursor:pointer;border:3px solid var(--oo);color:var(--oo);background:#fff;text-decoration:none;transition:all 0.15s;white-space:nowrap;font-family:'DM Sans',sans-serif;}
-    .nav-link:hover{border-color:var(--oo);color:var(--oo);}
+    .nav-link{font-size:0.78rem;font-weight:700;padding:6px 20px;border-radius:99px;cursor:pointer;border:3px solid var(--sapphire);color:var(--sapphire);background:#fff;text-decoration:none;transition:all 0.15s;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+    .nav-link:hover{border-color:var(--sapphire);color:var(--sapphire);}
+    
+    /* TABS STYLING */
+    .tab-btn{font-size:0.85rem;font-weight:600;padding:12px 20px;border:none;background:none;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;font-family:'DM Sans',sans-serif;white-space:nowrap;position:relative;}
+    .tab-btn:hover{color:var(--text);}
+    .tab-btn.active{color:var(--sapphire);border-bottom-color:var(--sapphire);}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;animation:fadeIn 0.2s ease;}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
     .back-to-top{position:fixed;bottom:28px;right:24px;background:#8b5e3c;color:#fff;border:none;border-radius:99px;padding:10px 20px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px rgba(139,94,60,0.35);transition:opacity 0.2s,transform 0.2s;z-index:999;opacity:0;pointer-events:none;}
     .back-to-top.visible{opacity:1;pointer-events:auto;}
     .back-to-top:hover{transform:translateY(-2px);}
@@ -161,18 +172,20 @@
 
     /* ── TASKS ── */
     .slot-row-tasks{flex-shrink:0;position:relative;width:auto;margin-left:8px;}
-    .tasks-btn{background:none;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:0.85rem;padding:6px 12px;color:var(--muted);transition:all 0.15s;white-space:nowrap;font-weight:600;min-width:50px;text-align:center;}
-    .tasks-btn:hover{border-color:var(--oo);color:var(--oo);background:rgba(26,143,224,0.04);transform:scale(1.05);}
-    .tasks-btn.has-tasks{border-color:var(--accent3);color:var(--accent3);background:rgba(26,170,106,0.06);}
-    .tasks-btn.has-tasks:hover{background:rgba(26,170,106,0.12);}
-    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;display:block;visibility:visible;opacity:1;}
+    .tasks-btn{background:none;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:0.85rem;padding:6px 12px;color:var(--muted);transition:all 0.2s;white-space:nowrap;font-weight:600;min-width:50px;text-align:center;}
+    .tasks-btn:hover{border-color:var(--sapphire);color:var(--sapphire);background:rgba(114,176,171,0.08);transform:scale(1.05);box-shadow:0 2px 8px rgba(114,176,171,0.15);}
+    .tasks-btn.has-tasks{border-color:var(--sapphire);color:#fff;background:linear-gradient(135deg, var(--sapphire) 0%, #5a9995 100%);font-weight:700;}
+    .tasks-btn.has-tasks:hover{background:linear-gradient(135deg, #5a9995 0%, var(--sapphire) 100%);box-shadow:0 4px 12px rgba(114,176,171,0.3);transform:scale(1.08);}
+    .tasks-popup{position:fixed;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,0.15);z-index:9999;width:280px;padding:12px;animation:dropIn 0.15s ease;max-height:400px;overflow-y:auto;display:block;visibility:visible;opacity:1;border-top:3px solid var(--sapphire);}
     @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
-    .tasks-popup-title{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px;}
-    .task-item{display:flex;align-items:center;gap:8px;padding:8px 6px;border-radius:6px;cursor:pointer;transition:background 0.1s;}
-    .task-item:hover{background:var(--bg);}
-    .task-item input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--accent3);}
+    .tasks-popup-title{font-size:0.68rem;color:var(--sapphire);text-transform:uppercase;letter-spacing:1.5px;font-weight:800;margin-bottom:12px;border-bottom:2px solid var(--sapphire);padding-bottom:8px;background:linear-gradient(135deg, rgba(114,176,171,0.04) 0%, rgba(114,176,171,0.02) 100%);padding:8px;border-radius:6px;margin:-12px -12px 12px -12px;padding:8px 12px;}
+    .task-item{display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:8px;cursor:pointer;transition:all 0.15s;border-left:3px solid transparent;}
+    .task-item:hover{background:linear-gradient(90deg, rgba(114,176,171,0.08) 0%, rgba(114,176,171,0.02) 100%);border-left-color:var(--sapphire);}
+    .task-item input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:var(--sapphire);transition:transform 0.2s;}
+    .task-item input[type=checkbox]:hover{transform:scale(1.1);}
     .task-item label{font-size:0.82rem;color:var(--text);cursor:pointer;flex:1;font-weight:500;}
-    .task-item.done label{text-decoration:line-through;color:var(--muted);}
+    .task-item.done label{text-decoration:line-through;color:#999;font-weight:400;}
+    .task-item.done{opacity:0.7;background:rgba(200,200,200,0.1);}
 
     /* ── GHOSTED STATUS ── */
     .slot-covered.status-ghosted{background:#F8F8F8;border-color:#ccc;opacity:0.7;}
@@ -224,8 +237,8 @@
   <div class="header-footer">
     <div class="header-date" id="headerDate">Loading...</div>
     <div style="display:flex;align-items:center;gap:12px;">
-      <button onclick="manualRefresh()" style="font-size:0.72rem;color:#1a8fe0;cursor:pointer;background:none;border:1px solid #1a8fe0;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#1a8fe0';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#1a8fe0'" title="Manually refresh dashboard">🔄 Refresh</button>
-      <button onclick="monthlyPurge()" style="font-size:0.72rem;color:#e03e3e;cursor:pointer;background:none;border:1px dashed #e03e3e;padding:4px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='#e03e3e';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#e03e3e'">🗑 Purge 30d+</button>
+      <button onclick="manualRefresh()" style="font-size:0.72rem;color:var(--sapphire);cursor:pointer;background:none;border:2px solid var(--sapphire);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--sapphire)';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='var(--sapphire)'" title="Manually refresh dashboard">🔄 Refresh</button>
+      <button onclick="monthlyPurge()" style="font-size:0.72rem;color:var(--peacock);cursor:pointer;background:none;border:2px dashed var(--lace);padding:6px 14px;border-radius:6px;font-family:'DM Sans',sans-serif;font-weight:700;transition:all 0.2s;" onmouseover="this.style.background='var(--lace)';this.style.color='var(--peacock)'" onmouseout="this.style.background='none';this.style.color='var(--peacock)'" title="Purge records older than 30 days">🗑 Purge 30d+</button>
       <div class="live-clock" id="liveClock" style="margin-top:0;">Loading...<span>CDT</span></div>
     </div>
   </div>
@@ -264,14 +277,16 @@
   </div>
 </div>
 
-<!-- NAV -->
-<nav class="sticky-nav" id="stickyNav">
-  <span style="font-size:0.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:4px;">Jump to:</span>
-  <div id="navLinks" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
-</nav>
+<!-- TABS NAVIGATION -->
+<div style="display:flex;align-items:center;gap:8px;max-width:1200px;margin:0 auto 24px;border-bottom:2px solid var(--border);overflow-x:auto;padding:0 20px;">
+  <div id="tabsContainer" style="display:flex;gap:4px;"></div>
+</div>
 
-<!-- MAIN GRID -->
-<div class="grid" id="dash"></div>
+<!-- MAIN TABBED CONTENT -->
+<div class="grid" id="dash" style="display:none;"></div>
+
+<!-- TAB CONTENT CONTAINER -->
+<div id="tabsContent" style="max-width:1200px;margin:0 auto;"></div>
 
 <!-- ADD DRIVER MODAL -->
 <div class="modal-overlay" id="modalOverlay">
@@ -618,10 +633,13 @@ function getDivisionIcon(divId) {
 
 // ========== RENDER ==========
 async function render() {
-  const dash = document.getElementById('dash');
-  dash.innerHTML = '';
-
+  buildTabs(); // Create tabs first
+  
   divisions.forEach(div => {
+    const tabContent = document.getElementById(`tab-${div.id}`);
+    if (!tabContent) return;
+    tabContent.innerHTML = '';
+    
     const divDrivers = drivers.filter(d => d.division_id === div.id && d.status !== 'hired' && d.status !== 'disqualified' && d.status !== 'ghosted');
     const totalOO = div.slots_oo || 0;
     const totalCD = div.slots_cd || 0;
@@ -722,10 +740,11 @@ async function render() {
     sg.appendChild(makeSlotGroup('🔵 Owner Operators', 'oo', ooDrivers, emptyOO));
     sg.appendChild(makeSlotGroup('🟢 Company Drivers', 'cd', cdDrivers, emptyCD));
     card.appendChild(sg);
-    dash.appendChild(card);
+    tabContent.appendChild(card);
   });
 
-  dash.querySelectorAll('[contenteditable="true"]').forEach(el => {
+  // Add event listeners to all editable elements
+  document.querySelectorAll('[contenteditable="true"]').forEach(el => {
     el.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -733,25 +752,56 @@ async function render() {
       }
     });
   });
+}
+}
 
-  buildNav();
+function buildTabs() {
+  const tabsContainer = document.getElementById('tabsContainer');
+  const tabsContent = document.getElementById('tabsContent');
+  if (!tabsContainer || !tabsContent) return;
+  
+  tabsContainer.innerHTML = '';
+  tabsContent.innerHTML = '';
+  
+  divisions.forEach((div, idx) => {
+    // Create tab button
+    const tabBtn = document.createElement('button');
+    tabBtn.className = `tab-btn ${idx === 0 ? 'active' : ''}`;
+    tabBtn.textContent = `${div.icon} ${div.title}`;
+    tabBtn.onclick = () => switchTab(div.id);
+    tabsContainer.appendChild(tabBtn);
+    
+    // Store reference for later
+    tabBtn.dataset.divId = div.id;
+  });
+  
+  // Create tab content containers
+  divisions.forEach((div, idx) => {
+    const tabDiv = document.createElement('div');
+    tabDiv.className = `tab-content ${idx === 0 ? 'active' : ''}`;
+    tabDiv.id = `tab-${div.id}`;
+    tabDiv.style.maxWidth = '1200px';
+    tabDiv.style.margin = '0 auto';
+    tabsContent.appendChild(tabDiv);
+  });
+}
+
+function switchTab(divId) {
+  // Hide all tabs
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // Show selected tab
+  document.getElementById(`tab-${divId}`)?.classList.add('active');
+  document.querySelector(`[data-div-id="${divId}"]`)?.classList.add('active');
 }
 
 function buildNav() {
-  const nav = document.getElementById('navLinks');
-  if (!nav) return;
-  nav.innerHTML = '';
-  divisions.forEach(div => {
-    const a = document.createElement('a');
-    a.className = 'nav-link';
-    a.href = `#div-${div.id}`;
-    a.textContent = `${div.icon} ${div.title}`;
-    a.onclick = (e) => {
-      e.preventDefault();
-      document.getElementById(`div-${div.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-    nav.appendChild(a);
-  });
+  buildTabs();
 }
 
 // ========== DATABASE OPERATIONS ==========
@@ -952,9 +1002,9 @@ function openTasksPopup(e, driverId) {
         ${isCustom ? `<span onclick="event.stopPropagation();removeCustomTask('${driverId}','${task}')" style="margin-left:auto;color:#ccc;cursor:pointer;font-size:0.7rem;padding:0 2px;" title="Remove">✕</span>` : ''}
       </div>`;
     }).join('') +
-    `<div style="display:flex;gap:6px;margin-top:10px;border-top:1px solid var(--border);padding-top:8px;">
-      <input id="customTaskInput_${driverId}" type="text" placeholder="Add custom task..." onclick="event.stopPropagation()" onkeydown="if(event.key==='Enter'){event.stopPropagation();addCustomTask('${driverId}')}" style="flex:1;font-size:0.78rem;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none;font-family:'DM Sans',sans-serif;">
-      <button onclick="event.stopPropagation();addCustomTask('${driverId}')" style="background:var(--oo);color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:0.78rem;font-weight:700;white-space:nowrap;">+ Add</button>
+    `<div style="display:flex;gap:6px;margin-top:12px;border-top:2px solid var(--border);padding-top:10px;">
+      <input id="customTaskInput_${driverId}" type="text" placeholder="Add custom task..." onclick="event.stopPropagation()" onkeydown="if(event.key==='Enter'){event.stopPropagation();addCustomTask('${driverId}')}" style="flex:1;font-size:0.78rem;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;outline:none;font-family:'DM Sans',sans-serif;transition:all 0.2s;background:#fafbfe;">
+      <button onclick="event.stopPropagation();addCustomTask('${driverId}')" style="background:linear-gradient(135deg, #72B0AB 0%, #5a9995 100%);color:#fff;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:0.78rem;font-weight:700;white-space:nowrap;transition:all 0.2s;box-shadow:0 2px 6px rgba(114,176,171,0.2);" onmouseover="this.style.boxShadow='0 4px 12px rgba(114,176,171,0.3)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 2px 6px rgba(114,176,171,0.2)';this.style.transform='translateY(0)'" onmousedown="this.style.transform='translateY(1px)'">+ Add</button>
     </div>`;
 
   console.log('Popup HTML created, appending to body');
